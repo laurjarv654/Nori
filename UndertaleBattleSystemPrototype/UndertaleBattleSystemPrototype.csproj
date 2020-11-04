@@ -302,7 +302,9 @@
     <None Include="Resources\appartement2.png" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\text.xml" />
+    <None Include="Resources\text.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
