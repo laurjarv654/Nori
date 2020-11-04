@@ -1,0 +1,18 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Dialogue>
+  <text value ="This door is locked."></text>
+  <text value ="...A small dog?"></text>
+  <text value ="No answer."></text>
+  <text value ="There's a frat party going on but you're just a kid. No party for you."></text>
+  <text value ="Sharol1 "></text>
+  <text value ="Sharol2 "></text>
+  <text value ="Sharol3"></text>
+  <text value ="Thank you Nori. I feel a bit better now."></text>
+  <text value ="(...Callum is gone.)"></text>
+  <text value ="Psh who are you? Get out of here punk!"></text>
+  <text value ="Why do you keep bugging us? Haven't you taken the hint? Get lost you loser!"></text>
+  <text value ="Wait... You killed that elk nerd?"></text>
+  <text value ="What's with that creepy look? G-get away from me!! You... You freak!"></text>
+  <text value ="Positive thing for frankie"></text>
+  <text value ="(...Frankie is gone.)"></text>
+</Dialogue>
