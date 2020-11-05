@@ -38,9 +38,7 @@
             this.nameLabel = new System.Windows.Forms.Label();
             this.hpLabel = new System.Windows.Forms.Label();
             this.hpValueLabel = new System.Windows.Forms.Label();
-
             this.damageLabel = new System.Windows.Forms.Label();
-
             this.SuspendLayout();
             // 
             // gameTimer
@@ -51,7 +49,6 @@
             // 
             // textOutput
             // 
-            this.textOutput.AutoSize = true;
             this.textOutput.BackColor = System.Drawing.Color.Transparent;
             this.textOutput.Enabled = false;
             this.textOutput.Font = new System.Drawing.Font("Determination Mono Web", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -65,7 +62,6 @@
             // 
             // actLabel1
             // 
-            this.actLabel1.AutoSize = true;
             this.actLabel1.BackColor = System.Drawing.Color.Transparent;
             this.actLabel1.Enabled = false;
             this.actLabel1.Font = new System.Drawing.Font("Determination Mono Web", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -79,7 +75,6 @@
             // 
             // actLabel2
             // 
-            this.actLabel2.AutoSize = true;
             this.actLabel2.BackColor = System.Drawing.Color.Transparent;
             this.actLabel2.Enabled = false;
             this.actLabel2.Font = new System.Drawing.Font("Determination Mono Web", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -93,7 +88,6 @@
             // 
             // actLabel3
             // 
-            this.actLabel3.AutoSize = true;
             this.actLabel3.BackColor = System.Drawing.Color.Transparent;
             this.actLabel3.Enabled = false;
             this.actLabel3.Font = new System.Drawing.Font("Determination Mono Web", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -107,7 +101,6 @@
             // 
             // actLabel4
             // 
-            this.actLabel4.AutoSize = true;
             this.actLabel4.BackColor = System.Drawing.Color.Transparent;
             this.actLabel4.Enabled = false;
             this.actLabel4.Font = new System.Drawing.Font("Determination Mono Web", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -121,7 +114,6 @@
             // 
             // nameLabel
             // 
-            this.nameLabel.AutoSize = true;
             this.nameLabel.BackColor = System.Drawing.Color.Transparent;
             this.nameLabel.Enabled = false;
             this.nameLabel.Font = new System.Drawing.Font("Determination Sans Web", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -131,11 +123,9 @@
             this.nameLabel.Size = new System.Drawing.Size(60, 28);
             this.nameLabel.TabIndex = 5;
             this.nameLabel.Text = "Nori";
-
             // 
             // hpLabel
             // 
-            this.hpLabel.AutoSize = true;
             this.hpLabel.BackColor = System.Drawing.Color.Transparent;
             this.hpLabel.Enabled = false;
             this.hpLabel.Font = new System.Drawing.Font("Determination Sans Web", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -148,7 +138,6 @@
             // 
             // hpValueLabel
             // 
-            this.hpValueLabel.AutoSize = true;
             this.hpValueLabel.BackColor = System.Drawing.Color.Transparent;
             this.hpValueLabel.Enabled = false;
             this.hpValueLabel.Font = new System.Drawing.Font("Determination Sans Web", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -158,7 +147,7 @@
             this.hpValueLabel.Size = new System.Drawing.Size(82, 28);
             this.hpValueLabel.TabIndex = 8;
             this.hpValueLabel.Text = "40 / 40";
-            //
+            // 
             // damageLabel
             // 
             this.damageLabel.BackColor = System.Drawing.Color.Transparent;
@@ -194,7 +183,6 @@
             this.KeyUp += new System.Windows.Forms.KeyEventHandler(this.BattleScreen_KeyUp);
             this.PreviewKeyDown += new System.Windows.Forms.PreviewKeyDownEventHandler(this.BattleScreen_PreviewKeyDown);
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
 
