@@ -4,14 +4,10 @@
     <General gold ="0">
     </General>
     <Battle currentHP ="40"
-            atk ="5"
-            def ="5">
+            atk ="5">
     </Battle>
   </Stats>
   <Items>
-    <Equiped weapon =" "
-             armor =" ">
-    </Equiped>
     <Inventory>
       <Item name ="Test Item 1"
             heal ="10">
@@ -28,8 +24,8 @@
     </Inventory>
   </Items>
   <Other>
-    <Save area =" "
-          trigger =" ">
+    <Save x ="600"
+          y ="400">
     </Save>
   </Other>
 </Player>

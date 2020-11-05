@@ -8,7 +8,7 @@
     <Attack name ="HornAttack"
             value ="0">
     </Attack>
-    <Attack name ="HornAttack"
+    <Attack name ="HoofAttack"
             value ="1">
     </Attack>
   </Attacks>
