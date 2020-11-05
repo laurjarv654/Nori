@@ -111,7 +111,7 @@ namespace UndertaleBattleSystemPrototype
 
         public void OnStart()
         {
-            nori = new Player(this.Width / 2 - 100,this.Height / 2 - 100, 150, 20, 20, 20);
+            nori = new Player(this.Width / 2 - 100, this.Height / 2 - 100, 150, 0, 0);
 
             //filling the text list with all of the dialogue that happens on this screen
             reader = XmlReader.Create("Resources/text.xml");

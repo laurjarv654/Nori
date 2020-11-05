@@ -21,10 +21,14 @@ namespace UndertaleBattleSystemPrototype
 
         #region enemy attack variables (sorry these are in a section of their own, it made it easier at the time to find them)
         //enemy attack variables
+        Boolean attackVariablesSet = false;
         Boolean hornLeft = true;
         Boolean hornSpaceChange = false;
-        int attackSpeed = 5;
-        int spaceBetweenAttacks = 40;
+        public static Boolean playerInvincible = false; //has to be global for access in the player class
+        int invincibilityTimer = 50;
+        int attackSpeed = 0;
+        int spaceBetweenAttacks = 0;
+        int attackPauseTimer = 0;
 
         #endregion enemy attack variables (sorry these are in a section of their own, it made it easier at the time to find them)
 
@@ -104,7 +108,7 @@ namespace UndertaleBattleSystemPrototype
         //lists for acting
         List<string> actNames = new List<string>() {" ", " ", " ", " "};
         List<string> actText = new List<string>() {" ", " ", " ", " "};
-        List<int> spareValues = new List<int>() {0, 0, 0, 0};
+        List<int> spareValues = new List<int>() {-1, -1, -1, -1};
         List<int> itemHeals = new List<int>() {0, 0, 0, 0};
 
         //lists for enemy turn
@@ -186,7 +190,6 @@ namespace UndertaleBattleSystemPrototype
             pReader.ReadToFollowing("Battle");
             player.hp = Convert.ToInt16(pReader.GetAttribute("currentHP"));
             player.atk = Convert.ToInt16(pReader.GetAttribute("atk"));
-            player.def = Convert.ToInt16(pReader.GetAttribute("def"));
 
             pReader.Close();
 
@@ -263,9 +266,46 @@ namespace UndertaleBattleSystemPrototype
             //if it is the enemy's turn...
             if (enemyTurn == true && enemyTurnCounter > 0)
             {
+                EnemyAttacks(enemyTurnCounter);
+
                 enemyTurnCounter--;
 
-                EnemyAttack(enemyTurnCounter);
+                #region player collision
+                //check if the player collides with any attack rec
+                foreach (Rectangle r in attackRecs)
+                {
+                    //if the player is out of invincibility frames, make the player not invincible anymore.
+                    //if the player still has invincibility left, the timer goes down.
+                    if (playerInvincible == true && invincibilityTimer <= 0)
+                    {
+                        playerInvincible = false;
+                        invincibilityTimer = 50;
+                    }
+                    else if (playerInvincible == true)
+                    {
+                        invincibilityTimer--;
+                    }
+                    
+                    //if it does, do damage accordingly
+                    if (playerRec.IntersectsWith(r))
+                    {
+                        player.AttackCollision(enemy.atk, playerInvincible);
+
+                        if (player.hp <= 0)
+                        {
+                            //stop the game timer
+                            gameTimer.Enabled = false;
+
+                            //go back to the town screen
+                            LoseScreen ls = new LoseScreen();
+                            Form form = this.FindForm();
+                            form.Controls.Add(ls);
+                            form.Controls.Remove(this);
+                            ls.Focus();
+                        }
+                    }
+                }
+                #endregion player collision
 
                 #region player movement
                 //player movement
@@ -287,7 +327,7 @@ namespace UndertaleBattleSystemPrototype
                 }
                 #endregion player movement
             }
-            
+
             //if the enemy turn is over
             #region enemy turn over
 
@@ -296,6 +336,10 @@ namespace UndertaleBattleSystemPrototype
                 //reset the enemy turn counter
                 enemyTurnCounter = 500;
                 enemyTurn = false;
+
+                //clear any attacks off the screen
+                attackRecs.Clear();
+                attacks.Clear();
 
                 //reset the arena walls
                 Rectangle leftWall = new Rectangle(fightRec.X, fightRec.Y - 250, 5, 200);
@@ -316,6 +360,7 @@ namespace UndertaleBattleSystemPrototype
             }
 
             #endregion enemy turn over
+
             #endregion fighting area code
 
             #region buttons code
@@ -459,7 +504,7 @@ namespace UndertaleBattleSystemPrototype
                             actText[0] = "* You showed mercy." + "\n\n* ...";
 
                             //call the menu disappear method
-                            MenuDisappear(-1);
+                            MenuDisappear(0);
                         }
                         else
                         {
@@ -468,6 +513,8 @@ namespace UndertaleBattleSystemPrototype
 
                             //call the menu disappear method
                             MenuDisappear(0);
+
+                            gameTimer.Enabled = false;
 
                             //go back to the town screen
                             TownScreen ts = new TownScreen();
@@ -526,7 +573,7 @@ namespace UndertaleBattleSystemPrototype
             {
                 e.Graphics.DrawImage(p.image, p.x, p.y, p.width, p.height);
             }
-
+          
             #endregion enemy attacks
 
             #region enemy health bar
@@ -686,6 +733,9 @@ namespace UndertaleBattleSystemPrototype
                 //add 1 to the counter
                 i++;
             }
+
+            //add an extra value to the spare values list that will always be -1
+            spareValues.Add(-1);
 
             eReader.Close();
 
@@ -885,8 +935,11 @@ namespace UndertaleBattleSystemPrototype
         #region menu disappear code
         private void MenuDisappear(int i)
         {
-            //set the spare number depending on the action selected
-            spareNum = spareValues[i];
+            if (actText[i] != "* You showed mercy." + "\n\n* ...")
+            {
+                //set the spare number depending on the action selected
+                spareNum = spareValues[i];
+            }
 
             //check if the player has made the correct choices for the enemy to be spared
             if (spareNum == 0) { canSpare = true; }
@@ -1009,25 +1062,32 @@ namespace UndertaleBattleSystemPrototype
             eReader.Close();
         }
         #endregion attack type method (filling in the possible attacks)
-        #region enemy attack
-        private void EnemyAttack(int timer)
+        #region enemy attacks
+        private void EnemyAttacks(int timer)
         {
             //check which attack was randomly selected and do it
             if(attackName == "HornAttack") 
             { 
-                //if it's been 1 second, and the enemy turn isn't over, spawn a new horn attack
+                //set attack variables correctly
+                if (attackVariablesSet == false)
+                {
+                    spaceBetweenAttacks = 40;
+                    attackSpeed = 5;
+                }
+
+                //if the correct amount of time has passed, and the enemy turn isn't over, spawn a new horn attack
                 if (timer % spaceBetweenAttacks == 0  && timer != 0)
                 {
                     //alternate between left and right attacks
                     if (hornLeft == true)
                     {
-                        Projectile hornProjL = new Projectile(arenaWalls[0].X + 5, arenaWalls[3].Y, 200, 100, Resources.attackHornO);
+                        Projectile hornProjL = new Projectile(arenaWalls[0].X + 5, arenaWalls[3].Y, 180, 100, Resources.attackHornO);
                         attacks.Add(hornProjL);
                         hornLeft = false;
                     }
                     else
                     {
-                        Projectile hornProjR = new Projectile(arenaWalls[1].X - 200, arenaWalls[3].Y, 200, 100, Resources.attackHorn);
+                        Projectile hornProjR = new Projectile(arenaWalls[1].X - 180, arenaWalls[3].Y, 180, 100, Resources.attackHorn);
                         attacks.Add(hornProjR);
                         hornLeft = true;
                         
@@ -1043,22 +1103,25 @@ namespace UndertaleBattleSystemPrototype
                             hornSpaceChange = true;
                         }
                     }
-
-                    //clear the attack rec list
-                    attackRecs.Clear();
-
-                    //for each projectile, create a rec for collisions
-                    foreach (Projectile p in attacks)
-                    {
-                        Rectangle horn = new Rectangle(p.x, p.y, p.width, p.height);
-                        attackRecs.Add(horn);
-                    }
                 }
-                //reset the attack speed and spacing
+                //reset attack variables
                 else if (timer == 0)
                 {
-                    attackSpeed = 4;
-                    spaceBetweenAttacks = 50;
+                    attackSpeed = 5;
+                    spaceBetweenAttacks = 40;
+                    hornLeft = true;
+                    hornSpaceChange = false;
+                    attackVariablesSet = false;
+                }
+
+                //clear the attack rec list
+                attackRecs.Clear();
+
+                //for each projectile, create a rec for collisions
+                foreach (Projectile p in attacks)
+                {
+                    Rectangle horn = new Rectangle(p.x, p.y + 20, p.width, p.height - 40);
+                    attackRecs.Add(horn);
                 }
 
                 //move the projectiles according to the attack and get rid of the first one if it goes out of the arena box
@@ -1073,8 +1136,74 @@ namespace UndertaleBattleSystemPrototype
                     }
                 }
             }
+            if(attackName == "HoofAttack")
+            {
+                //set attack variables correctly
+                if (attackVariablesSet == false)
+                {
+                    spaceBetweenAttacks = 75;
+                    attackSpeed = 10;
+                }
+
+                //if the correct amount of time has passed, and the enemy turn isn't over, spawn a new hoof attack pattern
+                if (timer % spaceBetweenAttacks == 0 && timer != 0)
+                {
+                    //set the pause timer
+                    attackPauseTimer = timer - 25;
+
+                    //initialize a hoof attack in each of the 4 sections of the arena
+                    for (int i = 0; i < 4; i++)
+                    {
+                        Projectile hoof = new Projectile(arenaWalls[0].X + 5 + (i * 100), arenaWalls[2].Y - 200, 100, 200, Resources.attackHoof);
+                        Rectangle hoofRec = new Rectangle(hoof.x, hoof.y, hoof.width, hoof.height);
+                        attacks.Add(hoof);
+                        attackRecs.Add(hoofRec);
+                    }
+
+                    //generate a random number(0, 1, 2, or 3)
+                    int x = randNum.Next(0, 4);
+
+                    //remove the hoof at the index of the random number
+                    attacks.RemoveAt(x);
+                    attackRecs.RemoveAt(x);
+                }
+                //reset attack variables
+                else if (timer == 0)
+                {
+                    attackVariablesSet = false;
+                }
+
+                //clear the attack rec list
+                attackRecs.Clear();
+
+                //for each projectile, create a rec for collisions
+                foreach (Projectile p in attacks)
+                {
+                    Rectangle horn = new Rectangle(p.x, p.y, p.width, p.height);
+                    attackRecs.Add(horn);
+                }
+
+                //move the projectiles according to the attack
+                foreach (Projectile p in attacks)
+                {
+                    if (timer < attackPauseTimer)
+                    {
+                        p.HoofAttack(attackSpeed, arenaWalls[2].Y);
+                    }
+                }
+
+                //once the attacks reach the bottom of the arena, remove them after half a second
+                try
+                {
+                    if (attacks[0].y >= arenaWalls[2].Y)
+                    {
+                        attacks.Clear();
+                    }
+                }
+                catch (Exception) { }
+            }
         }
-        #endregion enemy attack
+        #endregion enemy attacks
 
         #endregion enemy turn methods
 

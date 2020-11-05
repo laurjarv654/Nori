@@ -29,5 +29,13 @@ namespace UndertaleBattleSystemPrototype.Classes
         {
             y -= speed;
         }
+
+        public void HoofAttack(int speed, int topY)
+        {
+            if (y <= topY)
+            {
+                y += speed;
+            }
+        }
     }
 }

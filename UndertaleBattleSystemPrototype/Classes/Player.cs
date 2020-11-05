@@ -8,21 +8,19 @@ namespace UndertaleBattleSystemPrototype
 {
     class Player
     {
-
-        public int x, y, size, hp, atk, def;
-
+        public int x, y, size, hp, atk;
+        
         public Player()
         {
         }
 
-        public Player(int _x, int _y, int _size, int _hp, int _atk, int _def)
+        public Player(int _x, int _y, int _size, int _hp, int _atk)
         {
             x = _x;
             y = _y;
             size = _size;
             hp = _hp;
             atk = _atk;
-            def = _def;
         }
 
         public void MoveUpDown(int speed)
@@ -34,6 +32,7 @@ namespace UndertaleBattleSystemPrototype
         {
             x += speed;
         }
+
         public void Stop(string direction, int speed)
         {
             switch (direction)
@@ -51,7 +50,15 @@ namespace UndertaleBattleSystemPrototype
                     x -= speed;
                     break;
             }
+        }
 
+        public void AttackCollision(int enemyDamage, Boolean invincible)
+        {
+            if (invincible == false)
+            {
+                hp -= enemyDamage;
+                BattleScreen.playerInvincible = true;
+            }
         }
     }
 }
