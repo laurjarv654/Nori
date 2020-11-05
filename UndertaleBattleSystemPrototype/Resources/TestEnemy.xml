@@ -1,14 +1,13 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Enemy>
   <Stats hp ="100"
-         atk ="5"
-         def ="5">
+         atk ="5">
   </Stats>
   <Attacks>
-    <Attack name ="HornAttack"
+    <Attack name ="FistAttack"
             value ="0">
     </Attack>
-    <Attack name ="HoofAttack"
+    <Attack name ="FistAttack"
             value ="1">
     </Attack>
   </Attacks>

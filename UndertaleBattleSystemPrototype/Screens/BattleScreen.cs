@@ -183,7 +183,6 @@ namespace UndertaleBattleSystemPrototype
             eReader.ReadToFollowing("Stats");
             enemy.hp = Convert.ToInt16(eReader.GetAttribute("hp"));
             enemy.atk = Convert.ToInt16(eReader.GetAttribute("atk"));
-            enemy.def = Convert.ToInt16(eReader.GetAttribute("def"));
 
             eReader.Close();
 
@@ -575,6 +574,10 @@ namespace UndertaleBattleSystemPrototype
             foreach (Projectile p in attacks)
             {
                 e.Graphics.DrawImage(p.image, p.x, p.y, p.width, p.height);
+            }
+            foreach (Rectangle r in attackRecs)
+            {
+                e.Graphics.FillRectangle(redBrush, r.X, r.Y, r.Width, r.Height);
             }
 
             #endregion enemy attacks
@@ -1076,6 +1079,7 @@ namespace UndertaleBattleSystemPrototype
                 {
                     spaceBetweenAttacks = 40;
                     attackSpeed = 5;
+                    attackVariablesSet = true;
                 }
 
                 //if the correct amount of time has passed, and the enemy turn isn't over, spawn a new horn attack
@@ -1110,8 +1114,6 @@ namespace UndertaleBattleSystemPrototype
                 //reset attack variables
                 else if (timer == 0)
                 {
-                    attackSpeed = 5;
-                    spaceBetweenAttacks = 40;
                     hornLeft = true;
                     hornSpaceChange = false;
                     attackVariablesSet = false;
@@ -1146,6 +1148,7 @@ namespace UndertaleBattleSystemPrototype
                 {
                     spaceBetweenAttacks = 75;
                     attackSpeed = 10;
+                    attackVariablesSet = true;
                 }
 
                 //if the correct amount of time has passed, and the enemy turn isn't over, spawn a new hoof attack pattern
@@ -1204,6 +1207,67 @@ namespace UndertaleBattleSystemPrototype
                     }
                 }
                 catch (Exception) { }
+            }
+            if (attackName == "FistAttack")
+            {
+                //set attack variables correctly
+                if (attackVariablesSet == false)
+                {
+                    spaceBetweenAttacks = 20;
+                    attackVariablesSet = true;
+                }
+
+                //if the correct amount of time has passed, and the enemy turn isn't over, spawn a new fist attack
+                if (timer % spaceBetweenAttacks == 0 && timer != 0)
+                {
+                    //if there is attacks on screen, set the oldest attack to actually do damage
+                    if (attacks.Count > 0)
+                    {
+                        //remove the oldest attack if there are 3 on screen
+                        if (attacks.Count == 3)
+                        {
+                            attacks.RemoveAt(0);
+                            attackRecs.RemoveAt(0);
+                        }
+
+                        //create a rec for the first attack
+                        if (attacks.Count() == 1)
+                        {
+                            Rectangle fistRec = new Rectangle(attacks[0].x + 16, attacks[0].y + 16, attacks[0].width - 32, attacks[0].height - 32);
+                            attackRecs.Add(fistRec);
+                        }
+
+                        //create a rec for the second attack
+                        if (attacks.Count() == 2)
+                        {
+                            Rectangle fistRec = new Rectangle(attacks[1].x + 16, attacks[1].y + 16, attacks[1].width - 32, attacks[1].height - 32);
+                            attackRecs.Add(fistRec);
+                        }
+
+                        //update the sprite of each attack that will do daamage
+                        for (int i = 0; i < attackRecs.Count(); i++)
+                        {
+                            attacks[i].image = Resources.attackFistL;
+                        }
+                    }
+
+                    //generate a random x and y coordinate for the next fist attack
+                    int x = randNum.Next(arenaWalls[0].X, arenaWalls[1].X - 80);
+                    int y = randNum.Next(arenaWalls[2].Y, arenaWalls[3].Y - 80);
+
+                    //create a projectile for the fist and set it's image to the dark version (aka it won't do damage yet)
+                    Projectile fist = new Projectile(x, y, 150, 105, Resources.attackFistD);
+                    attacks.Add(fist);
+                }
+                //reset attack variables
+                else if (timer == 0)
+                {
+                    attackVariablesSet = false;
+                }
+            }
+            if (attackName == "")
+            {
+
             }
         }
         #endregion enemy attacks
