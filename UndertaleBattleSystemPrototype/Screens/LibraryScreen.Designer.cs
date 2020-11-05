@@ -40,13 +40,13 @@
             // 
             // LibraryScreen
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(120F, 120F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(96F, 96F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
             this.BackColor = System.Drawing.Color.DarkGreen;
             this.DoubleBuffered = true;
             this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "LibraryScreen";
-            this.Size = new System.Drawing.Size(1277, 890);
+            this.Size = new System.Drawing.Size(960, 720);
             this.Paint += new System.Windows.Forms.PaintEventHandler(this.LibraryScreen_Paint);
             this.KeyUp += new System.Windows.Forms.KeyEventHandler(this.LibraryScreen_KeyUp);
             this.PreviewKeyDown += new System.Windows.Forms.PreviewKeyDownEventHandler(this.LibraryScreen_PreviewKeyDown);
