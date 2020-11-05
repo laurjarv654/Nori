@@ -191,6 +191,46 @@ namespace UndertaleBattleSystemPrototype.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap bookshelfB {
+            get {
+                object obj = ResourceManager.GetObject("bookshelfB", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap bookshelfG {
+            get {
+                object obj = ResourceManager.GetObject("bookshelfG", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap bookshelfR {
+            get {
+                object obj = ResourceManager.GetObject("bookshelfR", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap bookshelfY {
+            get {
+                object obj = ResourceManager.GetObject("bookshelfY", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to &lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
         ///&lt;Enemy&gt;
         ///  &lt;Stats hp =&quot;80&quot;
@@ -209,8 +249,7 @@ namespace UndertaleBattleSystemPrototype.Properties {
         ///    &lt;/Act&gt;
         ///    &lt;Act actName =&quot;Taunt&quot;
         ///          actLine1 =&quot;You prod at Calum&apos;s missing antler&quot;
-        ///          actLine2 =&quot;...&quot;
-        ///        [rest of string was truncated]&quot;;.
+        ///          actLi [rest of string was truncated]&quot;;.
         /// </summary>
         internal static string Calum {
             get {
@@ -224,6 +263,16 @@ namespace UndertaleBattleSystemPrototype.Properties {
         internal static System.Drawing.Bitmap Calum_WS {
             get {
                 object obj = ResourceManager.GetObject("Calum_WS", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Donna {
+            get {
+                object obj = ResourceManager.GetObject("Donna", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -304,6 +353,16 @@ namespace UndertaleBattleSystemPrototype.Properties {
         internal static System.Drawing.Bitmap library {
             get {
                 object obj = ResourceManager.GetObject("library", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap libraryDoor {
+            get {
+                object obj = ResourceManager.GetObject("libraryDoor", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -492,12 +551,51 @@ namespace UndertaleBattleSystemPrototype.Properties {
         ///      &lt;/Item&gt;
         ///      &lt;Item name =&quot;Test Item 3&quot;
         ///            heal =&quot;20&quot;&gt;
-        ///      &lt;/Item&gt;
-        ///      &lt;Item name =&quot; [rest of string was truncated]&quot;;.
+        ///      &lt;/It [rest of string was truncated]&quot;;.
         /// </summary>
         internal static string Player {
             get {
                 return ResourceManager.GetString("Player", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap road1 {
+            get {
+                object obj = ResourceManager.GetObject("road1", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap road2 {
+            get {
+                object obj = ResourceManager.GetObject("road2", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap road3 {
+            get {
+                object obj = ResourceManager.GetObject("road3", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap road4 {
+            get {
+                object obj = ResourceManager.GetObject("road4", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
             }
         }
         
@@ -533,8 +631,7 @@ namespace UndertaleBattleSystemPrototype.Properties {
         ///          actLine2 =&quot;Basic enemy example&quot;&gt;
         ///    &lt;/Act&gt;
         ///    &lt;Act spareValue =&quot;1&quot;
-        ///          actName =&quot;Joke&quot;
-        ///          actLine1 =&quot; [rest of string was truncated]&quot;;.
+        ///          actName =&quot;Joke&quot;        /// [rest of string was truncated]&quot;;.
         /// </summary>
         internal static string TestEnemy {
             get {
