@@ -18,36 +18,43 @@ namespace UndertaleBattleSystemPrototype
         #region global variables
         Boolean aDown, dDown, wDown, sDown, spaceDown, escapeDown;
 
-        //nori
+        #region nori
         Player nori;
         Rectangle noriRec;
-        const int HEROSPEED = 5;
+        const int HEROSPEED = 10;
+        #endregion
 
-        Image noriSprite;
-        List<Image> noriAnimation = new List<Image>();
-        int animationCounterH = 0;
-        int frameCounter = 1;
+        #region animation
+        Image noriSprite, road = Properties.Resources.road1;
+        List<Image> noriAnimation = new List<Image>(), roadAnimation = new List<Image>();
+        int animationCounterH = 0, frameCounter = 1, spriteNumber = 0;
+        #endregion
 
-        //objects
+        #region objects
         List<Object> objects = new List<Object>();
         List<Rectangle> objectRecs = new List<Rectangle>();
+        #endregion
 
-        //Text box
+        #region Text box
         Boolean displayText = false, displayTextBox = false;
         Rectangle textBox;
         List<string> textList = new List<string>();
         string text = "";
         int textNum = 0;
         XmlReader reader;
+        #endregion
 
         //dialogue changes (counters)
         int talkingS = 0, talkingC = 0, talkingF = 0;
-        #endregion
 
-        //github comment
-        //fighting variables
+        #region fighting variables
         Boolean fightCal, spareCal;
         public static string enemyName;
+        #endregion
+
+        #endregion
+
+
 
         //TODO HP/attack/defense ints that pull from hero xml
 
@@ -73,6 +80,13 @@ namespace UndertaleBattleSystemPrototype
             noriAnimation.Add(Properties.Resources.noriLR);
             noriAnimation.Add(Properties.Resources.noriL1);
             noriAnimation.Add(Properties.Resources.noriL2);
+            #endregion
+
+            #region initializing road images
+            roadAnimation.Add(Properties.Resources.road1);
+            roadAnimation.Add(Properties.Resources.road2);
+            roadAnimation.Add(Properties.Resources.road3);
+            roadAnimation.Add(Properties.Resources.road4);
             #endregion
 
             #region initializing objects+object recs
@@ -188,67 +202,15 @@ namespace UndertaleBattleSystemPrototype
             {
                 nori.MoveUpDown(-HEROSPEED);
                 animationCounterH++;
-                if (animationCounterH == 4)
-                {
-
-                    if (frameCounter == 1)
-                    {
-                        noriSprite = noriAnimation[1];
-                        animationCounterH = 0;
-                        frameCounter = 2;
-                    }
-                    else if (frameCounter == 2)
-                    {
-                        noriSprite = noriAnimation[0];
-                        animationCounterH = 0;
-                        frameCounter = 3;
-                    }
-                    else if (frameCounter == 3)
-                    {
-                        noriSprite = noriAnimation[2];
-                        animationCounterH = 0;
-                        frameCounter = 4;
-                    }
-                    else if (frameCounter == 4)
-                    {
-                        noriSprite = noriAnimation[0];
-                        animationCounterH = 0;
-                        frameCounter = 1;
-                    }
-                }
+                spriteNumber = 0;
+                NoriAnimation();
             }
             if (sDown == true && wDown == false && nori.y <= this.Height)
             {
                 nori.MoveUpDown(HEROSPEED);
                 animationCounterH++;
-                if (animationCounterH == 4)
-                {
-
-                    if (frameCounter == 1)
-                    {
-                        noriSprite = noriAnimation[4];
-                        animationCounterH = 0;
-                        frameCounter = 2;
-                    }
-                    else if (frameCounter == 2)
-                    {
-                        noriSprite = noriAnimation[3];
-                        animationCounterH = 0;
-                        frameCounter = 3;
-                    }
-                    else if (frameCounter == 3)
-                    {
-                        noriSprite = noriAnimation[5];
-                        animationCounterH = 0;
-                        frameCounter = 4;
-                    }
-                    else if (frameCounter == 4)
-                    {
-                        noriSprite = noriAnimation[3];
-                        animationCounterH = 0;
-                        frameCounter = 1;
-                    }
-                }
+                spriteNumber = 3;
+                NoriAnimation();
             }
             if (dDown == true && aDown == false)
             {
@@ -261,31 +223,15 @@ namespace UndertaleBattleSystemPrototype
                 if (animationCounterH == 4)
                 {
 
-                    if (frameCounter == 1)
-                    {
-                        noriSprite = noriAnimation[7];
-                        animationCounterH = 0;
-                        frameCounter = 2;
-                    }
-                    else if (frameCounter == 2)
-                    {
-                        noriSprite = noriAnimation[6];
-                        animationCounterH = 0;
-                        frameCounter = 3;
-                    }
-                    else if (frameCounter == 3)
-                    {
-                        noriSprite = noriAnimation[8];
-                        animationCounterH = 0;
-                        frameCounter = 4;
-                    }
-                    else if (frameCounter == 4)
-                    {
-                        noriSprite = noriAnimation[6];
-                        animationCounterH = 0;
-                        frameCounter = 1;
-                    }
+                    if (frameCounter == 2) { road = roadAnimation[3]; }
+
+                    if (frameCounter == 4) { road = roadAnimation[1]; }
+
+
                 }
+                spriteNumber = 6;
+                NoriAnimation();
+
             }
             if (aDown == true && dDown == false)
             {
@@ -293,35 +239,11 @@ namespace UndertaleBattleSystemPrototype
                 {
                     o.MoveLeftRight(HEROSPEED);
                 }
-                animationCounterH++;
-                if (animationCounterH == 4)
-                {
 
-                    if (frameCounter == 1)
-                    {
-                        noriSprite = noriAnimation[10];
-                        animationCounterH = 0;
-                        frameCounter = 2;
-                    }
-                    else if (frameCounter == 2)
-                    {
-                        noriSprite = noriAnimation[9];
-                        animationCounterH = 0;
-                        frameCounter = 3;
-                    }
-                    else if (frameCounter == 3)
-                    {
-                        noriSprite = noriAnimation[11];
-                        animationCounterH = 0;
-                        frameCounter = 4;
-                    }
-                    else if (frameCounter == 4)
-                    {
-                        noriSprite = noriAnimation[9];
-                        animationCounterH = 0;
-                        frameCounter = 1;
-                    }
-                }
+                animationCounterH++;
+                spriteNumber = 9;
+                NoriAnimation();
+
             }
             #endregion
 
@@ -331,6 +253,7 @@ namespace UndertaleBattleSystemPrototype
             //library door
             if (noriRec.IntersectsWith(objectRecs[0]) && spaceDown == true)
             {
+                gameTimer.Enabled = false;
                 LibraryScreen ls = new LibraryScreen();
                 this.Controls.Add(ls);
                 ls.Focus();
@@ -446,6 +369,8 @@ namespace UndertaleBattleSystemPrototype
 
         private void TownScreen_Paint(object sender, PaintEventArgs e)
         {
+            e.Graphics.DrawImage(road, 0, 0, this.Width, this.Height);
+
             //drawing all images on the screen
             foreach (Object o in objects)
             {
@@ -513,6 +438,58 @@ namespace UndertaleBattleSystemPrototype
                 }
             }
 
+        }
+
+        private void NoriAnimation()
+        {
+            if (animationCounterH == 4)
+            {
+
+                if (frameCounter == 1)
+                {
+                    noriSprite = noriAnimation[0 + spriteNumber];
+                    animationCounterH = 0;
+                    frameCounter = 2;
+                }
+                else if (frameCounter == 2)
+                {
+                    noriSprite = noriAnimation[1 + spriteNumber];
+                    animationCounterH = 0;
+                    frameCounter = 3;
+                }
+                else if (frameCounter == 3)
+                {
+                    noriSprite = noriAnimation[0 + spriteNumber];
+                    animationCounterH = 0;
+                    frameCounter = 4;
+                }
+                else if (frameCounter == 4)
+                {
+                    noriSprite = noriAnimation[2 + spriteNumber];
+                    animationCounterH = 0;
+                    frameCounter = 1;
+                }
+                //loop
+                //if (frameCounter == 5)
+                //{
+                //    noriSprite = noriAnimation[0 + spriteNumber];
+                //    animationCounterH = 0;
+                //    frameCounter = 6;
+                //}
+                //else if (frameCounter == 6)
+                //{
+                //    noriSprite = noriAnimation[1 + spriteNumber];
+                //    animationCounterH = 0;
+                //    frameCounter = 7;
+                //}
+                //else if (frameCounter == 7)
+                //{
+                //    noriSprite = noriAnimation[0 + spriteNumber];
+                //    animationCounterH = 0;
+                //    frameCounter = 1;
+                //}
+                
+            }
         }
     }
 }

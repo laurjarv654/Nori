@@ -306,5 +306,35 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
   </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\road1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\road2.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\road3.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\road4.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\bookshelfB.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\bookshelfG.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\bookshelfR.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\bookshelfY.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Donna.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\libraryDoor.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
