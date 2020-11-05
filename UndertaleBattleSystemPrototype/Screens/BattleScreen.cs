@@ -575,10 +575,6 @@ namespace UndertaleBattleSystemPrototype
             {
                 e.Graphics.DrawImage(p.image, p.x, p.y, p.width, p.height);
             }
-            foreach (Rectangle r in attackRecs)
-            {
-                e.Graphics.FillRectangle(redBrush, r.X, r.Y, r.Width, r.Height);
-            }
 
             #endregion enemy attacks
 
