@@ -666,7 +666,7 @@ namespace UndertaleBattleSystemPrototype
                 fightMenuSelected = false;
                 spaceDown = false;
             }
-            else if (attackRec.X > 888)
+            else if (attackRec.X > arenaWalls[1].X)
             {
                 //set the player damage number string to "miss" for drawing
                 playerDamageNum = "MISS";
@@ -1084,13 +1084,13 @@ namespace UndertaleBattleSystemPrototype
                     //alternate between left and right attacks
                     if (hornLeft == true)
                     {
-                        Projectile hornProjL = new Projectile(arenaWalls[0].X + 5, arenaWalls[3].Y, 180, 100, Resources.attackHornO);
+                        Projectile hornProjL = new Projectile(arenaWalls[0].X + 5, arenaWalls[3].Y, (arenaWalls[1].X - arenaWalls[0].X) / 2 + 10, 100, Resources.attackHornO);
                         attacks.Add(hornProjL);
                         hornLeft = false;
                     }
                     else
                     {
-                        Projectile hornProjR = new Projectile(arenaWalls[1].X - 180, arenaWalls[3].Y, 180, 100, Resources.attackHorn);
+                        Projectile hornProjR = new Projectile(arenaWalls[1].X - (arenaWalls[1].X - arenaWalls[0].X) / 2 - 10, arenaWalls[3].Y, (arenaWalls[1].X - arenaWalls[0].X) / 2 + 10, 100, Resources.attackHorn);
                         attacks.Add(hornProjR);
                         hornLeft = true;
 
@@ -1157,7 +1157,7 @@ namespace UndertaleBattleSystemPrototype
                     //initialize a hoof attack in each of the 4 sections of the arena
                     for (int i = 0; i < 4; i++)
                     {
-                        Projectile hoof = new Projectile(arenaWalls[0].X + 5 + (i * 100), arenaWalls[2].Y - 200, 100, 200, Resources.attackHoof);
+                        Projectile hoof = new Projectile(arenaWalls[0].X + ((arenaWalls[1].X - arenaWalls[0].X) / 4) * i, arenaWalls[2].Y - 200, 100, 200, Resources.attackHoof);
                         Rectangle hoofRec = new Rectangle(hoof.x, hoof.y, hoof.width, hoof.height);
                         attacks.Add(hoof);
                         attackRecs.Add(hoofRec);
