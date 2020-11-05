@@ -32,7 +32,6 @@ namespace UndertaleBattleSystemPrototype
         List<Object> objects = new List<Object>();
         List<Rectangle> objectRecs = new List<Rectangle>();
         List<Rectangle> border = new List<Rectangle>();
-        const int BOOKSHELFSIZE = 221;
         #endregion
 
         #region Text box
@@ -50,6 +49,8 @@ namespace UndertaleBattleSystemPrototype
         {
             InitializeComponent();
             OnStart();
+
+            int bookshelfSize = (this.Width - 396) / 4;
 
             #region initializing nori animation images
             noriSprite = Properties.Resources.noriBR;
@@ -71,20 +72,21 @@ namespace UndertaleBattleSystemPrototype
             #endregion
 
             #region initializing objects
-            objects.Add(new Object(500, this.Height - 178, 50, BOOKSHELFSIZE, Properties.Resources.libraryDoor));
-            objects.Add(new Object(198, 50, BOOKSHELFSIZE, BOOKSHELFSIZE, Properties.Resources.bookshelfB));
-            objects.Add(new Object(198+BOOKSHELFSIZE, 50, BOOKSHELFSIZE, BOOKSHELFSIZE, Properties.Resources.bookshelfR));
-            objects.Add(new Object(this.Width-198-BOOKSHELFSIZE, 50, BOOKSHELFSIZE, BOOKSHELFSIZE, Properties.Resources.bookshelfG));
-            objects.Add(new Object(this.Width-198-(BOOKSHELFSIZE*2), 50, BOOKSHELFSIZE, BOOKSHELFSIZE, Properties.Resources.bookshelfY));
+            objects.Add(new Object((this.Width/2)-(bookshelfSize/2), this.Height - 170, 50, bookshelfSize, Properties.Resources.libraryDoor));
+
+            objects.Add(new Object(198, 150 - bookshelfSize, bookshelfSize, bookshelfSize, Properties.Resources.bookshelfB));
+            objects.Add(new Object(198 + bookshelfSize, 150 - bookshelfSize, bookshelfSize, bookshelfSize, Properties.Resources.bookshelfR));
+            objects.Add(new Object(this.Width - 198 - bookshelfSize, 150 - bookshelfSize, bookshelfSize, bookshelfSize, Properties.Resources.bookshelfG));
+            objects.Add(new Object(this.Width - 198 - (bookshelfSize * 2), 150-bookshelfSize, bookshelfSize, bookshelfSize, Properties.Resources.bookshelfY));
             //objects.Add(new Object());
             #endregion
 
             #region initializing borders
-            border.Add(new Rectangle(0, 0, this.Width, 130));
+            border.Add(new Rectangle(0, 0, this.Width, 150));
             border.Add(new Rectangle(0, 0, 198, this.Height));
             border.Add(new Rectangle(this.Width - 198, 0, 198, this.Height));
-            border.Add(new Rectangle(0, this.Height - 130, this.Width, 130));
-            
+            border.Add(new Rectangle(0, this.Height - 150, this.Width, 150));
+
             #endregion
 
         }
@@ -150,7 +152,7 @@ namespace UndertaleBattleSystemPrototype
             #region update nori/object movement
 
             //setting the rectangles to the updated x,y
-            noriRec = new Rectangle(nori.x + 40, nori.y + 130, 70, 20);
+            noriRec = new Rectangle(nori.x + 40, nori.y + 150, 70, 20);
 
             if (wDown == true && sDown == false && nori.y >= 30)
             {
@@ -160,7 +162,7 @@ namespace UndertaleBattleSystemPrototype
                 spriteNumber = 0;
                 NoriAnimation();
             }
-            if (sDown == true && wDown == false&&nori.y<=this.Height-290)
+            if (sDown == true && wDown == false && nori.y <= this.Height - 290)
             {
                 nori.MoveUpDown(HEROSPEED);
                 direction = "down";
@@ -188,7 +190,7 @@ namespace UndertaleBattleSystemPrototype
             }
             #endregion
 
-           //if (noriRec.IntersectsWith())
+            //if (noriRec.IntersectsWith())
 
             if (escapeDown == true)
             {
@@ -224,7 +226,7 @@ namespace UndertaleBattleSystemPrototype
             //drawing nori
             e.Graphics.DrawImage(noriSprite, nori.x, nori.y, nori.size, nori.size);
 
-           
+
         }
 
         private void Pausing()
