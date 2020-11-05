@@ -90,7 +90,7 @@ namespace UndertaleBattleSystemPrototype
         }
         public void OnStart()
         {
-            nori = new Player(this.Width / 2 - 75, this.Height - 300, 150, 20, 20, 20);
+            nori = new Player(this.Width / 2 - 75, this.Height - 300, 150, 0, 0);
 
         }
         private void LibraryScreen_PreviewKeyDown(object sender, PreviewKeyDownEventArgs e)

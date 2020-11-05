@@ -95,10 +95,7 @@ namespace UndertaleBattleSystemPrototype
         Rectangle playerRec;
 
         //health bar rectangles
-        Rectangle maxHPRec = new Rectangle(410, 550, 80, 20);
-        Rectangle remainingHPRec = new Rectangle(410, 550, 80, 20);
-        Rectangle enemyMaxHPRec = new Rectangle(372, 50, 200, 20);
-        Rectangle enemyRemainingHPRec = new Rectangle(372, 50, 200, 20);
+        Rectangle maxHPRec, remainingHPRec, enemyMaxHPRec, enemyRemainingHPRec;
         #endregion rectangles
 
         #region lists
@@ -106,10 +103,10 @@ namespace UndertaleBattleSystemPrototype
         List<Rectangle> arenaWalls = new List<Rectangle>();
 
         //lists for acting
-        List<string> actNames = new List<string>() {" ", " ", " ", " "};
-        List<string> actText = new List<string>() {" ", " ", " ", " "};
-        List<int> spareValues = new List<int>() {-1, -1, -1, -1};
-        List<int> itemHeals = new List<int>() {0, 0, 0, 0};
+        List<string> actNames = new List<string>() { " ", " ", " ", " " };
+        List<string> actText = new List<string>() { " ", " ", " ", " " };
+        List<int> spareValues = new List<int>() { -1, -1, -1, -1 };
+        List<int> itemHeals = new List<int>() { 0, 0, 0, 0 };
 
         //lists for enemy turn
         List<string> enemyAttacks = new List<string>();
@@ -150,17 +147,23 @@ namespace UndertaleBattleSystemPrototype
         #region setup
         public void OnStart()
         {
+            //health bar rectangles
+            maxHPRec = new Rectangle(this.Width / 2 - 40, this.Height - 130, 80, 20);
+            remainingHPRec = new Rectangle(this.Width / 2 - 40, this.Height - 130, 80, 20);
+            enemyMaxHPRec = new Rectangle(this.Width / 2 - 100, 50, 200, 20);
+            enemyRemainingHPRec = new Rectangle(this.Width / 2 - 100, 50, 200, 20);
+
             //set button positions and sizes
-            fightRec = new Rectangle(236 - 190, this.Height - 100, 140, 50);
-            actRec = new Rectangle(472 - 190, this.Height - 100, 140, 50);
-            itemRec = new Rectangle(708 - 190, this.Height - 100, 140, 50);
-            mercyRec = new Rectangle(944 - 190, this.Height - 100, 140, 50);
+            fightRec = new Rectangle(this.Width / 4 - 190, this.Height - 100, 140, 50);
+            actRec = new Rectangle(this.Width / 2 - 190, this.Height - 100, 140, 50);
+            itemRec = new Rectangle((this.Width / 2) + (this.Width / 4) - 190, this.Height - 100, 140, 50);
+            mercyRec = new Rectangle(this.Width - 190, this.Height - 100, 140, 50);
 
             //create rectangles for the arena walls
             Rectangle leftWall = new Rectangle(fightRec.X, fightRec.Y - 250, 5, 200);
             Rectangle rightWall = new Rectangle(mercyRec.X + 135, mercyRec.Y - 250, 5, 200);
-            Rectangle topWall = new Rectangle(fightRec.X, fightRec.Y - 250, 848, 5);
-            Rectangle bottomWall = new Rectangle(fightRec.X, fightRec.Y - 50, 848, 5);
+            Rectangle topWall = new Rectangle(fightRec.X, fightRec.Y - 250, rightWall.X - leftWall.X + 5, 5);
+            Rectangle bottomWall = new Rectangle(fightRec.X, fightRec.Y - 50, rightWall.X - leftWall.X + 5, 5);
 
             //add the walls to the arena walls list
             arenaWalls.Add(leftWall);
@@ -285,7 +288,7 @@ namespace UndertaleBattleSystemPrototype
                     {
                         invincibilityTimer--;
                     }
-                    
+
                     //if it does, do damage accordingly
                     if (playerRec.IntersectsWith(r))
                     {
@@ -344,8 +347,8 @@ namespace UndertaleBattleSystemPrototype
                 //reset the arena walls
                 Rectangle leftWall = new Rectangle(fightRec.X, fightRec.Y - 250, 5, 200);
                 Rectangle rightWall = new Rectangle(mercyRec.X + 135, mercyRec.Y - 250, 5, 200);
-                Rectangle topWall = new Rectangle(fightRec.X, fightRec.Y - 250, 848, 5);
-                Rectangle bottomWall = new Rectangle(fightRec.X, fightRec.Y - 50, 848, 5);
+                Rectangle topWall = new Rectangle(fightRec.X, fightRec.Y - 250, rightWall.X - leftWall.X + 5, 5);
+                Rectangle bottomWall = new Rectangle(fightRec.X, fightRec.Y - 50, rightWall.X - leftWall.X + 5, 5);
 
                 //add the walls to the arena walls list
                 arenaWalls.Clear();
@@ -389,7 +392,7 @@ namespace UndertaleBattleSystemPrototype
                         fightMenuSelected = true;
 
                         //set the attackRec position for fighting
-                        attackRec = new Rectangle(50, 338, 15, 190);
+                        attackRec = new Rectangle(arenaWalls[0].X + 5, arenaWalls[0].Y + 5, 15, 190);
 
                         //move the player off-screen during player attack
                         player.x = -20;
@@ -555,7 +558,7 @@ namespace UndertaleBattleSystemPrototype
         private void BattleScreen_Paint(object sender, PaintEventArgs e)
         {
             //draw the text box/arena walls
-            foreach(Rectangle r in arenaWalls)
+            foreach (Rectangle r in arenaWalls)
             {
                 e.Graphics.FillRectangle(wallBrush, r);
             }
@@ -563,7 +566,7 @@ namespace UndertaleBattleSystemPrototype
             //draw the fight UI if the player is in the fight menu
             if (fightMenuSelected == true)
             {
-                e.Graphics.DrawImage(fightUISprite, arenaWalls[0].X + 5, arenaWalls[2].Y + 5, 838, 195);
+                e.Graphics.DrawImage(fightUISprite, arenaWalls[0].X + 5, arenaWalls[2].Y + 5, arenaWalls[1].X - arenaWalls[0].X - 5, 195);
                 e.Graphics.FillRectangle(attackBrush, attackRec);
             }
 
@@ -573,7 +576,7 @@ namespace UndertaleBattleSystemPrototype
             {
                 e.Graphics.DrawImage(p.image, p.x, p.y, p.width, p.height);
             }
-          
+
             #endregion enemy attacks
 
             #region enemy health bar
@@ -636,17 +639,17 @@ namespace UndertaleBattleSystemPrototype
                 int damageNum = 0;
 
                 //if attack is in the red areas of the fight UI do damage accordingly
-                if (atkCenter > 50 && atkCenter < 300 || atkCenter > 638 && atkCenter < 888) 
+                if (atkCenter > 50 && atkCenter < 300 || atkCenter > 638 && atkCenter < 888)
                 {
                     damageNum = randNum.Next(player.atk, player.atk * 2);
                 }
                 //if attack is in the yellow areas of the fight UI do damage accordingly
-                if (atkCenter > 300 && atkCenter < 450 || atkCenter > 488 && atkCenter < 638) 
+                if (atkCenter > 300 && atkCenter < 450 || atkCenter > 488 && atkCenter < 638)
                 {
                     damageNum = 2 * (randNum.Next(player.atk, player.atk * 2));
                 }
                 //if attack is in the green area of the fight UI do damage accordingly
-                if (atkCenter > 450 && atkCenter < 488) 
+                if (atkCenter > 450 && atkCenter < 488)
                 {
                     damageNum = 3 * (randNum.Next(player.atk, player.atk * 2));
                 }
@@ -1012,14 +1015,14 @@ namespace UndertaleBattleSystemPrototype
             enemyTurn = true;
 
             //set the player in the middle of the battle area
-            player.x = 462;
-            player.y = 400;
+            player.x = this.Width / 2 - 10;
+            player.y = this.Height / 2 + this.Height / 4;
 
             //resize the arena area
             Rectangle leftWall = new Rectangle(actRec.X, actRec.Y - 250, 5, 200);
             Rectangle rightWall = new Rectangle(itemRec.X + 135, itemRec.Y - 250, 5, 200);
-            Rectangle topWall = new Rectangle(actRec.X, actRec.Y - 250, 376, 5);
-            Rectangle bottomWall = new Rectangle(actRec.X, actRec.Y - 50, 376, 5);
+            Rectangle topWall = new Rectangle(actRec.X, actRec.Y - 250, rightWall.X - leftWall.X + 5, 5);
+            Rectangle bottomWall = new Rectangle(actRec.X, actRec.Y - 50, rightWall.X - leftWall.X + 5, 5);
 
             //add the new walls to the arena walls list
             arenaWalls.Clear();
@@ -1066,8 +1069,8 @@ namespace UndertaleBattleSystemPrototype
         private void EnemyAttacks(int timer)
         {
             //check which attack was randomly selected and do it
-            if(attackName == "HornAttack") 
-            { 
+            if (attackName == "HornAttack")
+            {
                 //set attack variables correctly
                 if (attackVariablesSet == false)
                 {
@@ -1076,7 +1079,7 @@ namespace UndertaleBattleSystemPrototype
                 }
 
                 //if the correct amount of time has passed, and the enemy turn isn't over, spawn a new horn attack
-                if (timer % spaceBetweenAttacks == 0  && timer != 0)
+                if (timer % spaceBetweenAttacks == 0 && timer != 0)
                 {
                     //alternate between left and right attacks
                     if (hornLeft == true)
@@ -1090,7 +1093,7 @@ namespace UndertaleBattleSystemPrototype
                         Projectile hornProjR = new Projectile(arenaWalls[1].X - 180, arenaWalls[3].Y, 180, 100, Resources.attackHorn);
                         attacks.Add(hornProjR);
                         hornLeft = true;
-                        
+
                         //make the attack get more difficult as time goes on
                         if (hornSpaceChange == true && spaceBetweenAttacks >= 30)
                         {
@@ -1125,8 +1128,8 @@ namespace UndertaleBattleSystemPrototype
                 }
 
                 //move the projectiles according to the attack and get rid of the first one if it goes out of the arena box
-                foreach (Projectile p in attacks) 
-                { 
+                foreach (Projectile p in attacks)
+                {
                     p.HornAttack(attackSpeed);
 
                     if (p.y <= arenaWalls[2].Y - 50)
@@ -1136,7 +1139,7 @@ namespace UndertaleBattleSystemPrototype
                     }
                 }
             }
-            if(attackName == "HoofAttack")
+            if (attackName == "HoofAttack")
             {
                 //set attack variables correctly
                 if (attackVariablesSet == false)
@@ -1236,7 +1239,7 @@ namespace UndertaleBattleSystemPrototype
             //this should move all items back one item in the xml file
             foreach (XmlNode n in itemList)
             {
-                if(n.Attributes[0].InnerText == " ")
+                if (n.Attributes[0].InnerText == " ")
                 {
                     if (i < 3)
                     {
