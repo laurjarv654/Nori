@@ -37,5 +37,19 @@ namespace UndertaleBattleSystemPrototype.Classes
                 y += speed;
             }
         }
+
+        public void LeafAttack(int speed, Boolean leavesLeft)
+        {
+            if (leavesLeft == true)
+            {
+                x -= speed;
+                y += speed;
+            }
+            else
+            {
+                x += speed;
+                y += speed;
+            }
+        }
     }
 }

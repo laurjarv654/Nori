@@ -1,0 +1,103 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Enemy>
+  <Stats hp ="100"
+         atk ="5">
+  </Stats>
+  <Attacks>
+    <Attack name ="HornAttack"
+            value ="0">
+    </Attack>
+    <Attack name ="HoofAttack"
+            value ="1">
+    </Attack>
+  </Attacks>
+  <ActMenu>
+    <Act spareValue ="-1"
+          actName ="Check"
+          actLine1 ="FRANKY 5 ATK"
+          actLine2 ="He's the one who bullied Calum, and he's been in"
+          actLine3 ="the way long enough. Deal with him as you see fit.">
+    </Act>
+    <Act spareValue ="-1"
+          actName ="Taunt"
+          actLine1 ="You tell Franky he's nothing compared to Calum."
+          actLine2 ="..."
+          actLine3 ="He looks pissed.">
+    </Act>
+    <Act spareValue ="1"
+          actName ="Confront"
+          actLine1 ="You ask Franky why he's bullying Calum.">
+    </Act>
+
+    <Act1 spareValue ="1"
+          actName ="Check"
+          actLine1 ="FRANKY 5 ATK"
+          actLine2 ="He's the one who bullied Calum, and he's been in"
+          actLine3 ="the way long enough. Deal with him as you see fit.">
+    </Act1>
+    <Act1 spareValue ="1"
+          actName ="Taunt"
+          actLine1 ="You tell Franky he's nothing compared to Calum."
+          actLine2 ="..."
+          actLine3 ="He looks pissed.">
+    </Act1>
+    <Act1 spareValue ="2"
+          actName ="Confront"
+          actLine1 ="You ask Franky why he broke Calum's antler.">
+    </Act1>
+
+    <Act2 spareValue ="2"
+          actName ="Check"
+          actLine1 ="FRANKY 5 ATK"
+          actLine2 ="He's the one who bullied Calum, and he's been in"
+          actLine3 ="the way long enough. Deal with him as you see fit.">
+    </Act2>
+    <Act2 spareValue ="2"
+          actName ="Taunt"
+          actLine1 ="You tell Franky he's nothing compared to Calum."
+          actLine2 ="..."
+          actLine3 ="He looks pissed.">
+    </Act2>
+    <Act2 spareValue ="3"
+          actName ="Chat"
+          actLine1 ="You tell Franky that he's horrible." 
+          actLine2 = "He should never have gone so far.">
+    </Act2>
+
+    <Act3 spareValue ="3"
+          actName ="Check"
+          actLine1 ="FRANKY 5 ATK"
+          actLine2 ="He's the one who bullied Calum, and he's been in"
+          actLine3 ="the way long enough. Deal with him as you see fit.">
+    </Act3>
+    <Act3 spareValue ="4"
+          actName ="Taunt"
+          actLine1 ="You tell Franky he's scum for hurting Calum."
+          actLine2 ="..."
+          actLine3 ="He looks conflicted.">
+    </Act3>
+    <Act3 spareValue ="3"
+          actName ="Chat"
+          actLine1 ="You tell Franky that he's horrible." 
+          actLine2 ="He should never have gone so far.">
+    </Act3>
+
+    <Act4 spareValue ="4"
+          actName ="Check"
+          actLine1 ="FRANKY 5 ATK"
+          actLine2 ="He's the one who bullied Calum, and he's been in"
+          actLine3 ="the way long enough. Deal with him as you see fit.">
+    </Act4>
+    <Act4 spareValue ="4"
+          actName ="Taunt"
+          actLine1 ="You tell Franky he's scum for hurting Calum."
+          actLine2 ="..."
+          actLine3 ="He looks conflicted.">
+    </Act4>
+    <Act4 spareValue ="0"
+          actName ="Chat"
+          actLine1 ="You tell Franky that he should drop"
+          actLine2 ="the gang and go appologize.">
+    </Act4>
+  </ActMenu>
+</Enemy>

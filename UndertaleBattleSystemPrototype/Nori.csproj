@@ -173,6 +173,9 @@
     <None Include="Resources\actButton.png" />
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="Resources\DialogFont.ttf">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </EmbeddedResource>
     <None Include="Resources\itemButton.png" />
   </ItemGroup>
   <ItemGroup>
@@ -335,6 +338,11 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\libraryDoor.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Franky.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

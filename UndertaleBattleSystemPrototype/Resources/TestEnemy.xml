@@ -4,10 +4,10 @@
          atk ="5">
   </Stats>
   <Attacks>
-    <Attack name ="FistAttack"
+    <Attack name ="LeafAttack"
             value ="0">
     </Attack>
-    <Attack name ="FistAttack"
+    <Attack name ="LeafAttack"
             value ="1">
     </Attack>
   </Attacks>
