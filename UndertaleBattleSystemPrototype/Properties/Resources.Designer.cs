@@ -234,7 +234,8 @@ namespace UndertaleBattleSystemPrototype.Properties {
         ///   Looks up a localized string similar to &lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
         ///&lt;Enemy&gt;
         ///  &lt;Stats hp =&quot;80&quot;
-        ///         atk =&quot;4&quot;&gt;
+        ///         atk =&quot;4&quot;
+        ///         gold =&quot;50&quot;&gt;
         ///  &lt;/Stats&gt;
         ///  &lt;Attacks&gt;
         ///    &lt;Attack name =&quot;LeafAttack&quot;
@@ -248,7 +249,7 @@ namespace UndertaleBattleSystemPrototype.Properties {
         ///    &lt;Text string =&quot;...Do what you will Nori. But please be careful.&quot;&gt;&lt;/Text&gt;
         ///    &lt;Text string =&quot;Franky and his gang broke my antler off a week ago...&quot;&gt;&lt;/Text&gt;
         ///    &lt;Text string =&quot;Yeah...&quot;&gt;&lt;/Text&gt;
-        ///    &lt;Text string =&quot;Thanks Nori. [rest of string was truncated]&quot;;.
+        ///    &lt;Text  [rest of string was truncated]&quot;;.
         /// </summary>
         internal static string Calum {
             get {
@@ -320,7 +321,8 @@ namespace UndertaleBattleSystemPrototype.Properties {
         ///   Looks up a localized string similar to &lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
         ///&lt;Enemy&gt;
         ///  &lt;Stats hp =&quot;100&quot;
-        ///         atk =&quot;5&quot;&gt;
+        ///         atk =&quot;5&quot;
+        ///         gold =&quot;200&quot;&gt;
         ///  &lt;/Stats&gt;
         ///  &lt;Attacks&gt;
         ///    &lt;Attack name =&quot;HornAttack&quot;
@@ -330,12 +332,9 @@ namespace UndertaleBattleSystemPrototype.Properties {
         ///            value =&quot;1&quot;&gt;
         ///    &lt;/Attack&gt;
         ///  &lt;/Attacks&gt;
-        ///  &lt;ActMenu&gt;
-        ///    &lt;Act spareValue =&quot;-1&quot;
-        ///          actName =&quot;Check&quot;
-        ///          actLine1 =&quot;FRANKY 5 ATK&quot;
-        ///          actLine2 =&quot;He&apos;s the one who bullied Calum, and he&apos;s been in&quot;
-        ///          actLine3 =&quot;the way long enough. Deal with him as you s [rest of string was truncated]&quot;;.
+        ///  &lt;Dialog&gt;
+        ///    &lt;Text string =&quot;...I guess I&apos;ll go appologize. You won&apos;t back off if I say no anyways. You win Nori.&quot;&gt;&lt;/Text&gt;
+        ///    &lt;Text string =&quot;Because he&apos;s weak. People like him don&apos;t survive society. He&apos;s a loser.&quot;&gt; [rest of string was truncated]&quot;;.
         /// </summary>
         internal static string Franky {
             get {
@@ -693,6 +692,16 @@ namespace UndertaleBattleSystemPrototype.Properties {
         internal static string text {
             get {
                 return ResourceManager.GetString("text", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap titleSprite {
+            get {
+                object obj = ResourceManager.GetObject("titleSprite", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
             }
         }
     }

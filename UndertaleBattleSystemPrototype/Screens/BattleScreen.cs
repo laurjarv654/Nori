@@ -135,10 +135,6 @@ namespace UndertaleBattleSystemPrototype
         //random number generator
         Random randNum = new Random();
 
-        //undertale font for drawing
-        PrivateFontCollection programFonts = new PrivateFontCollection();
-        Font dialogFont;
-
         #endregion variables and lists
 
         #region battle system brought up
@@ -165,16 +161,9 @@ namespace UndertaleBattleSystemPrototype
         }
         #endregion battle system brought up
 
-        //enemy xml name is HERE
         #region setup
         public void OnStart()
         {
-            TownScreen.enemyName = "Franky";
-
-            //initialize the dialog font
-            programFonts.AddFontFile("Resources/dialogFont.ttf");
-            dialogFont = new Font(programFonts.Families[0], 18, FontStyle.Regular);
-
             //health bar rectangles
             maxHPRec = new Rectangle(this.Width / 2 - 40, this.Height - 130, 80, 20);
             remainingHPRec = new Rectangle(this.Width / 2 - 40, this.Height - 130, 80, 20);
@@ -706,11 +695,11 @@ namespace UndertaleBattleSystemPrototype
                 //draw the correct enemy dialog string in the dialog box
                 if (spareNum == -1 || spareNum == lastSpareNum)
                 {
-                    e.Graphics.DrawString("...", dialogFont, blackBrush, enemyDialogBox);
+                    e.Graphics.DrawString("...", Form1.dialogFont, blackBrush, enemyDialogBox);
                 }
                 else 
                 {
-                    e.Graphics.DrawString(enemyDialog[spareNum], dialogFont, blackBrush, enemyDialogBox);
+                    e.Graphics.DrawString(enemyDialog[spareNum], Form1.dialogFont, blackBrush, enemyDialogBox);
                 }
 
                 //set the last spare number to the current one for the next time dialog is written
