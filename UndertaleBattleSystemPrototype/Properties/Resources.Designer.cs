@@ -268,6 +268,16 @@ namespace UndertaleBattleSystemPrototype.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
+        internal static byte[] DialogFont {
+            get {
+                object obj = ResourceManager.GetObject("DialogFont", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
         internal static System.Drawing.Bitmap Donna {
@@ -657,6 +667,16 @@ namespace UndertaleBattleSystemPrototype.Properties {
         internal static string text {
             get {
                 return ResourceManager.GetString("text", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap titleSprite {
+            get {
+                object obj = ResourceManager.GetObject("titleSprite", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
             }
         }
     }
