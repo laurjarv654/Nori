@@ -136,10 +136,6 @@
         L4QRhoaZGWGEJgyeCOPKZQfg6YSh6HXiCwAAAABJRU5ErkJggg==
 </value>
   </data>
-  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="Calum" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Calum.xml;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
-  </data>
   <data name="fightButton" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAAEYAAAAYCAYAAABHqosDAAAABGdBTUEAALGPC/xhBQAAAPlJREFUWEft
@@ -5940,9 +5936,6 @@
         AAAASUVORK5CYII=
 </value>
   </data>
-  <data name="Player" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Player.xml;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
-  </data>
   <data name="Sharol_WS" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAAK8AAADhCAYAAAC+wOVpAAAABGdBTUEAALGPC/xhBQAADnJJREFUeF7t
@@ -6009,9 +6002,6 @@
         9EaxI+1d1Xc2erdILkgTrYGsoDeKHWnvqr6z0btFckGaaA1kBb1R7Eh7V/Wdjd4tkgvSRGsgK+iNYkfa
         u6rvbPRukVyQJloDWUFvFDvS3lV9Z6N3i28s3333PxjiNC8UcW7qAAAAAElFTkSuQmCC
 </value>
-  </data>
-  <data name="TestEnemy" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\TestEnemy.xml;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
   </data>
   <data name="attackFistD" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
@@ -6856,6 +6846,7 @@
         Zl/PP1zMzMzMzOzr/fHDJfwfZmZmZmZm3wpvmpmZmZmZfYl/9o//P5JJMDzuaJepAAAAAElFTkSuQmCC
 </value>
   </data>
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="text" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\text.xml;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
   </data>
@@ -7559,8 +7550,20 @@
         nuneQQAAAABJRU5ErkJggg==
 </value>
   </data>
+  <data name="Calum" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Calum.xml;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  </data>
   <data name="DialogFont" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\DialogFont.ttf;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="Franky" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Franky.xml;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  </data>
+  <data name="Player" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Player.xml;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  </data>
+  <data name="TestEnemy" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\TestEnemy.xml;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
   </data>
   <data name="titleSprite" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>

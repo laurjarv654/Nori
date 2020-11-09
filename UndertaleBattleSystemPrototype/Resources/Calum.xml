@@ -1,26 +1,130 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Enemy>
   <Stats hp ="80"
-         atk ="5"
-         def ="2">
+         atk ="4"
+         gold ="50">
   </Stats>
+  <Attacks>
+    <Attack name ="LeafAttack"
+            value ="0">
+    </Attack>
+    <Attack name ="FistAttack"
+            value ="1">
+    </Attack>
+  </Attacks>
+  <Dialog>
+    <Text string ="...Do what you will Nori. But please be careful."></Text>
+    <Text string ="Franky and his gang broke my antler off a week ago..."></Text>
+    <Text string ="Yeah..."></Text>
+    <Text string ="Thanks Nori. I needed that."></Text>
+  </Dialog>
+  <AfterTurn>
+    <FlavorText line1 ="Calum seems to be okay."
+                line2 ="He's seeing you off now.">
+    </FlavorText>
+    <FlavorText line1 ="Calum looks awkwardly at his surroundings.">
+    </FlavorText>
+    <FlavorText line1 ="The mood seems a bit dim...">
+    </FlavorText>
+    <FlavorText line1 ="Maybe you shouldn't get involved?"
+                line2 ="..."
+                line3 ="On second thought, why else would you be here?.">
+    </FlavorText>
+    <FlavorText line1 ="Calum's antler looks rough."
+                line2 ="..."
+                line3 ="What happened to him...?">
+    </FlavorText>
+  </AfterTurn>
   <ActMenu>
-    <Act actName ="Check"
-          actLine1 ="CALUM 5 ATK 2 DEF"
+    <Act spareValue ="-1"
+          actName ="Check"
+          actLine1 ="CALUM 4 ATK"
           actLine2 ="A hurt soul...">
     </Act>
-    <Act actName ="Comfort"
+    <Act spareValue ="-1"
+          actName ="Comfort"
           actLine1 ="You comforted Calum."
           actLine2 ="..."
           actLine3 ="He doesn't seem to care.">
     </Act>
-    <Act actName ="Taunt"
+    <Act spareValue ="-1"
+          actName ="Taunt"
           actLine1 ="You prod at Calum's missing antler"
           actLine2 ="..."
           actLine3 ="He looks at you with a mix of anger and sadness.">
     </Act>
-    <Act actName = "Chat"
+    <Act spareValue ="1"
+          actName = "Chat"
           actLine1 ="You ask Calum what happened to his antler.">
     </Act>
+
+    <Act1 spareValue ="1"
+          actName ="Check"
+          actLine1 ="CALUM 4 ATK"
+          actLine2 ="A hurt soul...">
+    </Act1>
+    <Act1 spareValue ="1"
+          actName ="Comfort"
+          actLine1 ="You comforted Calum."
+          actLine2 ="..."
+          actLine3 ="He doesn't seem like he needs that right now.">
+    </Act1>
+    <Act1 spareValue ="-1"
+          actName ="Taunt"
+          actLine1 ="You prod at Calum's missing antler"
+          actLine2 ="..."
+          actLine3 ="He doesn't even bother looking at you.">
+    </Act1>
+    <Act1 spareValue ="2"
+          actName = "Chat"
+          actLine1 ="You tell Calum that Franky is the worst kind of person."
+          actLine2 ="..."
+          actLine3 ="He just looks sadly at the ground...">
+    </Act1>
+
+    <Act2 spareValue ="2"
+          actName ="Check"
+          actLine1 ="CALUM 4 ATK"
+          actLine2 ="A hurt soul...">
+    </Act2>
+    <Act2 spareValue ="3"
+          actName ="Comfort"
+          actLine1 ="You comforted Calum."
+          actLine2 ="..."
+          actLine3 ="He seems to be feeling better.">
+    </Act2>
+    <Act2 spareValue ="-1"
+          actName ="Taunt"
+          actLine1 ="You prod at Calum's missing antler"
+          actLine2 ="..."
+          actLine3 ="He looks at you with a mix of anger and sadness.">
+    </Act2>
+    <Act2 spareValue ="2"
+          actName = "Chat"
+          actLine1 ="He doesn't seem much for conversation right now."
+          actLine2 ="...">
+    </Act2>
+
+    <Act3 spareValue ="3"
+          actName ="Check"
+          actLine1 ="CALUM 4 ATK"
+          actLine2 ="A hurt soul...">
+    </Act3>
+    <Act3 spareValue ="3"
+          actName ="Comfort"
+          actLine1 ="You comforted Calum."
+          actLine2 ="..."
+          actLine3 ="He seems to be feeling better.">
+    </Act3>
+    <Act3 spareValue ="-1"
+          actName ="Taunt"
+          actLine1 ="You prod at Calum's missing antler"
+          actLine2 ="..."
+          actLine3 ="He looks at you with a mix of anger and sadness.">
+    </Act3>
+    <Act3 spareValue ="0"
+          actName = "Chat"
+          actLine1 ="You tell Calum you're going to confront Franky.">
+    </Act3>
   </ActMenu>
 </Enemy>

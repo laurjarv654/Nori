@@ -234,22 +234,22 @@ namespace UndertaleBattleSystemPrototype.Properties {
         ///   Looks up a localized string similar to &lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
         ///&lt;Enemy&gt;
         ///  &lt;Stats hp =&quot;80&quot;
-        ///         atk =&quot;5&quot;
-        ///         def =&quot;2&quot;&gt;
+        ///         atk =&quot;4&quot;
+        ///         gold =&quot;50&quot;&gt;
         ///  &lt;/Stats&gt;
-        ///  &lt;ActMenu&gt;
-        ///    &lt;Act actName =&quot;Check&quot;
-        ///          actLine1 =&quot;CALUM 5 ATK 2 DEF&quot;
-        ///          actLine2 =&quot;A hurt soul...&quot;&gt;
-        ///    &lt;/Act&gt;
-        ///    &lt;Act actName =&quot;Comfort&quot;
-        ///          actLine1 =&quot;You comforted Calum.&quot;
-        ///          actLine2 =&quot;...&quot;
-        ///          actLine3 =&quot;He doesn&apos;t seem to care.&quot;&gt;
-        ///    &lt;/Act&gt;
-        ///    &lt;Act actName =&quot;Taunt&quot;
-        ///          actLine1 =&quot;You prod at Calum&apos;s missing antler&quot;
-        ///          actLi [rest of string was truncated]&quot;;.
+        ///  &lt;Attacks&gt;
+        ///    &lt;Attack name =&quot;LeafAttack&quot;
+        ///            value =&quot;0&quot;&gt;
+        ///    &lt;/Attack&gt;
+        ///    &lt;Attack name =&quot;FistAttack&quot;
+        ///            value =&quot;1&quot;&gt;
+        ///    &lt;/Attack&gt;
+        ///  &lt;/Attacks&gt;
+        ///  &lt;Dialog&gt;
+        ///    &lt;Text string =&quot;...Do what you will Nori. But please be careful.&quot;&gt;&lt;/Text&gt;
+        ///    &lt;Text string =&quot;Franky and his gang broke my antler off a week ago...&quot;&gt;&lt;/Text&gt;
+        ///    &lt;Text string =&quot;Yeah...&quot;&gt;&lt;/Text&gt;
+        ///    &lt;Text  [rest of string was truncated]&quot;;.
         /// </summary>
         internal static string Calum {
             get {
@@ -314,6 +314,31 @@ namespace UndertaleBattleSystemPrototype.Properties {
             get {
                 object obj = ResourceManager.GetObject("fightUISprite", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to &lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
+        ///&lt;Enemy&gt;
+        ///  &lt;Stats hp =&quot;100&quot;
+        ///         atk =&quot;5&quot;
+        ///         gold =&quot;200&quot;&gt;
+        ///  &lt;/Stats&gt;
+        ///  &lt;Attacks&gt;
+        ///    &lt;Attack name =&quot;HornAttack&quot;
+        ///            value =&quot;0&quot;&gt;
+        ///    &lt;/Attack&gt;
+        ///    &lt;Attack name =&quot;HoofAttack&quot;
+        ///            value =&quot;1&quot;&gt;
+        ///    &lt;/Attack&gt;
+        ///  &lt;/Attacks&gt;
+        ///  &lt;Dialog&gt;
+        ///    &lt;Text string =&quot;...I guess I&apos;ll go appologize. You won&apos;t back off if I say no anyways. You win Nori.&quot;&gt;&lt;/Text&gt;
+        ///    &lt;Text string =&quot;Because he&apos;s weak. People like him don&apos;t survive society. He&apos;s a loser.&quot;&gt; [rest of string was truncated]&quot;;.
+        /// </summary>
+        internal static string Franky {
+            get {
+                return ResourceManager.GetString("Franky", resourceCulture);
             }
         }
         
@@ -624,14 +649,13 @@ namespace UndertaleBattleSystemPrototype.Properties {
         ///   Looks up a localized string similar to &lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
         ///&lt;Enemy&gt;
         ///  &lt;Stats hp =&quot;100&quot;
-        ///         atk =&quot;5&quot;
-        ///         def =&quot;5&quot;&gt;
+        ///         atk =&quot;5&quot;&gt;
         ///  &lt;/Stats&gt;
         ///  &lt;Attacks&gt;
-        ///    &lt;Attack name =&quot;HornAttack&quot;
+        ///    &lt;Attack name =&quot;LeafAttack&quot;
         ///            value =&quot;0&quot;&gt;
         ///    &lt;/Attack&gt;
-        ///    &lt;Attack name =&quot;HoofAttack&quot;
+        ///    &lt;Attack name =&quot;LeafAttack&quot;
         ///            value =&quot;1&quot;&gt;
         ///    &lt;/Attack&gt;
         ///  &lt;/Attacks&gt;
@@ -642,7 +666,8 @@ namespace UndertaleBattleSystemPrototype.Properties {
         ///          actLine2 =&quot;Basic enemy example&quot;&gt;
         ///    &lt;/Act&gt;
         ///    &lt;Act spareValue =&quot;1&quot;
-        ///          actName =&quot;Joke&quot;        /// [rest of string was truncated]&quot;;.
+        ///          actName =&quot;Joke&quot;
+        ///          actLine1 [rest of string was truncated]&quot;;.
         /// </summary>
         internal static string TestEnemy {
             get {

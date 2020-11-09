@@ -22,7 +22,7 @@ namespace UndertaleBattleSystemPrototype
             InitializeComponent();
 
             //initialize the dialog font
-            programFonts.AddFontFile("Resources / dialogFont.ttf");
+            programFonts.AddFontFile("Resources/dialogFont.ttf");
             dialogFont = new Font(programFonts.Families[0], 18, FontStyle.Regular);
         }
 
