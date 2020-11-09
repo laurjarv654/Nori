@@ -49,13 +49,14 @@
             // 
             // textOutput
             // 
+            this.textOutput.AutoEllipsis = true;
             this.textOutput.BackColor = System.Drawing.Color.Transparent;
             this.textOutput.Enabled = false;
             this.textOutput.Font = new System.Drawing.Font("Determination Mono Web", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.textOutput.ForeColor = System.Drawing.Color.White;
             this.textOutput.Location = new System.Drawing.Point(56, 361);
             this.textOutput.Name = "textOutput";
-            this.textOutput.Size = new System.Drawing.Size(899, 175);
+            this.textOutput.Size = new System.Drawing.Size(844, 175);
             this.textOutput.TabIndex = 0;
             this.textOutput.Text = "* Hello. \r\n\r\n* Welcome to the Undetale Battle System Prototype.\r\n\r\n* Try some of " +
     "the buttons and menus out for testing.";

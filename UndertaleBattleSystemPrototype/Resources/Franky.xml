@@ -1,7 +1,8 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Enemy>
   <Stats hp ="100"
-         atk ="5">
+         atk ="5"
+         gold ="200">
   </Stats>
   <Attacks>
     <Attack name ="HornAttack"
@@ -11,6 +12,32 @@
             value ="1">
     </Attack>
   </Attacks>
+  <Dialog>
+    <Text string ="...I guess I'll go appologize. You won't back off if I say no anyways. You win Nori."></Text>
+    <Text string ="Because he's weak. People like him don't survive society. He's a loser."></Text>
+    <Text string ="Heh heh, well... Let's just say that was an idea from my gang. Wasn't that hard either."></Text>
+    <Text string ="Oh yeah? He seems to be doing just fine if you ask me. Why won't you leave me alone? Scram, kid!"></Text>
+    <Text string ="What did you say!? He's the weak one, so... Hm... He deserved it...?"></Text>
+  </Dialog>
+  <AfterTurn>
+    <FlavorText line1 ="Franky is showing you mercy."
+                line2 ="Time to move on.">
+    </FlavorText>
+    <FlavorText line1 ="Franky's sinister glare hits you."
+                line2 ="..."
+                line3 ="But it seems forced...">
+    </FlavorText>
+    <FlavorText line1 ="A great gang leader, or maybe not..."
+                line2 ="You don't have the time to find out.">
+    </FlavorText>
+    <FlavorText line1 ="Franky's gang cheers him on as you both collide."
+                line2 ="He doesn't seem to like the pressure...">
+    </FlavorText>
+    <FlavorText line1 ="What did Franky's mom say when he left home?"
+                line2 ="Bi-son!"
+                line3 ="                        ...Anyways.">
+    </FlavorText>
+  </AfterTurn>
   <ActMenu>
     <Act spareValue ="-1"
           actName ="Check"

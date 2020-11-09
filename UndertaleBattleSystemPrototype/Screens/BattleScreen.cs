@@ -14,6 +14,7 @@ using UndertaleBattleSystemPrototype.Properties;
 using System.IO;
 using System.Drawing.Text;
 using System.Resources;
+using System.Diagnostics;
 
 namespace UndertaleBattleSystemPrototype
 {
@@ -61,8 +62,9 @@ namespace UndertaleBattleSystemPrototype
         int afterTurnCounter = 0;
         int enemyTurnCounter = 500;
 
-        //int for sparing
+        //ints for sparing and dialog
         int spareNum = -1;
+        int lastSpareNum = -2;
 
         //string for damage number drawing
         string playerDamageNum;
@@ -125,8 +127,9 @@ namespace UndertaleBattleSystemPrototype
         List<Rectangle> attackRecs = new List<Rectangle>();
         List<Projectile> attacks = new List<Projectile>();
 
-        //list for enemy dialog
+        //lists for enemy dialog and after enemy turn text
         List<string> enemyDialog = new List<string>();
+        List<string> afterEnemyTurnText = new List<string>();
         #endregion lists
 
         //random number generator
@@ -166,7 +169,7 @@ namespace UndertaleBattleSystemPrototype
         #region setup
         public void OnStart()
         {
-            TownScreen.enemyName = "Calum";
+            TownScreen.enemyName = "Franky";
 
             //initialize the dialog font
             programFonts.AddFontFile("Resources/dialogFont.ttf");
@@ -211,11 +214,22 @@ namespace UndertaleBattleSystemPrototype
             eReader.ReadToFollowing("Stats");
             enemy.hp = Convert.ToInt16(eReader.GetAttribute("hp"));
             enemy.atk = Convert.ToInt16(eReader.GetAttribute("atk"));
+            enemy.gold = Convert.ToInt16(eReader.GetAttribute("gold"));
 
             while (eReader.Read())
             {
                 eReader.ReadToFollowing("Text");
                 enemyDialog.Add(eReader.GetAttribute("string"));
+            }
+
+            eReader.Close();
+
+            eReader = XmlReader.Create("Resources/" + TownScreen.enemyName + ".xml");
+
+            while (eReader.Read())
+            {
+                eReader.ReadToFollowing("FlavorText");
+                afterEnemyTurnText.Add("* " + eReader.GetAttribute("line1") + "\n\n* " + eReader.GetAttribute("line2") + "\n\n* " + eReader.GetAttribute("line3"));
             }
 
             eReader.Close();
@@ -300,7 +314,7 @@ namespace UndertaleBattleSystemPrototype
             #region fighting area code
 
             //if it is the enemy's turn...
-            if (enemyTurn == true && enemyTurnCounter > 0)
+            if (enemyTurn == true && enemyTurnCounter > 0 && canSpare == false)
             {
                 EnemyAttacks(enemyTurnCounter);
 
@@ -367,11 +381,16 @@ namespace UndertaleBattleSystemPrototype
             //if the enemy turn is over
             #region enemy turn over
 
-            else if (enemyTurn == true && enemyTurnCounter <= 0)
+            else if (enemyTurn == true && (enemyTurnCounter <= 0 || canSpare == true))
             {
                 //reset the enemy turn counter
                 enemyTurnCounter = 500;
                 enemyTurn = false;
+
+                //display the output box with the appropriate text
+                if (spareNum == 0) { textOutput.Text = afterEnemyTurnText[0]; }
+                else { textOutput.Text = afterEnemyTurnText[randNum.Next(1, afterEnemyTurnText.Count - 1)]; }
+                textOutput.Visible = true;
 
                 //clear any attacks off the screen
                 attackRecs.Clear();
@@ -627,8 +646,28 @@ namespace UndertaleBattleSystemPrototype
                     playerAttack = false;
                     damageLabel.Visible = false;
 
-                    //call the turn made method
-                    TurnMade();
+                    //call the turn made method if enemy is not defeated yet, else "You Win!", and gain gold
+                    if (enemy.hp > 0) { TurnMade(); }
+                    else 
+                    {
+                        //set the action result to show that the player won
+                        actText[0] = "* You Won! \n\n* You got " + enemy.gold + " gold.";
+
+                        //set the enemy spared boolean to true
+                        enemySpared = true;
+
+                        //call the menu disappear method
+                        MenuDisappear(0);
+
+                        gameTimer.Enabled = false;
+
+                        //go back to the town screen
+                        TownScreen ts = new TownScreen();
+                        Form form = this.FindForm();
+                        form.Controls.Add(ts);
+                        form.Controls.Remove(this);
+                        ts.Focus();
+                    }
 
                     afterTurnCounter = 0;
                 }
@@ -665,7 +704,7 @@ namespace UndertaleBattleSystemPrototype
                 e.Graphics.FillRectangle(whiteBrush, enemyDialogBox);
 
                 //draw the correct enemy dialog string in the dialog box
-                if (spareNum == -1)
+                if (spareNum == -1 || spareNum == lastSpareNum)
                 {
                     e.Graphics.DrawString("...", dialogFont, blackBrush, enemyDialogBox);
                 }
@@ -673,6 +712,9 @@ namespace UndertaleBattleSystemPrototype
                 {
                     e.Graphics.DrawString(enemyDialog[spareNum], dialogFont, blackBrush, enemyDialogBox);
                 }
+
+                //set the last spare number to the current one for the next time dialog is written
+                lastSpareNum = spareNum;
             }
 
             //draw the fight UI if the player is in the fight menu
@@ -711,6 +753,9 @@ namespace UndertaleBattleSystemPrototype
                 {
                     damageNum = 3 * (randNum.Next(player.atk, player.atk * 2));
                 }
+
+                //if the enemy is spare-able, instant kill. (Betrayal, they aren't on-guard anymore)
+                if (canSpare == true) { damageNum = enemy.hp; }
 
                 //subtract the damage number from the enemy's hp
                 enemy.hp -= damageNum;
@@ -1069,23 +1114,24 @@ namespace UndertaleBattleSystemPrototype
             //make the main output label invisible
             textOutput.Visible = false;
 
+            //wait for 3 seconds before the enemy turn (again, so the player can read lol)
             if (enemySpared == false)
             {
                 //display the enemy dialog box
                 showEnemyDialog = true;
-
-                //wait for 2 seconds before the enemy turn (again, so the player can read lol)
                 Refresh();
-                Thread.Sleep(2000);
-                showEnemyDialog = false;
+                Thread.Sleep(3000);
             }
+
+            //stop showing the enemy dialog
+            showEnemyDialog = false;
 
             //set enemy turn boolean to true
             enemyTurn = true;
 
             //set the player in the middle of the battle area
             player.x = this.Width / 2 - 10;
-            player.y = this.Height / 2 + this.Height / 4;
+            player.y = arenaWalls[2].Y + (arenaWalls[3].Y - arenaWalls[2].Y) / 2;
 
             //resize the arena area
             Rectangle leftWall = new Rectangle(actRec.X, actRec.Y - 250, 5, 200);

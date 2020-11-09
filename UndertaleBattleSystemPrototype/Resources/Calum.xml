@@ -1,7 +1,8 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Enemy>
   <Stats hp ="80"
-         atk ="4">
+         atk ="4"
+         gold ="50">
   </Stats>
   <Attacks>
     <Attack name ="LeafAttack"
@@ -17,6 +18,23 @@
     <Text string ="Yeah..."></Text>
     <Text string ="Thanks Nori. I needed that."></Text>
   </Dialog>
+  <AfterTurn>
+    <FlavorText line1 ="Calum seems to be okay."
+                line2 ="He's seeing you off now.">
+    </FlavorText>
+    <FlavorText line1 ="Calum looks awkwardly at his surroundings.">
+    </FlavorText>
+    <FlavorText line1 ="The mood seems a bit dim...">
+    </FlavorText>
+    <FlavorText line1 ="Maybe you shouldn't get involved?"
+                line2 ="..."
+                line3 ="On second thought, why else would you be here?.">
+    </FlavorText>
+    <FlavorText line1 ="Calum's antler looks rough."
+                line2 ="..."
+                line3 ="What happened to him...?">
+    </FlavorText>
+  </AfterTurn>
   <ActMenu>
     <Act spareValue ="-1"
           actName ="Check"
