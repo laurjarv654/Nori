@@ -12,6 +12,9 @@ using System.Xml;
 using UndertaleBattleSystemPrototype.Classes;
 using UndertaleBattleSystemPrototype.Properties;
 using System.IO;
+using System.Drawing.Text;
+using System.Resources;
+using System.Diagnostics;
 
 namespace UndertaleBattleSystemPrototype
 {
@@ -24,6 +27,7 @@ namespace UndertaleBattleSystemPrototype
         Boolean attackVariablesSet = false;
         Boolean hornLeft = true;
         Boolean hornSpaceChange = false;
+        Boolean leavesLeft = true;
         public static Boolean playerInvincible = false; //has to be global for access in the player class
         int invincibilityTimer = 50;
         int attackSpeed = 0;
@@ -37,7 +41,8 @@ namespace UndertaleBattleSystemPrototype
         XmlReader eReader, pReader;
 
         //brush for walls, player attacks, and hp bars
-        SolidBrush wallBrush = new SolidBrush(Color.White);
+        SolidBrush whiteBrush = new SolidBrush(Color.White);
+        SolidBrush blackBrush = new SolidBrush(Color.Black);
         SolidBrush attackBrush = new SolidBrush(Color.Indigo);
         SolidBrush redBrush = new SolidBrush(Color.Red);
         SolidBrush yellowBrush = new SolidBrush(Color.Yellow);
@@ -57,8 +62,9 @@ namespace UndertaleBattleSystemPrototype
         int afterTurnCounter = 0;
         int enemyTurnCounter = 500;
 
-        //int for sparing
+        //ints for sparing and dialog
         int spareNum = -1;
+        int lastSpareNum = -2;
 
         //string for damage number drawing
         string playerDamageNum;
@@ -70,6 +76,7 @@ namespace UndertaleBattleSystemPrototype
         #region booleans
         //make a globally useable spare variable
         public static Boolean canSpare = false;
+        Boolean enemySpared = false;
 
         //player key press variables
         Boolean wDown, aDown, sDown, dDown, spaceDown, shiftDown;
@@ -82,6 +89,9 @@ namespace UndertaleBattleSystemPrototype
 
         //boolean for checking if the player has made an attack
         Boolean playerAttack = false;
+
+        //boolean for checking if the enemy dialog should be shown or not
+        Boolean showEnemyDialog = false;
         #endregion booleans
 
         #region rectangles
@@ -96,6 +106,9 @@ namespace UndertaleBattleSystemPrototype
 
         //health bar rectangles
         Rectangle maxHPRec, remainingHPRec, enemyMaxHPRec, enemyRemainingHPRec;
+
+        //rectangle for enemy dialog box
+        Rectangle enemyDialogBox;
         #endregion rectangles
 
         #region lists
@@ -113,6 +126,10 @@ namespace UndertaleBattleSystemPrototype
         List<int> enemyAttackValues = new List<int>();
         List<Rectangle> attackRecs = new List<Rectangle>();
         List<Projectile> attacks = new List<Projectile>();
+
+        //lists for enemy dialog and after enemy turn text
+        List<string> enemyDialog = new List<string>();
+        List<string> afterEnemyTurnText = new List<string>();
         #endregion lists
 
         //random number generator
@@ -171,6 +188,9 @@ namespace UndertaleBattleSystemPrototype
             arenaWalls.Add(topWall);
             arenaWalls.Add(bottomWall);
 
+            //set the enemy dialog box position
+            enemyDialogBox = new Rectangle(mercyRec.X - 60, this.Height / 8, mercyRec.Width + 80, 150);
+
             //set the text of the act labels
             actLabel1.Text = "  " + actNames[0];
             actLabel2.Text = "* " + actNames[1];
@@ -178,12 +198,28 @@ namespace UndertaleBattleSystemPrototype
             actLabel4.Text = "* " + actNames[3];
 
             //fill in enemy details for battle use
-            eReader = XmlReader.Create("Resources/TestEnemy.xml");
+            eReader = XmlReader.Create("Resources/" + TownScreen.enemyName + ".xml");
 
             eReader.ReadToFollowing("Stats");
             enemy.hp = Convert.ToInt16(eReader.GetAttribute("hp"));
             enemy.atk = Convert.ToInt16(eReader.GetAttribute("atk"));
-            enemy.def = Convert.ToInt16(eReader.GetAttribute("def"));
+            enemy.gold = Convert.ToInt16(eReader.GetAttribute("gold"));
+
+            while (eReader.Read())
+            {
+                eReader.ReadToFollowing("Text");
+                enemyDialog.Add(eReader.GetAttribute("string"));
+            }
+
+            eReader.Close();
+
+            eReader = XmlReader.Create("Resources/" + TownScreen.enemyName + ".xml");
+
+            while (eReader.Read())
+            {
+                eReader.ReadToFollowing("FlavorText");
+                afterEnemyTurnText.Add("* " + eReader.GetAttribute("line1") + "\n\n* " + eReader.GetAttribute("line2") + "\n\n* " + eReader.GetAttribute("line3"));
+            }
 
             eReader.Close();
 
@@ -267,7 +303,7 @@ namespace UndertaleBattleSystemPrototype
             #region fighting area code
 
             //if it is the enemy's turn...
-            if (enemyTurn == true && enemyTurnCounter > 0)
+            if (enemyTurn == true && enemyTurnCounter > 0 && canSpare == false)
             {
                 EnemyAttacks(enemyTurnCounter);
 
@@ -314,19 +350,19 @@ namespace UndertaleBattleSystemPrototype
                 //player movement
                 if (dDown == true && player.x < arenaWalls[1].X - arenaWalls[1].Width - player.size)
                 {
-                    player.MoveLeftRight(5);
+                    player.MoveLeftRight(8);
                 }
                 if (aDown == true && player.x > arenaWalls[0].X + arenaWalls[0].Width)
                 {
-                    player.MoveLeftRight(-5);
+                    player.MoveLeftRight(-8);
                 }
                 if (wDown == true && player.y > arenaWalls[2].Y + arenaWalls[2].Height)
                 {
-                    player.MoveUpDown(-5);
+                    player.MoveUpDown(-8);
                 }
                 if (sDown == true && player.y < arenaWalls[3].Y - arenaWalls[3].Height - player.size)
                 {
-                    player.MoveUpDown(5);
+                    player.MoveUpDown(8);
                 }
                 #endregion player movement
             }
@@ -334,11 +370,16 @@ namespace UndertaleBattleSystemPrototype
             //if the enemy turn is over
             #region enemy turn over
 
-            else if (enemyTurn == true && enemyTurnCounter <= 0)
+            else if (enemyTurn == true && (enemyTurnCounter <= 0 || canSpare == true))
             {
                 //reset the enemy turn counter
                 enemyTurnCounter = 500;
                 enemyTurn = false;
+
+                //display the output box with the appropriate text
+                if (spareNum == 0) { textOutput.Text = afterEnemyTurnText[0]; }
+                else { textOutput.Text = afterEnemyTurnText[randNum.Next(1, afterEnemyTurnText.Count - 1)]; }
+                textOutput.Visible = true;
 
                 //clear any attacks off the screen
                 attackRecs.Clear();
@@ -514,6 +555,9 @@ namespace UndertaleBattleSystemPrototype
                             //set the action result to show that the player won
                             actText[0] = "* You Won!";
 
+                            //set the enemy spared boolean to true
+                            enemySpared = true;
+
                             //call the menu disappear method
                             MenuDisappear(0);
 
@@ -557,24 +601,17 @@ namespace UndertaleBattleSystemPrototype
         #region paint graphics
         private void BattleScreen_Paint(object sender, PaintEventArgs e)
         {
-            //draw the text box/arena walls
-            foreach (Rectangle r in arenaWalls)
-            {
-                e.Graphics.FillRectangle(wallBrush, r);
-            }
-
-            //draw the fight UI if the player is in the fight menu
-            if (fightMenuSelected == true)
-            {
-                e.Graphics.DrawImage(fightUISprite, arenaWalls[0].X + 5, arenaWalls[2].Y + 5, arenaWalls[1].X - arenaWalls[0].X - 5, 195);
-                e.Graphics.FillRectangle(attackBrush, attackRec);
-            }
-
             #region enemy attacks
 
             foreach (Projectile p in attacks)
             {
-                e.Graphics.DrawImage(p.image, p.x, p.y, p.width, p.height);
+               e.Graphics.DrawImage(p.image, p.x, p.y, p.width, p.height);
+            }
+
+            if (attackName != "HoofAttack")
+            {
+                e.Graphics.FillRectangle(blackBrush, 0, arenaWalls[2].Y - 50, this.Width, 50);
+                e.Graphics.FillRectangle(blackBrush, 0, arenaWalls[3].Y + 5, this.Width, 100);
             }
 
             #endregion enemy attacks
@@ -598,8 +635,28 @@ namespace UndertaleBattleSystemPrototype
                     playerAttack = false;
                     damageLabel.Visible = false;
 
-                    //call the turn made method
-                    TurnMade();
+                    //call the turn made method if enemy is not defeated yet, else "You Win!", and gain gold
+                    if (enemy.hp > 0) { TurnMade(); }
+                    else 
+                    {
+                        //set the action result to show that the player won
+                        actText[0] = "* You Won! \n\n* You got " + enemy.gold + " gold.";
+
+                        //set the enemy spared boolean to true
+                        enemySpared = true;
+
+                        //call the menu disappear method
+                        MenuDisappear(0);
+
+                        gameTimer.Enabled = false;
+
+                        //go back to the town screen
+                        TownScreen ts = new TownScreen();
+                        Form form = this.FindForm();
+                        form.Controls.Add(ts);
+                        form.Controls.Remove(this);
+                        ts.Focus();
+                    }
 
                     afterTurnCounter = 0;
                 }
@@ -623,6 +680,38 @@ namespace UndertaleBattleSystemPrototype
             e.Graphics.DrawImage(playerSprite, player.x, player.y);
 
             #endregion player UI
+
+            //draw the text box/arena walls
+            foreach (Rectangle r in arenaWalls)
+            {
+                e.Graphics.FillRectangle(whiteBrush, r);
+            }
+
+            //draw the enemy dialog box if it's time
+            if (showEnemyDialog == true)
+            {
+                e.Graphics.FillRectangle(whiteBrush, enemyDialogBox);
+
+                //draw the correct enemy dialog string in the dialog box
+                if (spareNum == -1 || spareNum == lastSpareNum)
+                {
+                    e.Graphics.DrawString("...", Form1.dialogFont, blackBrush, enemyDialogBox);
+                }
+                else 
+                {
+                    e.Graphics.DrawString(enemyDialog[spareNum], Form1.dialogFont, blackBrush, enemyDialogBox);
+                }
+
+                //set the last spare number to the current one for the next time dialog is written
+                lastSpareNum = spareNum;
+            }
+
+            //draw the fight UI if the player is in the fight menu
+            if (fightMenuSelected == true)
+            {
+                e.Graphics.DrawImage(fightUISprite, arenaWalls[0].X + 5, arenaWalls[2].Y + 5, arenaWalls[1].X - arenaWalls[0].X - 5, 195);
+                e.Graphics.FillRectangle(attackBrush, attackRec);
+            }
         }
         #endregion paint graphics
 
@@ -653,6 +742,9 @@ namespace UndertaleBattleSystemPrototype
                 {
                     damageNum = 3 * (randNum.Next(player.atk, player.atk * 2));
                 }
+
+                //if the enemy is spare-able, instant kill. (Betrayal, they aren't on-guard anymore)
+                if (canSpare == true) { damageNum = enemy.hp; }
 
                 //subtract the damage number from the enemy's hp
                 enemy.hp -= damageNum;
@@ -719,14 +811,14 @@ namespace UndertaleBattleSystemPrototype
             int i = 0;
 
             //set reader to beginning of enemy file
-            eReader = XmlReader.Create("Resources/TestEnemy.xml");
+            eReader = XmlReader.Create("Resources/" + TownScreen.enemyName + ".xml");
 
             while (eReader.Read() && i < 4)
             {
                 //check what step of sparing the player is on 
                 //(0 is spare-able, -1 is a negative action, 1 to infinity is a step forward/neutral action)
                 if (spareNum == 0 || spareNum == -1) { eReader.ReadToFollowing("Act"); }
-                if (spareNum == 1) { eReader.ReadToFollowing("Act1"); }
+                else { eReader.ReadToFollowing("Act" + spareNum); }
 
                 //fill out the proper details for each act option
                 spareValues[i] = Convert.ToInt16(eReader.GetAttribute("spareValue"));
@@ -814,9 +906,9 @@ namespace UndertaleBattleSystemPrototype
         private void Menus()
         {
             //disable act options if they are blank
-            if (actLabel2.Text == "*  ") { actLabel2.Visible = false; }
-            if (actLabel3.Text == "*  ") { actLabel3.Visible = false; }
-            if (actLabel4.Text == "*  ") { actLabel4.Visible = false; }
+            if (actLabel2.Text == "*  " || actNames[1] == null) { actLabel2.Visible = false; }
+            if (actLabel3.Text == "*  " || actNames[2] == null) { actLabel3.Visible = false; }
+            if (actLabel4.Text == "*  " || actNames[3] == null) { actLabel4.Visible = false; }
 
             //check which act option the player is on and do things accordingly
             #region option selection
@@ -1001,7 +1093,7 @@ namespace UndertaleBattleSystemPrototype
             player.x = -20;
             player.y = -20;
 
-            //wait for 3 seconds before starting the enemy turn if an act was made (so that the player can read lol)
+            //wait for 3 seconds before showing the enemy dialog if an act was made (so that the player can read lol)
             if (textOutput.Visible == true)
             {
                 Refresh();
@@ -1011,12 +1103,24 @@ namespace UndertaleBattleSystemPrototype
             //make the main output label invisible
             textOutput.Visible = false;
 
+            //wait for 3 seconds before the enemy turn (again, so the player can read lol)
+            if (enemySpared == false)
+            {
+                //display the enemy dialog box
+                showEnemyDialog = true;
+                Refresh();
+                Thread.Sleep(3000);
+            }
+
+            //stop showing the enemy dialog
+            showEnemyDialog = false;
+
             //set enemy turn boolean to true
             enemyTurn = true;
 
             //set the player in the middle of the battle area
             player.x = this.Width / 2 - 10;
-            player.y = this.Height / 2 + this.Height / 4;
+            player.y = arenaWalls[2].Y + (arenaWalls[3].Y - arenaWalls[2].Y) / 2;
 
             //resize the arena area
             Rectangle leftWall = new Rectangle(actRec.X, actRec.Y - 250, 5, 200);
@@ -1047,7 +1151,7 @@ namespace UndertaleBattleSystemPrototype
         private void AttackType()
         {
             //read from the enemy xml file
-            eReader = XmlReader.Create("Resources/TestEnemy.xml");
+            eReader = XmlReader.Create("Resources/" + TownScreen.enemyName + ".xml");
 
             //fill in the enemy attacks lists from the enemy xml
             while (eReader.Read())
@@ -1076,6 +1180,9 @@ namespace UndertaleBattleSystemPrototype
                 {
                     spaceBetweenAttacks = 40;
                     attackSpeed = 5;
+                    hornLeft = true;
+                    hornSpaceChange = false;
+                    attackVariablesSet = true;
                 }
 
                 //if the correct amount of time has passed, and the enemy turn isn't over, spawn a new horn attack
@@ -1108,12 +1215,8 @@ namespace UndertaleBattleSystemPrototype
                     }
                 }
                 //reset attack variables
-                else if (timer == 0)
+                else if (timer == 1)
                 {
-                    attackSpeed = 5;
-                    spaceBetweenAttacks = 40;
-                    hornLeft = true;
-                    hornSpaceChange = false;
                     attackVariablesSet = false;
                 }
 
@@ -1146,6 +1249,7 @@ namespace UndertaleBattleSystemPrototype
                 {
                     spaceBetweenAttacks = 75;
                     attackSpeed = 10;
+                    attackVariablesSet = true;
                 }
 
                 //if the correct amount of time has passed, and the enemy turn isn't over, spawn a new hoof attack pattern
@@ -1171,7 +1275,7 @@ namespace UndertaleBattleSystemPrototype
                     attackRecs.RemoveAt(x);
                 }
                 //reset attack variables
-                else if (timer == 0)
+                else if (timer == 1)
                 {
                     attackVariablesSet = false;
                 }
@@ -1204,6 +1308,144 @@ namespace UndertaleBattleSystemPrototype
                     }
                 }
                 catch (Exception) { }
+            }
+            if (attackName == "FistAttack")
+            {
+                //set attack variables correctly
+                if (attackVariablesSet == false)
+                {
+                    spaceBetweenAttacks = 20;
+                    attackVariablesSet = true;
+                }
+
+                //if the correct amount of time has passed, and the enemy turn isn't over, spawn a new fist attack
+                if (timer % spaceBetweenAttacks == 0 && timer != 0)
+                {
+                    //if there is attacks on screen, set the oldest attack to actually do damage
+                    if (attacks.Count > 0)
+                    {
+                        //remove the oldest attack if there are 3 on screen
+                        if (attacks.Count == 3)
+                        {
+                            attacks.RemoveAt(0);
+                            attackRecs.RemoveAt(0);
+                        }
+
+                        //create a rec for the first attack
+                        if (attacks.Count() == 1)
+                        {
+                            Rectangle fistRec = new Rectangle(attacks[0].x + 16, attacks[0].y + 16, attacks[0].width - 32, attacks[0].height - 32);
+                            attackRecs.Add(fistRec);
+                        }
+
+                        //create a rec for the second attack
+                        if (attacks.Count() == 2)
+                        {
+                            Rectangle fistRec = new Rectangle(attacks[1].x + 16, attacks[1].y + 16, attacks[1].width - 32, attacks[1].height - 32);
+                            attackRecs.Add(fistRec);
+                        }
+
+                        //update the sprite of each attack that will do daamage
+                        for (int i = 0; i < attackRecs.Count(); i++)
+                        {
+                            attacks[i].image = Resources.attackFistL;
+                        }
+                    }
+
+                    //generate a random x and y coordinate for the next fist attack
+                    int x = randNum.Next(arenaWalls[0].X, arenaWalls[1].X - 80);
+                    int y = randNum.Next(arenaWalls[2].Y, arenaWalls[3].Y - 80);
+
+                    //create a projectile for the fist and set it's image to the dark version (aka it won't do damage yet)
+                    Projectile fist = new Projectile(x, y, 150, 105, Resources.attackFistD);
+                    attacks.Add(fist);
+                }
+                //reset attack variables
+                else if (timer == 1)
+                {
+                    attackVariablesSet = false;
+                }
+            }
+            if (attackName == "LeafAttack")
+            {
+                //set attack variables correctly
+                if (attackVariablesSet == false)
+                {
+                    spaceBetweenAttacks = 25;
+                    attackSpeed = 4;
+                    leavesLeft = true;
+                    attackVariablesSet = true;
+                }
+
+                //if the correct amount of time has passed, and the enemy turn isn't over, spawn a new hoof attack pattern
+                if (timer % spaceBetweenAttacks == 0 && timer != 0)
+                {
+                    if (leavesLeft == true)
+                    {
+                        //create 2 random leaf attacks
+                        for (int i = 0; i < 2; i++)
+                        {
+                            int x = randNum.Next(arenaWalls[0].X, arenaWalls[1].X);
+
+                            Projectile leaf = new Projectile(x, arenaWalls[2].Y - 50, 76, 50, Resources.attackLeaves);
+                            attacks.Add(leaf);
+                        }
+
+                        leavesLeft = false;
+                    }
+                    else
+                    {
+                        //create 2 random leaf attacks
+                        for (int i = 0; i < 2; i++)
+                        {
+                            int x = randNum.Next(arenaWalls[0].X, arenaWalls[1].X);
+
+                            Projectile leaf = new Projectile(x, arenaWalls[2].Y - 50, 76, 50, Resources.attackLeavesO);
+                            attacks.Add(leaf);
+                        }
+
+                        leavesLeft = true;
+                    }
+                }
+                //reset attack variables
+                else if (timer == 1)
+                {
+                    attackVariablesSet = false;
+                }
+
+                //clear the attack rec list
+                attackRecs.Clear();
+
+                //for each projectile, create a rec for collisions
+                foreach (Projectile p in attacks)
+                {
+                    Rectangle leafRec = new Rectangle(p.x + 10, p.y + 10, p.width - 10, p.height - 10);
+                    attackRecs.Add(leafRec);
+                }
+
+
+                if (leavesLeft == true)
+                {
+                    //move the projectiles according to the attack
+                    foreach (Projectile p in attacks)
+                    {
+                        p.LeafAttack(attackSpeed, leavesLeft);
+                    }
+                }
+                else
+                {
+                    //move the projectiles according to the attack
+                    foreach (Projectile p in attacks)
+                    {
+                        p.LeafAttack(attackSpeed, leavesLeft);
+                    }
+                }
+
+                //once a wave of attacks reach the bottom of the arena, remove them
+                if (attacks[0].y >= arenaWalls[3].Y - 20)
+                {
+                    attacks.RemoveRange(0, 2);
+                }
             }
         }
         #endregion enemy attacks
