@@ -534,14 +534,10 @@ namespace UndertaleBattleSystemPrototype.Properties {
         ///    &lt;General gold =&quot;0&quot;&gt;
         ///    &lt;/General&gt;
         ///    &lt;Battle currentHP =&quot;40&quot;
-        ///            atk =&quot;5&quot;
-        ///            def =&quot;5&quot;&gt;
+        ///            atk =&quot;5&quot;&gt;
         ///    &lt;/Battle&gt;
         ///  &lt;/Stats&gt;
         ///  &lt;Items&gt;
-        ///    &lt;Equiped weapon =&quot; &quot;
-        ///             armor =&quot; &quot;&gt;
-        ///    &lt;/Equiped&gt;
         ///    &lt;Inventory&gt;
         ///      &lt;Item name =&quot;Test Item 1&quot;
         ///            heal =&quot;10&quot;&gt;
@@ -551,7 +547,12 @@ namespace UndertaleBattleSystemPrototype.Properties {
         ///      &lt;/Item&gt;
         ///      &lt;Item name =&quot;Test Item 3&quot;
         ///            heal =&quot;20&quot;&gt;
-        ///      &lt;/It [rest of string was truncated]&quot;;.
+        ///      &lt;/Item&gt;
+        ///      &lt;Item name =&quot; &quot;
+        ///            heal =&quot;0&quot;&gt;
+        ///      &lt;/Item&gt;
+        ///    &lt;/Inventory&gt;
+        ///  &lt;/I [rest of string was truncated]&quot;;.
         /// </summary>
         internal static string Player {
             get {
@@ -620,7 +621,7 @@ namespace UndertaleBattleSystemPrototype.Properties {
         ///    &lt;Attack name =&quot;HornAttack&quot;
         ///            value =&quot;0&quot;&gt;
         ///    &lt;/Attack&gt;
-        ///    &lt;Attack name =&quot;HornAttack&quot;
+        ///    &lt;Attack name =&quot;HoofAttack&quot;
         ///            value =&quot;1&quot;&gt;
         ///    &lt;/Attack&gt;
         ///  &lt;/Attacks&gt;

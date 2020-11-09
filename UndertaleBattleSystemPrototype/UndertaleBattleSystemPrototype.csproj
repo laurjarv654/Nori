@@ -319,6 +319,12 @@
     <None Include="Resources\road4.png" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Resources\Donna.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\libraryDoor.png" />
+  </ItemGroup>
+  <ItemGroup>
     <None Include="Resources\bookshelfB.png" />
   </ItemGroup>
   <ItemGroup>
@@ -329,12 +335,6 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\bookshelfY.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\Donna.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\libraryDoor.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
