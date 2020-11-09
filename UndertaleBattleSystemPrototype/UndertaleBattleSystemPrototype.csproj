@@ -191,16 +191,6 @@
     <None Include="Resources\mercyButtonBlank.png" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\Player.xml">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\TestEnemy.xml">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-  </ItemGroup>
-  <ItemGroup>
     <None Include="Resources\fightUISprite.png" />
   </ItemGroup>
   <ItemGroup>
@@ -261,11 +251,6 @@
     <None Include="Resources\Franky_WS.png" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\Calum.xml">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-  </ItemGroup>
-  <ItemGroup>
     <None Include="Resources\mercyButtonSpare.png" />
   </ItemGroup>
   <ItemGroup>
@@ -322,6 +307,12 @@
     <None Include="Resources\road4.png" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Resources\Donna.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\libraryDoor.png" />
+  </ItemGroup>
+  <ItemGroup>
     <None Include="Resources\bookshelfB.png" />
   </ItemGroup>
   <ItemGroup>
@@ -334,10 +325,27 @@
     <None Include="Resources\bookshelfY.png" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\Donna.png" />
+    <None Include="Resources\titleSprite.png" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\libraryDoor.png" />
+    <None Include="Resources\TestEnemy.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Player.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Calum.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Franky.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\Franky.xml">

@@ -47,6 +47,7 @@ namespace UndertaleBattleSystemPrototype
         //dialogue changes (counters)
         int talkingS = 0, talkingC = 0, talkingF = 0;
 
+
         #region fighting variables
         Boolean fightCal, spareCal;
         public static string enemyName;
@@ -55,6 +56,7 @@ namespace UndertaleBattleSystemPrototype
         #endregion
 
 
+        public static Boolean timer = true;
 
         //TODO HP/attack/defense ints that pull from hero xml
 
@@ -109,8 +111,17 @@ namespace UndertaleBattleSystemPrototype
 
         }
 
+        //enables gametimer again when it becomes the main usercontrol (for returning from other screens)
+        private void TownScreen_Enter(object sender, EventArgs e)
+        {
+            gameTimer.Enabled = true;
+            Thread.Sleep(400);
+        }
+
         public void OnStart()
         {
+            
+
             nori = new Player(this.Width / 2 - 100, this.Height / 2 - 100, 150, 0, 0);
 
             //filling the text list with all of the dialogue that happens on this screen
@@ -122,6 +133,14 @@ namespace UndertaleBattleSystemPrototype
                 textList.Add(reader.GetAttribute("value"));
             }
 
+            if (timer = true)
+            {
+                gameTimer.Enabled = true;
+            }
+            else
+            {
+                gameTimer.Enabled = false;
+            }
         }
         private void TownScreen_PreviewKeyDown(object sender, PreviewKeyDownEventArgs e)
         {
@@ -255,8 +274,13 @@ namespace UndertaleBattleSystemPrototype
             {
                 gameTimer.Enabled = false;
                 LibraryScreen ls = new LibraryScreen();
-                this.Controls.Add(ls);
+                Form form = this.FindForm();
+                form.Controls.Add(ls);
+
+                ls.Location = new Point((this.Width - ls.Width) / 2, (this.Height - ls.Height) / 2);
+
                 ls.Focus();
+                ls.BringToFront();
             }
 
             //arlo's door

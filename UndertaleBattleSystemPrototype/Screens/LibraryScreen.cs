@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Threading;
 using System.Xml;
 
 namespace UndertaleBattleSystemPrototype
@@ -19,6 +20,7 @@ namespace UndertaleBattleSystemPrototype
         Player nori;
         Rectangle noriRec;
         const int HEROSPEED = 10;
+        string noriRow = "row1";
         #endregion
 
         #region animation
@@ -32,6 +34,8 @@ namespace UndertaleBattleSystemPrototype
         List<Object> objects = new List<Object>();
         List<Rectangle> objectRecs = new List<Rectangle>();
         List<Rectangle> border = new List<Rectangle>();
+        const int BORDERWIDTH = 250;
+        int bookshelfSize;
         #endregion
 
         #region Text box
@@ -39,7 +43,7 @@ namespace UndertaleBattleSystemPrototype
         Rectangle textBox;
         List<string> textList = new List<string>();
         string text = "";
-
+        int talkingD = 0;
 
         int textNum = 0;
         XmlReader reader;
@@ -50,7 +54,7 @@ namespace UndertaleBattleSystemPrototype
             InitializeComponent();
             OnStart();
 
-            int bookshelfSize = (this.Width - 396) / 4;
+            bookshelfSize = (this.Width - (BORDERWIDTH * 2)) / 4;
 
             #region initializing nori animation images
             noriSprite = Properties.Resources.noriBR;
@@ -72,19 +76,64 @@ namespace UndertaleBattleSystemPrototype
             #endregion
 
             #region initializing objects
-            objects.Add(new Object((this.Width/2)-(bookshelfSize/2), this.Height - 170, 50, bookshelfSize, Properties.Resources.libraryDoor));
+            //door
+            objects.Add(new Object((this.Width / 2) - (bookshelfSize / 2), this.Height - 170, 50, bookshelfSize, Properties.Resources.libraryDoor));
 
-            objects.Add(new Object(198, 150 - bookshelfSize, bookshelfSize, bookshelfSize, Properties.Resources.bookshelfB));
-            objects.Add(new Object(198 + bookshelfSize, 150 - bookshelfSize, bookshelfSize, bookshelfSize, Properties.Resources.bookshelfR));
-            objects.Add(new Object(this.Width - 198 - bookshelfSize, 150 - bookshelfSize, bookshelfSize, bookshelfSize, Properties.Resources.bookshelfG));
-            objects.Add(new Object(this.Width - 198 - (bookshelfSize * 2), 150-bookshelfSize, bookshelfSize, bookshelfSize, Properties.Resources.bookshelfY));
-            //objects.Add(new Object());
+            //bookshelves back row (1-4)
+            objects.Add(new Object(BORDERWIDTH, 20, bookshelfSize, bookshelfSize, Properties.Resources.bookshelfB));
+            objects.Add(new Object(BORDERWIDTH + bookshelfSize, 20, bookshelfSize, bookshelfSize, Properties.Resources.bookshelfR));
+            objects.Add(new Object(this.Width - BORDERWIDTH - bookshelfSize, 20, bookshelfSize, bookshelfSize, Properties.Resources.bookshelfG));
+            objects.Add(new Object(this.Width - BORDERWIDTH - (bookshelfSize * 2), 20, bookshelfSize, bookshelfSize, Properties.Resources.bookshelfY));
+
+            //librarian (donna)
+            objects.Add(new Object(BORDERWIDTH, this.Height - 120 - bookshelfSize, bookshelfSize - 30, bookshelfSize, Properties.Resources.Donna));
+
+            //bookshelves row 2
+            objects.Add(new Object(BORDERWIDTH, bookshelfSize, bookshelfSize, bookshelfSize, Properties.Resources.bookshelfY));
+            objects.Add(new Object(this.Width - BORDERWIDTH - bookshelfSize, bookshelfSize, bookshelfSize, bookshelfSize, Properties.Resources.bookshelfR));
+
+            //bookshelves row 1
+            objects.Add(new Object(BORDERWIDTH, (bookshelfSize * 2) - 20, bookshelfSize, bookshelfSize, Properties.Resources.bookshelfG));
+            objects.Add(new Object(this.Width - BORDERWIDTH - bookshelfSize, (bookshelfSize * 2) - 20, bookshelfSize, bookshelfSize, Properties.Resources.bookshelfB));
+
+
+            #endregion
+
+            #region object rectangles
+            //backrow 
+            objectRecs.Add(new Rectangle(BORDERWIDTH, bookshelfSize + 20, bookshelfSize, bookshelfSize - 20));
+            objectRecs.Add(new Rectangle(this.Width - BORDERWIDTH - bookshelfSize, bookshelfSize + 20, bookshelfSize, bookshelfSize - 20));
+
+            //row 2
+            objectRecs.Add(new Rectangle(BORDERWIDTH, (bookshelfSize * 2), bookshelfSize, bookshelfSize - 20));
+            objectRecs.Add(new Rectangle(this.Width - BORDERWIDTH - bookshelfSize, (bookshelfSize * 2), bookshelfSize, bookshelfSize - 20));
+
+            //row 1
+            objectRecs.Add(new Rectangle(BORDERWIDTH, (bookshelfSize * 3) - 20, bookshelfSize, 30));
+            objectRecs.Add(new Rectangle(this.Width - BORDERWIDTH - bookshelfSize, (bookshelfSize * 3) - 20, bookshelfSize, 30));
+
+            //mid back row
+            objectRecs.Add(new Rectangle(BORDERWIDTH + bookshelfSize, bookshelfSize + 20, bookshelfSize, 30));
+            objectRecs.Add(new Rectangle(this.Width - BORDERWIDTH - (bookshelfSize * 2), bookshelfSize + 20, bookshelfSize, 30));
+
+            //donna
+            objectRecs.Add(new Rectangle(objects[5].x, objects[5].y + 30, objects[5].width - 20, objects[5].height - 30));
+
+            //door
+            objectRecs.Add(new Rectangle(objects[0].x, objects[0].y + 10, objects[0].width - 20, objects[0].height - 30));
             #endregion
 
             #region initializing borders
-            border.Add(new Rectangle(0, 0, this.Width, 150));
-            border.Add(new Rectangle(0, 0, 198, this.Height));
-            border.Add(new Rectangle(this.Width - 198, 0, 198, this.Height));
+            //top
+            border.Add(new Rectangle(0, 0, this.Width, bookshelfSize + 20));
+
+            //left
+            border.Add(new Rectangle(0, 0, BORDERWIDTH, this.Height));
+
+            //right
+            border.Add(new Rectangle(this.Width - BORDERWIDTH, 0, BORDERWIDTH, this.Height));
+
+            //bottom
             border.Add(new Rectangle(0, this.Height - 150, this.Width, 150));
 
             #endregion
@@ -94,6 +143,14 @@ namespace UndertaleBattleSystemPrototype
         {
             nori = new Player(this.Width / 2 - 75, this.Height - 300, 150, 0, 0);
 
+            //filling the text list with all of the dialogue that happens on this screen
+            reader = XmlReader.Create("Resources/text.xml");
+            while (reader.Read())
+            {
+                reader.ReadToFollowing("text");
+
+                textList.Add(reader.GetAttribute("value"));
+            }
         }
         private void LibraryScreen_PreviewKeyDown(object sender, PreviewKeyDownEventArgs e)
         {
@@ -149,12 +206,50 @@ namespace UndertaleBattleSystemPrototype
         {
 
 
+
             #region update nori/object movement
+            for (int i = 0; i <= 3; i++)
+            {
+                if (noriRec.IntersectsWith(objectRecs[i]) == true)
+                {
+                    wDown = false;
+                    sDown = false;
+                }
+            }
+            for (int i = 4; i <= 7; i++)
+            {
+                if (noriRec.IntersectsWith(objectRecs[i]))
+                {
+                    wDown = false;
+                }
+            }
+
+            //donna
+            if (noriRec.IntersectsWith(objectRecs[8]))
+            {
+                if (direction == "down")
+                {
+                    sDown = false;
+                }
+                if (direction == "up")
+                {
+                    sDown = false;
+                }
+
+                if (direction == "left")
+                {
+                    aDown = false;
+                }
+                if (direction == "right")
+                {
+                    aDown = false;
+                }
+            }
 
             //setting the rectangles to the updated x,y
-            noriRec = new Rectangle(nori.x + 40, nori.y + 150, 70, 20);
+            noriRec = new Rectangle(nori.x + 40, nori.y + 120, 70, 30);
 
-            if (wDown == true && sDown == false && nori.y >= 30)
+            if (wDown == true && nori.y >= bookshelfSize - 90)
             {
                 nori.MoveUpDown(-HEROSPEED);
                 direction = "up";
@@ -162,7 +257,7 @@ namespace UndertaleBattleSystemPrototype
                 spriteNumber = 0;
                 NoriAnimation();
             }
-            if (sDown == true && wDown == false && nori.y <= this.Height - 290)
+            if (sDown == true && wDown == false && nori.y <= this.Height - 310)
             {
                 nori.MoveUpDown(HEROSPEED);
                 direction = "down";
@@ -170,7 +265,7 @@ namespace UndertaleBattleSystemPrototype
                 spriteNumber = 3;
                 NoriAnimation();
             }
-            if (dDown == true && aDown == false && nori.x <= this.Width - 310)
+            if (dDown == true && aDown == false && nori.x <= this.Width - BORDERWIDTH - 100)
             {
                 nori.MoveLeftRight(HEROSPEED);
                 direction = "right";
@@ -179,7 +274,7 @@ namespace UndertaleBattleSystemPrototype
                 NoriAnimation();
 
             }
-            if (aDown == true && dDown == false && nori.x >= 160)
+            if (aDown == true && dDown == false && nori.x >= BORDERWIDTH - 40)
             {
                 nori.MoveLeftRight(-HEROSPEED);
                 direction = "left";
@@ -188,10 +283,73 @@ namespace UndertaleBattleSystemPrototype
                 NoriAnimation();
 
             }
+
+
             #endregion
 
-            //if (noriRec.IntersectsWith())
+            #region colisions
+            if (displayText == false)
+            {
+                //bookshelves
+                for (int i = 0; i <= 7; i++)
+                {
+                    if (noriRec.IntersectsWith(objectRecs[i]) && spaceDown == true)
+                    {
+                        textNum = i + 15;
+                        displayText = true;
+                        Thread.Sleep(200);
+                    }
+                }
 
+                //donna
+                if (noriRec.IntersectsWith(objectRecs[8]) && spaceDown == true)
+                {
+                    switch (talkingD)
+                    {
+                        case 0:
+                            textNum = 25;
+                            displayText = true;
+                            spaceDown = false;
+                            talkingD++;
+                            break;
+                        case 1:
+                            textNum = 26;
+                            displayText = true;
+                            spaceDown = false;
+                            talkingD++;
+                            break;
+                        case 2:
+                            textNum = 27;
+                            displayText = true;
+                            spaceDown = false;
+                            break;
+                    }
+                }
+
+            }
+            else
+            {
+                DisplayTextCollisions();
+
+            }
+
+
+
+            //door
+            if (noriRec.IntersectsWith(objectRecs[9]) && spaceDown == true)
+            {
+                TownScreen.timer = true;
+                gameTimer.Enabled = false;
+                Form form = this.FindForm();
+                form.Controls.Remove(this);
+
+            }
+
+            
+
+            #endregion
+
+            //pausing
             if (escapeDown == true)
             {
                 Pausing();
@@ -205,27 +363,40 @@ namespace UndertaleBattleSystemPrototype
             SolidBrush borderbrush = new SolidBrush(Color.Black);
 
             //drawing borders
-            foreach (Rectangle r in border)
-            {
-                e.Graphics.FillRectangle(borderbrush, r);
-            }
+            foreach (Rectangle r in border) { e.Graphics.FillRectangle(borderbrush, r); }
+
+            #region drawing bookshelves vs nori
+            //drawing back shelves
+            for (int i = 0; i <= 4; i++) { e.Graphics.DrawImage(objects[i].sprite, objects[i].x, objects[i].y, objects[i].width, objects[i].height); }
+
+            //drawing nori if behind both rows 1 + 2
+            if (noriRec.Y <= bookshelfSize * 2) { e.Graphics.DrawImage(noriSprite, nori.x, nori.y, nori.size, nori.size); }
+
+            e.Graphics.DrawImage(objects[6].sprite, objects[6].x, objects[6].y, objects[6].width, objects[6].height);
+            e.Graphics.DrawImage(objects[7].sprite, objects[7].x, objects[7].y, objects[7].width, objects[7].height);
+
+            //drawing nori if between row 1 + 2
+            if (noriRec.Y < (bookshelfSize * 3) - 20 && noriRec.Y > bookshelfSize * 2) { e.Graphics.DrawImage(noriSprite, nori.x, nori.y, nori.size, nori.size); }
+
+            e.Graphics.DrawImage(objects[8].sprite, objects[8].x, objects[8].y, objects[8].width, objects[8].height);
+            e.Graphics.DrawImage(objects[9].sprite, objects[9].x, objects[9].y, objects[9].width, objects[9].height);
+
+            //drawing nori if infront of row 1
+            if (noriRec.Y > (bookshelfSize * 3) - 20 || nori.y == 420) { e.Graphics.DrawImage(noriSprite, nori.x, nori.y, nori.size, nori.size); }
+            #endregion
+
+            //drawing donna
+            e.Graphics.DrawImage(objects[5].sprite, objects[5].x, objects[5].y, objects[5].width, objects[5].height);
 
             // for testing rectangle collisions
             Pen test = new Pen(Color.Red);
-            foreach (Rectangle r in objectRecs)
+            foreach (Rectangle r in objectRecs) { e.Graphics.DrawRectangle(test, r); }
+            e.Graphics.DrawRectangle(test, noriRec);
+
+            if (displayTextBox == true)
             {
-                e.Graphics.DrawRectangle(test, r);
+                e.Graphics.DrawRectangle(test, textBox);
             }
-
-            //drawing objects
-            foreach (Object o in objects)
-            {
-                e.Graphics.DrawImage(o.sprite, o.x, o.y, o.width, o.height);
-            }
-
-            //drawing nori
-            e.Graphics.DrawImage(noriSprite, nori.x, nori.y, nori.size, nori.size);
-
 
         }
 
@@ -308,6 +479,23 @@ namespace UndertaleBattleSystemPrototype
 
             }
         }
+        private void DisplayTextCollisions()
+        {
 
+            text = textList[textNum];
+
+            displayTextBox = true;
+            textLabel.Visible = true;
+            textLabel.Text = text;
+            if (spaceDown == true)
+            {
+                displayTextBox = false;
+                displayText = false;
+                textLabel.Visible = false;
+                textLabel.Text = "";
+                Thread.Sleep(200);
+            }
+
+        }
     }
 }

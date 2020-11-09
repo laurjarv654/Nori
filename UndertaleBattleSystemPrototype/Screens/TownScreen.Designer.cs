@@ -43,25 +43,26 @@
             // 
             this.textLabel.BackColor = System.Drawing.Color.Transparent;
             this.textLabel.ForeColor = System.Drawing.SystemColors.ActiveBorder;
-            this.textLabel.Location = new System.Drawing.Point(118, 508);
+            this.textLabel.Location = new System.Drawing.Point(148, 635);
             this.textLabel.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.textLabel.Name = "textLabel";
-            this.textLabel.Size = new System.Drawing.Size(682, 134);
+            this.textLabel.Size = new System.Drawing.Size(852, 168);
             this.textLabel.TabIndex = 0;
             this.textLabel.Text = "label1";
             this.textLabel.Visible = false;
             // 
             // TownScreen
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(96F, 96F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(120F, 120F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
             this.BackColor = System.Drawing.Color.Black;
             this.Controls.Add(this.textLabel);
             this.DoubleBuffered = true;
-            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "TownScreen";
-            this.Size = new System.Drawing.Size(958, 719);
+            this.Size = new System.Drawing.Size(1198, 899);
             this.Paint += new System.Windows.Forms.PaintEventHandler(this.TownScreen_Paint);
+            this.Enter += new System.EventHandler(this.TownScreen_Enter);
             this.KeyUp += new System.Windows.Forms.KeyEventHandler(this.TownScreen_KeyUp);
             this.PreviewKeyDown += new System.Windows.Forms.PreviewKeyDownEventHandler(this.TownScreen_PreviewKeyDown);
             this.ResumeLayout(false);
