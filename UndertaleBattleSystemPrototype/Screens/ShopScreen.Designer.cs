@@ -28,20 +28,33 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
+            this.gameTimer = new System.Windows.Forms.Timer(this.components);
             this.SuspendLayout();
+            // 
+            // gameTimer
+            // 
+            this.gameTimer.Enabled = true;
+            this.gameTimer.Interval = 20;
+            this.gameTimer.Tick += new System.EventHandler(this.gameTimer_Tick);
             // 
             // ShopScreen
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(96F, 96F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(120F, 120F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
-            this.BackColor = System.Drawing.Color.Black;
-            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(26)))), ((int)(((byte)(49)))), ((int)(((byte)(54)))));
+            this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "ShopScreen";
-            this.Size = new System.Drawing.Size(958, 719);
+            this.Size = new System.Drawing.Size(1198, 899);
+            this.Paint += new System.Windows.Forms.PaintEventHandler(this.ShopScreen_Paint);
+            this.KeyUp += new System.Windows.Forms.KeyEventHandler(this.ShopScreen_KeyUp);
+            this.PreviewKeyDown += new System.Windows.Forms.PreviewKeyDownEventHandler(this.ShopScreen_PreviewKeyDown);
             this.ResumeLayout(false);
 
         }
 
         #endregion
+
+        private System.Windows.Forms.Timer gameTimer;
     }
 }
