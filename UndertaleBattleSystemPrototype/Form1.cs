@@ -15,7 +15,7 @@ namespace UndertaleBattleSystemPrototype
     {
         //undertale font for drawing
         PrivateFontCollection programFonts = new PrivateFontCollection();
-        public static Font dialogFont;
+        public static Font dialogFont, dialogFontLarge;
 
         public Form1()
         {
@@ -24,11 +24,12 @@ namespace UndertaleBattleSystemPrototype
             //initialize the dialog font
             programFonts.AddFontFile("Resources/dialogFont.ttf");
             dialogFont = new Font(programFonts.Families[0], 18, FontStyle.Regular);
+            dialogFontLarge = new Font(programFonts.Families[0], 30, FontStyle.Regular);
         }
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            ShopScreen ms = new ShopScreen();
+            TownScreen ms = new TownScreen();
             this.Controls.Add(ms);
             ms.Focus();
         }
