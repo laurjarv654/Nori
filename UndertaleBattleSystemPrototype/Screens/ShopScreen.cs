@@ -196,7 +196,7 @@ namespace UndertaleBattleSystemPrototype
             }
             #endregion
 
-
+            Refresh();
         }
         private void ShopScreen_Paint(object sender, PaintEventArgs e)
         {
