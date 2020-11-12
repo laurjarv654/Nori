@@ -16,7 +16,7 @@ namespace UndertaleBattleSystemPrototype
         #region variable declaractions
 
         //string for the game over text
-        string gameOverText = "It's not over yet... Nori! Stay Determined!";
+        string gameOverText = "It's not over yet...   Nori! Stay Determined!";
         string gameOverTextWritten = "";
 
         //booleans for key presses

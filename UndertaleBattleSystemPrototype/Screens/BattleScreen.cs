@@ -76,7 +76,7 @@ namespace UndertaleBattleSystemPrototype
         #region booleans
         //make a globally useable spare variable
         public static Boolean canSpare = false;
-        Boolean enemySpared = false;
+        public static Boolean enemySpared = false;
 
         //player key press variables
         Boolean wDown, aDown, sDown, dDown, spaceDown, shiftDown;
@@ -643,7 +643,7 @@ namespace UndertaleBattleSystemPrototype
                         actText[0] = "* You Won! \n\n* You got " + enemy.gold + " gold.";
 
                         //set the enemy spared boolean to true
-                        enemySpared = true;
+                        enemySpared = false;
 
                         //call the menu disappear method
                         MenuDisappear(0);
