@@ -457,25 +457,6 @@ namespace UndertaleBattleSystemPrototype
                     animationCounterH = 0;
                     frameCounter = 1;
                 }
-                //loop
-                //if (frameCounter == 5)
-                //{
-                //    noriSprite = noriAnimation[0 + spriteNumber];
-                //    animationCounterH = 0;
-                //    frameCounter = 6;
-                //}
-                //else if (frameCounter == 6)
-                //{
-                //    noriSprite = noriAnimation[1 + spriteNumber];
-                //    animationCounterH = 0;
-                //    frameCounter = 7;
-                //}
-                //else if (frameCounter == 7)
-                //{
-                //    noriSprite = noriAnimation[0 + spriteNumber];
-                //    animationCounterH = 0;
-                //    frameCounter = 1;
-                //}
 
             }
         }
