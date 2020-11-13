@@ -70,7 +70,7 @@ namespace UndertaleBattleSystemPrototype
             OnStart();
 
             //play the music on loop
-            music.PlayLooping();
+            //music.PlayLooping();
 
             #region initializing nori animation images
             noriSprite = Properties.Resources.noriRR;

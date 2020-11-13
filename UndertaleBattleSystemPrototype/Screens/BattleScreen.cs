@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Threading;
 using System.Xml;
+using System.Media;
 using UndertaleBattleSystemPrototype.Classes;
 using UndertaleBattleSystemPrototype.Properties;
 using System.IO;
@@ -49,6 +50,9 @@ namespace UndertaleBattleSystemPrototype
 
         //create a new image for the player sprite and button sprites
         Image playerSprite, fightSprite, actSprite, itemSprite, mercySprite, fightUISprite;
+
+        //create an image for the enemy sprite
+        Image enemySprite;
 
         //create the player
         Player player = new Player();
@@ -135,12 +139,16 @@ namespace UndertaleBattleSystemPrototype
         //random number generator
         Random randNum = new Random();
 
+        //music player
+        SoundPlayer music = new SoundPlayer("Resources/Nori - " + TownScreen.enemyName + "'s Theme.wav");
+
         #endregion variables and lists
 
         #region battle system brought up
         public BattleScreen()
         {
             InitializeComponent();
+            TownScreen.enemyName = "Franky";
 
             //screen setup
             OnStart();
@@ -158,6 +166,11 @@ namespace UndertaleBattleSystemPrototype
             itemSprite = Resources.itemButton;
             mercySprite = Resources.mercyButton;
             fightUISprite = Resources.fightUISprite;
+            if (TownScreen.enemyName == "Calum") { enemySprite = Resources.Calum_FS; }
+            if (TownScreen.enemyName == "Franky") { enemySprite = Resources.Franky_FS; }
+
+            //play the music on loop
+            //music.PlayLooping();
         }
         #endregion battle system brought up
 
@@ -601,6 +614,9 @@ namespace UndertaleBattleSystemPrototype
         #region paint graphics
         private void BattleScreen_Paint(object sender, PaintEventArgs e)
         {
+            //draw the enemy sprite
+            e.Graphics.DrawImage(enemySprite, this.Width / 2 - enemySprite.Width / 2, this.Height / 20);
+
             #region enemy attacks
 
             foreach (Projectile p in attacks)
@@ -687,6 +703,8 @@ namespace UndertaleBattleSystemPrototype
                 e.Graphics.FillRectangle(whiteBrush, r);
             }
 
+            #region enemy dialog box
+
             //draw the enemy dialog box if it's time
             if (showEnemyDialog == true)
             {
@@ -705,6 +723,8 @@ namespace UndertaleBattleSystemPrototype
                 //set the last spare number to the current one for the next time dialog is written
                 lastSpareNum = spareNum;
             }
+
+            #endregion enemy dialog box
 
             //draw the fight UI if the player is in the fight menu
             if (fightMenuSelected == true)
