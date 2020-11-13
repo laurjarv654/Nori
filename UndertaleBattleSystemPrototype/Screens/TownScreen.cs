@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Threading;
 using System.Xml;
+using System.Media;
 
 
 namespace UndertaleBattleSystemPrototype
@@ -17,6 +18,9 @@ namespace UndertaleBattleSystemPrototype
     {
         #region global variables
         Boolean aDown, dDown, wDown, sDown, spaceDown, escapeDown;
+
+        //music player
+        SoundPlayer music = new SoundPlayer("Resources/Nori - The Winter City.wav");
 
         #region nori
         Player nori;
@@ -64,6 +68,9 @@ namespace UndertaleBattleSystemPrototype
         {
             InitializeComponent();
             OnStart();
+
+            //play the music on loop
+            music.PlayLooping();
 
             #region initializing nori animation images
             noriSprite = Properties.Resources.noriRR;

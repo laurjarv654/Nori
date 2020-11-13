@@ -358,5 +358,18 @@
   <ItemGroup>
     <None Include="Resources\gameOverSprite.png" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\controlsSprite.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Nori - Nori.wav">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Nori - The Winter City.wav">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

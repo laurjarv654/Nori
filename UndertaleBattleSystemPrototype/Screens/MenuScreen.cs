@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Threading;
+using System.Media;
 using UndertaleBattleSystemPrototype.Properties;
 
 namespace UndertaleBattleSystemPrototype
@@ -28,6 +29,9 @@ namespace UndertaleBattleSystemPrototype
         //brush for menu buttons
         SolidBrush whiteBrush = new SolidBrush(Color.White);
 
+        //sound player for the background music
+        SoundPlayer music = new SoundPlayer("Resources/Nori - Nori.wav");
+
         #endregion variable declaractions
 
         public MenuScreen()
@@ -37,6 +41,9 @@ namespace UndertaleBattleSystemPrototype
 
             //setup sprites
             playerSprite = Resources.heart;
+
+            //start the music and have it loop
+            music.PlayLooping();
         }
 
         public void OnStart()
@@ -130,6 +137,9 @@ namespace UndertaleBattleSystemPrototype
                 {
                     //stop menu timer
                     menuTimer.Enabled = false;
+
+                    //stop the music
+                    music.Stop();
 
                     // Goes to the town screen
                     TownScreen ts = new TownScreen();

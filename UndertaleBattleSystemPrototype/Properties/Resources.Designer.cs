@@ -258,6 +258,16 @@ namespace UndertaleBattleSystemPrototype.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap controlsSprite {
+            get {
+                object obj = ResourceManager.GetObject("controlsSprite", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized resource of type System.Byte[].
         /// </summary>
         internal static byte[] DialogFont {
@@ -439,6 +449,24 @@ namespace UndertaleBattleSystemPrototype.Properties {
             get {
                 object obj = ResourceManager.GetObject("mercyButtonSpareBlank", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.IO.UnmanagedMemoryStream similar to System.IO.MemoryStream.
+        /// </summary>
+        internal static System.IO.UnmanagedMemoryStream Nori___Nori {
+            get {
+                return ResourceManager.GetStream("Nori___Nori", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.IO.UnmanagedMemoryStream similar to System.IO.MemoryStream.
+        /// </summary>
+        internal static System.IO.UnmanagedMemoryStream Nori___The_Winter_City {
+            get {
+                return ResourceManager.GetStream("Nori___The_Winter_City", resourceCulture);
             }
         }
         
@@ -682,12 +710,8 @@ namespace UndertaleBattleSystemPrototype.Properties {
         ///  &lt;text value =&quot;...A small dog?&quot;&gt;&lt;/text&gt;
         ///  &lt;text value =&quot;No answer.&quot;&gt;&lt;/text&gt;
         ///  &lt;text value =&quot;There&apos;s a frat party going on but you&apos;re just a kid. No party for you.&quot;&gt;&lt;/text&gt;
-        ///  &lt;text value =&quot;Sharol1 &quot;&gt;&lt;/text&gt;
-        ///  &lt;text value =&quot;Sharol2 &quot;&gt;&lt;/text&gt;
-        ///  &lt;text value =&quot;Sharol3&quot;&gt;&lt;/text&gt;
-        ///  &lt;text value =&quot;Thank you Nori. I feel a bit better now.&quot;&gt;&lt;/text&gt;
-        ///  &lt;text value =&quot;(...Callum is gone.)&quot;&gt;&lt;/text&gt;
-        ///  &lt;text value =&quot;Psh [rest of string was truncated]&quot;;.
+        ///  &lt;text value =&quot;Hey there... New face in town, eh? I&apos;m Sharol, nice to meetcha. Got any spare change?&quot;&gt;&lt;/text&gt;
+        ///  &lt;text value =&quot;Well if you don&apos;t got any that&apos;s okay. Just be careful passing through town now. Franky and his bison gang ar [rest of string was truncated]&quot;;.
         /// </summary>
         internal static string text {
             get {
