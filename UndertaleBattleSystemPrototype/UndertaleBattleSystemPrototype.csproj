@@ -56,6 +56,11 @@
     <Compile Include="Pause.Designer.cs">
       <DependentUpon>Pause.cs</DependentUpon>
     </Compile>
+    <Compile Include="Properties\Resources1.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
     <Compile Include="Screens\LibraryScreen.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -127,12 +132,8 @@
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <SubType>Designer</SubType>
+      <LastGenOutput>Resources1.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <Compile Include="Properties\Resources.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DependentUpon>Resources.resx</DependentUpon>
-      <DesignTime>True</DesignTime>
-    </Compile>
     <EmbeddedResource Include="Screens\ControlsScreen.resx">
       <DependentUpon>ControlsScreen.cs</DependentUpon>
     </EmbeddedResource>
@@ -356,6 +357,12 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\PauseFormBackground.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\road2.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\roadTurn.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
