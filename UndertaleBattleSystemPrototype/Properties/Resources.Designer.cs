@@ -628,6 +628,16 @@ namespace UndertaleBattleSystemPrototype.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap road1 {
+            get {
+                object obj = ResourceManager.GetObject("road1", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap road2 {
             get {
                 object obj = ResourceManager.GetObject("road2", resourceCulture);
@@ -638,9 +648,19 @@ namespace UndertaleBattleSystemPrototype.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap roadTurn {
+        internal static System.Drawing.Bitmap road3 {
             get {
-                object obj = ResourceManager.GetObject("roadTurn", resourceCulture);
+                object obj = ResourceManager.GetObject("road3", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap road4 {
+            get {
+                object obj = ResourceManager.GetObject("road4", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

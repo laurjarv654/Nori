@@ -338,7 +338,7 @@ namespace UndertaleBattleSystemPrototype
             //door
             if (noriRec.IntersectsWith(objectRecs[9]) && spaceDown == true)
             {
-                //TownScreen.timer = true;
+                TownScreen.timer = true;
                 gameTimer.Enabled = false;
                 Form form = this.FindForm();
                 form.Controls.Remove(this);

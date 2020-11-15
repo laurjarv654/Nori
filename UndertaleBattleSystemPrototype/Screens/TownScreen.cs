@@ -29,15 +29,14 @@ namespace UndertaleBattleSystemPrototype
         #endregion
 
         #region animation
-        Image noriSprite;
-        List<Image> noriAnimation = new List<Image>();
+        Image noriSprite, road = Properties.Resources.road1;
+        List<Image> noriAnimation = new List<Image>(), roadAnimation = new List<Image>();
         int animationCounterH = 0, frameCounter = 1, spriteNumber = 0;
         #endregion
 
         #region objects
-        List<Object> objects = new List<Object>(), roadList = new List<Object>();
+        List<Object> objects = new List<Object>();
         List<Rectangle> objectRecs = new List<Rectangle>();
-        int buildingHeight;
         #endregion
 
         #region Text box
@@ -60,14 +59,15 @@ namespace UndertaleBattleSystemPrototype
 
         #endregion
 
+
+        public static Boolean timer = true;
+
         //TODO HP/attack/defense ints that pull from hero xml
 
         public TownScreen()
         {
             InitializeComponent();
             OnStart();
-
-            buildingHeight = (this.Height / 16) * 7;
 
             //play the music on loop
             //music.PlayLooping();
@@ -91,20 +91,23 @@ namespace UndertaleBattleSystemPrototype
             noriAnimation.Add(Properties.Resources.noriL2);
             #endregion
 
+            #region initializing road images
+            roadAnimation.Add(Properties.Resources.road1);
+            roadAnimation.Add(Properties.Resources.road2);
+            roadAnimation.Add(Properties.Resources.road3);
+            roadAnimation.Add(Properties.Resources.road4);
+            #endregion
+
             #region initializing objects+object recs
-            //library
-            objects.Add(new Object((this.Width / 4) * 7, 0, buildingHeight, (this.Width / 8) * 7, Properties.Resources.library));
-            //arlos
-            objects.Add(new Object((this.Width / 4) * 11, 0, buildingHeight + 10, this.Width / 2, Properties.Resources.arlos));
+            objects.Add(new Object(1750, 0, 290, 850, Properties.Resources.library));
+            objects.Add(new Object(2700, 0, 300, 550, Properties.Resources.arlos));
 
-            //appartements
-            objects.Add(new Object(0, 0, buildingHeight, (this.Width / 4) * 3, Properties.Resources.appartement1));
-            objects.Add(new Object((this.Width / 4) * 3, 0, buildingHeight, (this.Width / 4) * 3, Properties.Resources.appartement2));
+            objects.Add(new Object(0, 0, 290, 780, Properties.Resources.appartement1));
+            objects.Add(new Object(780, 0, 290, 815, Properties.Resources.appartement2));
 
-            //characters
-            objects.Add(new Object((this.Width / 8) * 15, buildingHeight - this.Height / 10 + 10, this.Height / 10, this.Width / 17, Properties.Resources.Sharol_WS));
-            objects.Add(new Object((this.Width / 8) * 21, buildingHeight - this.Height / 6 + 10, this.Height / 6, this.Width / 16, Properties.Resources.Calum_WS));
-            objects.Add(new Object((this.Width / 8) * 28, buildingHeight - this.Height / 6 + 10, this.Height / 6, this.Width / 12, Properties.Resources.Franky_WS));
+            objects.Add(new Object(1900, 210, 90, 70, Properties.Resources.Sharol_WS));
+            objects.Add(new Object(2610, 145, 155, 80, Properties.Resources.Calum_WS));
+            objects.Add(new Object(3350, 150, 150, 100, Properties.Resources.Franky_WS));
 
             //just putting osmething in here so that the list isn't empty
             objectRecs.Add(new Rectangle(0, 0, 0, 0));
@@ -124,7 +127,7 @@ namespace UndertaleBattleSystemPrototype
 
         public void OnStart()
         {
-
+            
 
             nori = new Player(this.Width / 2 - 100, this.Height / 2 - 100, 150, 0, 0);
 
@@ -137,13 +140,14 @@ namespace UndertaleBattleSystemPrototype
                 textList.Add(reader.GetAttribute("value"));
             }
 
-            #region initializing roads
-            roadList.Add(new Object(-10, 0, this.Height, this.Width, Properties.Resources.road2));
-            roadList.Add(new Object(this.Width - 20, 0, this.Height, this.Width, Properties.Resources.road2));
-            roadList.Add(new Object((this.Width * 2) - 30, 0, this.Height, this.Width, Properties.Resources.road2));
-            roadList.Add(new Object((this.Width * 3) - 40, 0, this.Height, this.Width, Properties.Resources.roadTurn));
-            #endregion
-
+            if (timer = true)
+            {
+                gameTimer.Enabled = true;
+            }
+            else
+            {
+                gameTimer.Enabled = false;
+            }
         }
         private void TownScreen_PreviewKeyDown(object sender, PreviewKeyDownEventArgs e)
         {
@@ -199,16 +203,14 @@ namespace UndertaleBattleSystemPrototype
         {
             #region updating object recs
             objectRecs.Clear();
-            //library
-            objectRecs.Add(new Rectangle(objects[0].x + (this.Width / 32) * 9, objects[0].y + buildingHeight, 140, 20));
-            //arlos
+            objectRecs.Add(new Rectangle(objects[0].x + 265, objects[0].y + 290, 120, 20));
             objectRecs.Add(new Rectangle(objects[1].x + 85, objects[1].y + 290, 110, 20));
 
             //appartments(3-6)
-            objectRecs.Add(new Rectangle(objects[2].x + (this.Width / 32) * 2, objects[2].y + buildingHeight, 100, 20));
-            objectRecs.Add(new Rectangle(objects[2].x + (this.Width / 8) * 5, objects[2].y + buildingHeight, 100, 20));
-            objectRecs.Add(new Rectangle(objects[2].x + (this.Width / 16) * 13, objects[2].y + buildingHeight, 100, 20));
-            objectRecs.Add(new Rectangle(objects[2].x + (this.Width / 16) * 22, objects[2].y + buildingHeight, 100, 20));
+            objectRecs.Add(new Rectangle(objects[2].x + 50, objects[2].y + 290, 100, 20));
+            objectRecs.Add(new Rectangle(objects[2].x + 650, objects[2].y + 290, 100, 20));
+            objectRecs.Add(new Rectangle(objects[2].x + 850, objects[2].y + 290, 100, 20));
+            objectRecs.Add(new Rectangle(objects[2].x + 1450, objects[2].y + 290, 100, 20));
 
             //characters (7-9)
             objectRecs.Add(new Rectangle(objects[3].x, objects[3].y, objects[3].width, objects[3].height));
@@ -222,14 +224,14 @@ namespace UndertaleBattleSystemPrototype
             //setting the rectangles to the updated x,y
             noriRec = new Rectangle(nori.x + 40, nori.y + 130, 70, 20);
 
-            if (wDown == true && sDown == false && nori.y >= buildingHeight-(this.Height/32)*5)
+            if (wDown == true && sDown == false && nori.y >= 165)
             {
                 nori.MoveUpDown(-HEROSPEED);
                 animationCounterH++;
                 spriteNumber = 0;
                 NoriAnimation();
             }
-            if (sDown == true && wDown == false && nori.y <= this.Height-(nori.size/8)*11)
+            if (sDown == true && wDown == false && nori.y <= this.Height)
             {
                 nori.MoveUpDown(HEROSPEED);
                 animationCounterH++;
@@ -238,39 +240,38 @@ namespace UndertaleBattleSystemPrototype
             }
             if (dDown == true && aDown == false)
             {
-                //if you're at the end of the map
-                if (nori.x >= this.Width / 2 - 100 || roadList[3].x + roadList[3].width <= this.Width)
+                foreach (Object o in objects)
                 {
-                    ObjectMovement(-HEROSPEED);
-                }
-                else if (nori.x < this.Width / 2 - 100 || nori.x <= this.Width - 30)
-                {
-                    nori.MoveLeftRight(HEROSPEED);
+                    o.MoveLeftRight(-HEROSPEED);
                 }
 
                 animationCounterH++;
+                if (animationCounterH == 4)
+                {
+
+                    if (frameCounter == 2) { road = roadAnimation[3]; }
+
+                    if (frameCounter == 4) { road = roadAnimation[1]; }
+
+
+                }
                 spriteNumber = 6;
                 NoriAnimation();
 
             }
             if (aDown == true && dDown == false)
             {
-                //if you get to the end of the map
-                if (roadList[0].x <= -10 || roadList[3].x + roadList[3].width < this.Width)
+                foreach (Object o in objects)
                 {
-                    ObjectMovement(HEROSPEED);
+                    o.MoveLeftRight(HEROSPEED);
                 }
-                else if (nori.x >= -30 || nori.x > this.Width / 2 - 100)
-                {
-                    nori.MoveLeftRight(-HEROSPEED);
-                }
+
                 animationCounterH++;
                 spriteNumber = 9;
                 NoriAnimation();
 
             }
             #endregion
-
 
             #region collision checks
 
@@ -399,10 +400,7 @@ namespace UndertaleBattleSystemPrototype
 
         private void TownScreen_Paint(object sender, PaintEventArgs e)
         {
-            foreach (Object o in roadList)
-            {
-                e.Graphics.DrawImage(o.sprite, o.x, o.y, o.width, o.height);
-            }
+            e.Graphics.DrawImage(road, 0, 0, this.Width, this.Height);
 
             //drawing all images on the screen
             foreach (Object o in objects)
@@ -443,6 +441,7 @@ namespace UndertaleBattleSystemPrototype
             }
 
         }
+
         private void Pausing()
         {
 
@@ -471,6 +470,7 @@ namespace UndertaleBattleSystemPrototype
             }
 
         }
+
         private void NoriAnimation()
         {
             if (animationCounterH == 4)
@@ -500,19 +500,26 @@ namespace UndertaleBattleSystemPrototype
                     animationCounterH = 0;
                     frameCounter = 1;
                 }
-
-            }
-        }
-        private void ObjectMovement(int speed)
-        {
-            foreach (Object o in objects)
-            {
-                o.MoveLeftRight(speed);
-            }
-
-            foreach (Object r in roadList)
-            {
-                r.MoveLeftRight(speed);
+                //loop
+                //if (frameCounter == 5)
+                //{
+                //    noriSprite = noriAnimation[0 + spriteNumber];
+                //    animationCounterH = 0;
+                //    frameCounter = 6;
+                //}
+                //else if (frameCounter == 6)
+                //{
+                //    noriSprite = noriAnimation[1 + spriteNumber];
+                //    animationCounterH = 0;
+                //    frameCounter = 7;
+                //}
+                //else if (frameCounter == 7)
+                //{
+                //    noriSprite = noriAnimation[0 + spriteNumber];
+                //    animationCounterH = 0;
+                //    frameCounter = 1;
+                //}
+                
             }
         }
     }
