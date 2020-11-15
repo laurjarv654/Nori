@@ -359,14 +359,10 @@
     <None Include="Resources\controlsSprite.png" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\Nori - Nori.wav">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
+    <None Include="Resources\Franky_FS.png" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\Nori - The Winter City.wav">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
+    <None Include="Resources\Calum_FS.png" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\road2.png" />

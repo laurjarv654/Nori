@@ -250,6 +250,16 @@ namespace UndertaleBattleSystemPrototype.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap Calum_FS {
+            get {
+                object obj = ResourceManager.GetObject("Calum_FS", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap Calum_WS {
             get {
                 object obj = ResourceManager.GetObject("Calum_WS", resourceCulture);
@@ -339,6 +349,16 @@ namespace UndertaleBattleSystemPrototype.Properties {
         internal static string Franky {
             get {
                 return ResourceManager.GetString("Franky", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Franky_FS {
+            get {
+                object obj = ResourceManager.GetObject("Franky_FS", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
             }
         }
         
