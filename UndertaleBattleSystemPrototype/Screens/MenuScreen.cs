@@ -43,7 +43,7 @@ namespace UndertaleBattleSystemPrototype
             playerSprite = Resources.heart;
 
             //start the music and have it loop
-            music.PlayLooping();
+            //music.PlayLooping();
         }
 
         public void OnStart()

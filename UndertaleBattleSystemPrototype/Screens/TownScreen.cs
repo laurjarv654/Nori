@@ -70,7 +70,7 @@ namespace UndertaleBattleSystemPrototype
             buildingHeight = (this.Height / 16) * 7;
 
             //play the music on loop
-            // music.PlayLooping();
+            //music.PlayLooping();
 
             #region initializing nori animation images
             noriSprite = Properties.Resources.noriRR;
