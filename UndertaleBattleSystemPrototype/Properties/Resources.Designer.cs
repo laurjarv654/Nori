@@ -453,24 +453,6 @@ namespace UndertaleBattleSystemPrototype.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized resource of type System.IO.UnmanagedMemoryStream similar to System.IO.MemoryStream.
-        /// </summary>
-        internal static System.IO.UnmanagedMemoryStream Nori___Nori {
-            get {
-                return ResourceManager.GetStream("Nori___Nori", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.IO.UnmanagedMemoryStream similar to System.IO.MemoryStream.
-        /// </summary>
-        internal static System.IO.UnmanagedMemoryStream Nori___The_Winter_City {
-            get {
-                return ResourceManager.GetStream("Nori___The_Winter_City", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
         internal static System.Drawing.Bitmap noriB1 {
@@ -626,16 +608,6 @@ namespace UndertaleBattleSystemPrototype.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap road1 {
-            get {
-                object obj = ResourceManager.GetObject("road1", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
         internal static System.Drawing.Bitmap road2 {
             get {
                 object obj = ResourceManager.GetObject("road2", resourceCulture);
@@ -646,19 +618,9 @@ namespace UndertaleBattleSystemPrototype.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap road3 {
+        internal static System.Drawing.Bitmap roadTurn {
             get {
-                object obj = ResourceManager.GetObject("road3", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap road4 {
-            get {
-                object obj = ResourceManager.GetObject("road4", resourceCulture);
+                object obj = ResourceManager.GetObject("roadTurn", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
