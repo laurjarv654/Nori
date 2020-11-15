@@ -69,7 +69,6 @@ namespace UndertaleBattleSystemPrototype
 
             buildingHeight = (this.Height / 16) * 7;
 
-            
             //play the music on loop
             //music.PlayLooping();
 
