@@ -35,9 +35,9 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(96F, 96F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
             this.BackColor = System.Drawing.Color.Black;
-            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "WinScreen";
-            this.Size = new System.Drawing.Size(958, 719);
+            this.Size = new System.Drawing.Size(944, 681);
             this.ResumeLayout(false);
 
         }

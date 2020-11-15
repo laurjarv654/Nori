@@ -148,7 +148,7 @@ namespace UndertaleBattleSystemPrototype
                 {
                     controlsTextWritten += c;
                     Refresh();
-                    Thread.Sleep(20);
+                    Thread.Sleep(10);
                 }
             }
 

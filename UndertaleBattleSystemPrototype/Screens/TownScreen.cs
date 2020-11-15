@@ -444,10 +444,8 @@ namespace UndertaleBattleSystemPrototype
 
         private void Pausing()
         {
-
             if (gameTimer.Enabled == true)
             {
-
                 gameTimer.Enabled = false;
                 Pause pauseForm = new Pause();
 
@@ -468,7 +466,6 @@ namespace UndertaleBattleSystemPrototype
                     form.Controls.Remove(this);
                 }
             }
-
         }
 
         private void NoriAnimation()

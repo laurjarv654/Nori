@@ -367,5 +367,8 @@
   <ItemGroup>
     <None Include="Resources\Calum_FS.png" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\PauseFormBackground.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
