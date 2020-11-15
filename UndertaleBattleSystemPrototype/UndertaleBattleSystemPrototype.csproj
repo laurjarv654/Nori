@@ -298,9 +298,6 @@
     <None Include="Resources\road1.png" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\road2.png" />
-  </ItemGroup>
-  <ItemGroup>
     <None Include="Resources\road3.png" />
   </ItemGroup>
   <ItemGroup>
@@ -366,6 +363,12 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\Calum_FS.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\road2.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\roadTurn.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
