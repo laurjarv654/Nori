@@ -295,18 +295,6 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\road1.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\road2.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\road3.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\road4.png" />
-  </ItemGroup>
-  <ItemGroup>
     <None Include="Resources\Donna.png" />
   </ItemGroup>
   <ItemGroup>
