@@ -29,15 +29,14 @@ namespace UndertaleBattleSystemPrototype
         #endregion
 
         #region animation
-        Image noriSprite;
-        List<Image> noriAnimation = new List<Image>();
+        Image noriSprite, road = Properties.Resources.road1;
+        List<Image> noriAnimation = new List<Image>(), roadAnimation = new List<Image>();
         int animationCounterH = 0, frameCounter = 1, spriteNumber = 0;
         #endregion
 
         #region objects
-        List<Object> objects = new List<Object>(), roadList = new List<Object>();
+        List<Object> objects = new List<Object>();
         List<Rectangle> objectRecs = new List<Rectangle>();
-        int buildingHeight;
         #endregion
 
         #region Text box
@@ -60,6 +59,9 @@ namespace UndertaleBattleSystemPrototype
 
         #endregion
 
+
+        public static Boolean timer = true;
+
         //TODO HP/attack/defense ints that pull from hero xml
         //
         public TownScreen()
@@ -68,7 +70,7 @@ namespace UndertaleBattleSystemPrototype
             OnStart();
 
             buildingHeight = (this.Height / 16) * 7;
-
+            
             //play the music on loop
             //music.PlayLooping();
 
@@ -124,7 +126,7 @@ namespace UndertaleBattleSystemPrototype
 
         public void OnStart()
         {
-
+            
 
             nori = new Player(this.Width / 2 - 100, this.Height / 2 - 100, 150, 0, 0);
 
@@ -270,7 +272,6 @@ namespace UndertaleBattleSystemPrototype
 
             }
             #endregion
-
 
             #region collision checks
 
@@ -443,12 +444,11 @@ namespace UndertaleBattleSystemPrototype
             }
 
         }
+
         private void Pausing()
         {
-
             if (gameTimer.Enabled == true)
             {
-
                 gameTimer.Enabled = false;
                 Pause pauseForm = new Pause();
 
@@ -469,8 +469,8 @@ namespace UndertaleBattleSystemPrototype
                     form.Controls.Remove(this);
                 }
             }
-
         }
+
         private void NoriAnimation()
         {
             if (animationCounterH == 4)
