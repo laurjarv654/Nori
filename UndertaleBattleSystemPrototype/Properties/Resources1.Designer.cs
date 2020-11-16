@@ -627,7 +627,8 @@ namespace UndertaleBattleSystemPrototype.Properties {
         ///            heal =&quot;0&quot;&gt;
         ///      &lt;/Item&gt;
         ///    &lt;/Inventory&gt;
-        ///  &lt;/Items&gt;        /// [rest of string was truncated]&quot;;.
+        ///  &lt;/Items&gt;
+        /// [rest of string was truncated]&quot;;.
         /// </summary>
         internal static string Player {
             get {

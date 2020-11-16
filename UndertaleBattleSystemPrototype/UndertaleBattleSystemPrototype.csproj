@@ -333,11 +333,6 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\Franky.xml">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-  </ItemGroup>
-  <ItemGroup>
     <None Include="Resources\titleSprite.png" />
   </ItemGroup>
   <ItemGroup>
@@ -359,6 +354,10 @@
     <None Include="Resources\roadTurn.png" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Resources\bush.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\trash.png" />
     <None Include="Resources\PauseFormBackground.png" />
   </ItemGroup>
   <ItemGroup>

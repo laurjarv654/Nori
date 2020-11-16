@@ -38,6 +38,7 @@ namespace UndertaleBattleSystemPrototype
         List<Object> objects = new List<Object>(), roadList = new List<Object>();
         List<Rectangle> objectRecs = new List<Rectangle>();
         int buildingHeight;
+        Boolean LeftSide = true;
         #endregion
 
         #region Text box
@@ -54,7 +55,7 @@ namespace UndertaleBattleSystemPrototype
 
 
         #region fighting variables
-        Boolean fightCal, spareCal;
+        String cOutcome, fOutcome;
         public static string enemyName;
         #endregion
 
@@ -64,14 +65,14 @@ namespace UndertaleBattleSystemPrototype
         public static Boolean timer = true;
 
         //TODO HP/attack/defense ints that pull from hero xml
-        //
+
         public TownScreen()
         {
             InitializeComponent();
             OnStart();
 
             buildingHeight = (this.Height / 16) * 7;
-            
+
             //play the music on loop
             //music.PlayLooping();
 
@@ -95,12 +96,12 @@ namespace UndertaleBattleSystemPrototype
             #endregion
 
             #region initializing objects+object recs
-            //library
+            //library(0)
             objects.Add(new Object((this.Width / 4) * 7, 0, buildingHeight, (this.Width / 8) * 7, Properties.Resources.library));
-            //arlos
+            //arlos(1)
             objects.Add(new Object((this.Width / 4) * 11, 0, buildingHeight + 10, this.Width / 2, Properties.Resources.arlos));
 
-            //appartements
+            //appartements(2,3)
             objects.Add(new Object(0, 0, buildingHeight, (this.Width / 4) * 3, Properties.Resources.appartement1));
             objects.Add(new Object((this.Width / 4) * 3, 0, buildingHeight, (this.Width / 4) * 3, Properties.Resources.appartement2));
 
@@ -108,6 +109,7 @@ namespace UndertaleBattleSystemPrototype
             objects.Add(new Object((this.Width / 8) * 15, buildingHeight - this.Height / 10 + 10, this.Height / 10, this.Width / 17, Properties.Resources.Sharol_WS));
             objects.Add(new Object((this.Width / 8) * 21, buildingHeight - this.Height / 6 + 10, this.Height / 6, this.Width / 16, Properties.Resources.Calum_WS));
             objects.Add(new Object((this.Width / 8) * 28, buildingHeight - this.Height / 6 + 10, this.Height / 6, this.Width / 12, Properties.Resources.Franky_WS));
+
 
             //just putting osmething in here so that the list isn't empty
             objectRecs.Add(new Rectangle(0, 0, 0, 0));
@@ -123,13 +125,62 @@ namespace UndertaleBattleSystemPrototype
         {
             gameTimer.Enabled = true;
             Thread.Sleep(400);
+            #region coming from battlescreen
+
+            #region Franky dialogue
+            //if you spare Franky
+            if (noriRec.IntersectsWith(objectRecs[8]) && fOutcome == "spared")
+            {
+                switch (talkingF)
+                {
+                    case 3:
+                        textNum = 15;
+                        displayText = true;
+                        spaceDown = false;
+                        talkingF++;
+                        break;
+                    case 4:
+                        textNum = 16;
+                        displayText = true;
+                        spaceDown = false;
+                        talkingF++;
+                        break;
+
+                }
+            }
+            //if you kill Franky
+            if (noriRec.IntersectsWith(objectRecs[8]) && fOutcome == "killed")
+            {
+                textNum = 17;
+                displayText = true;
+                spaceDown = false;
+            }
+            #endregion
+
+            #region Callum
+            //coming out of battlescreen and if you spared callum
+            if (noriRec.IntersectsWith(objectRecs[7]) && cOutcome == "spared")
+            {
+                textNum = 7;
+                displayText = true;
+                spaceDown = false;
+
+            }
+
+            //coming out of battlescreen and if you killed callum
+            if (noriRec.IntersectsWith(objectRecs[7]) && cOutcome == "killed")
+            {
+                textNum = 8;
+                displayText = true;
+                spaceDown = false;
+            }
+            #endregion
+            #endregion
         }
 
         public void OnStart()
         {
-            
-
-            nori = new Player(this.Width / 2 - 100, this.Height / 2 - 100, 150, 0, 0);
+            nori = new Player(this.Width / 2 - 100, this.Height / 2 - 100, buildingHeight - 150, 0, 0);
 
             //filling the text list with all of the dialogue that happens on this screen
             reader = XmlReader.Create("Resources/text.xml");
@@ -200,6 +251,17 @@ namespace UndertaleBattleSystemPrototype
         }
         private void gameTimer_Tick(object sender, EventArgs e)
         {
+            #region set up xml reader
+            reader = XmlReader.Create("Resources/Player.xml");
+            while (reader.Read())
+            {
+                reader.ReadToFollowing("save");
+
+                cOutcome = reader.GetAttribute("calum");
+                fOutcome = reader.GetAttribute("franky");
+            }
+            #endregion
+
             #region updating object recs
             objectRecs.Clear();
             //library
@@ -225,14 +287,14 @@ namespace UndertaleBattleSystemPrototype
             //setting the rectangles to the updated x,y
             noriRec = new Rectangle(nori.x + 40, nori.y + 130, 70, 20);
 
-            if (wDown == true && sDown == false && nori.y >= buildingHeight-(this.Height/32)*5)
+            if (wDown == true && sDown == false && nori.y >= buildingHeight - (this.Height / 32) * 5)
             {
                 nori.MoveUpDown(-HEROSPEED);
                 animationCounterH++;
                 spriteNumber = 0;
                 NoriAnimation();
             }
-            if (sDown == true && wDown == false && nori.y <= this.Height-(nori.size/8)*11)
+            if (sDown == true && wDown == false && nori.y <= this.Height - (nori.size / 8) * 11)
             {
                 nori.MoveUpDown(HEROSPEED);
                 animationCounterH++;
@@ -241,16 +303,25 @@ namespace UndertaleBattleSystemPrototype
             }
             if (dDown == true && aDown == false)
             {
-                //if you're at the end of the map
-                if (nori.x >= this.Width / 2 - 100 || roadList[3].x + roadList[3].width <= this.Width)
+                #region stops you if you're at the end of the map
+                if (nori.x >= this.Width / 2 - 100 && LeftSide == true)
                 {
                     ObjectMovement(-HEROSPEED);
                 }
-                else if (nori.x < this.Width / 2 - 100 || nori.x <= this.Width - 30)
+                else if (nori.x < this.Width / 2 - 100 && LeftSide == true)
                 {
                     nori.MoveLeftRight(HEROSPEED);
                 }
 
+                if (roadList[3].x + roadList[3].width >= this.Width && LeftSide == false)
+                {
+                    ObjectMovement(-HEROSPEED);
+                }
+                else if (nori.x >= this.Width / 2 - 100 && LeftSide == false)
+                {
+                    nori.MoveLeftRight(HEROSPEED);
+                }
+                #endregion
                 animationCounterH++;
                 spriteNumber = 6;
                 NoriAnimation();
@@ -258,19 +329,40 @@ namespace UndertaleBattleSystemPrototype
             }
             if (aDown == true && dDown == false)
             {
-                //if you get to the end of the map
-                if (roadList[0].x <= -10 || roadList[3].x + roadList[3].width < this.Width)
+                #region stops you if you get to the end of the map
+                if (roadList[0].x <= -10 && LeftSide == true)
                 {
                     ObjectMovement(HEROSPEED);
                 }
-                else if (nori.x >= -30 || nori.x > this.Width / 2 - 100)
+                else if (nori.x >= -30 && LeftSide == true)
                 {
                     nori.MoveLeftRight(-HEROSPEED);
                 }
+
+                if (nori.x <= this.Width / 2 - 100 && LeftSide == false)
+                {
+                    ObjectMovement(HEROSPEED);
+                }
+                else if (nori.x > this.Width / 2 - 100 && LeftSide == false)
+                {
+                    nori.MoveLeftRight(-HEROSPEED);
+                }
+                #endregion
                 animationCounterH++;
                 spriteNumber = 9;
                 NoriAnimation();
 
+            }
+            #endregion
+
+            #region tells if you're on the left or right side of the map
+            if (objects[0].x + objects[0].width > this.Width / 2)
+            {
+                LeftSide = true;
+            }
+            else
+            {
+                LeftSide = false;
             }
             #endregion
 
@@ -297,6 +389,36 @@ namespace UndertaleBattleSystemPrototype
                 ShopScreen ss = new ShopScreen();
                 this.Controls.Add(ss);
                 ss.Focus();
+            }
+
+            //Calum
+            if (noriRec.IntersectsWith(objectRecs[7]) && spaceDown == true)
+            {
+                enemyName = "Calum";
+                gameTimer.Enabled = false;
+                BattleScreen bs = new BattleScreen();
+                Form form = this.FindForm();
+                form.Controls.Add(bs);
+
+                bs.Location = new Point((this.Width - bs.Width) / 2, (this.Height - bs.Height) / 2);
+                bs.Focus();
+                bs.BringToFront();
+
+            }
+
+            //Franky
+            if (noriRec.IntersectsWith(objectRecs[8]) && spaceDown == true && cOutcome == "spared")
+            {
+                enemyName = "Franky";
+                gameTimer.Enabled = false;
+                BattleScreen bs = new BattleScreen();
+                Form form = this.FindForm();
+                form.Controls.Add(bs);
+
+                bs.Location = new Point((this.Width - bs.Width) / 2, (this.Height - bs.Height) / 2);
+                bs.Focus();
+                bs.BringToFront();
+
             }
             #endregion
 
@@ -341,42 +463,54 @@ namespace UndertaleBattleSystemPrototype
                 }
                 #endregion
 
-                #region Callum
-                if (noriRec.IntersectsWith(objectRecs[8]) && spaceDown == true)
+                #region Frankie
+                //if you haven't fought with callum yet
+                if (noriRec.IntersectsWith(objectRecs[8]) && spaceDown == true && cOutcome == "null")
                 {
-                    if (talkingC == 2)
+                    switch (talkingF)
                     {
-                        //flash and make a noise?
-                        enemyName = "Callum";
-                        talkingC++;
-                        BattleScreen bs = new BattleScreen();
-                        Form form = this.FindForm();
-                        form.Controls.Add(bs);
-                        form.Controls.Remove(this);
-                        bs.Focus();
+                        case 0:
+                            textNum = 10;
+                            displayText = true;
+                            spaceDown = false;
+                            talkingF++;
+                            break;
 
+                        case 1:
+                            textNum = 11;
+                            displayText = true;
+                            spaceDown = false;
+                            break;
                     }
-                    //positive outcome
-                    if (talkingC == 1)
-                    {
-                        textNum = 7;
-                        displayText = true;
-                        spaceDown = false;
-                    }
+                }
 
-                    //negative outcome
-                    if (talkingC == 0)
+                //if you killed callum
+                if (noriRec.IntersectsWith(objectRecs[8]) && spaceDown == true && cOutcome == "killed")
+                {
+                    switch (talkingF)
                     {
-                        textNum = 8;
-                        displayText = true;
-                        spaceDown = false;
+                        case 1:
+                            textNum = 12;
+                            displayText = true;
+                            spaceDown = false;
+                            talkingF++;
+                            break;
+                        case 2:
+                            textNum = 13;
+                            displayText = true;
+                            spaceDown = false;
+                            talkingF++;
+                            break;
+                        case 3:
+                            textNum = 14;
+                            displayText = true;
+                            spaceDown = false;
+                            break;
+
                     }
 
                 }
-                #endregion
-
-                #region Frankie
-
+               
                 #endregion
             }
             else
@@ -387,7 +521,6 @@ namespace UndertaleBattleSystemPrototype
 
 
             #endregion
-
 
             #endregion
 

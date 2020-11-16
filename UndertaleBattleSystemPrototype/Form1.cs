@@ -29,7 +29,7 @@ namespace UndertaleBattleSystemPrototype
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            MenuScreen ms = new MenuScreen();
+            TownScreen ms = new TownScreen();
             this.Controls.Add(ms);
             ms.Focus();
         }
