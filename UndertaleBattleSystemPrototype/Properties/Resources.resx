@@ -5909,6 +5909,9 @@
         EQAA4IY8AgAA3JBHAACAG/IIAADwP/Z//u//Axx3QteQr8x8AAAAAElFTkSuQmCC
 </value>
   </data>
+  <data name="bush" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\bush.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="road2" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAAwwAAAIcCAYAAABb3ilUAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
@@ -6178,5 +6181,8 @@
         AMBDggEAAHhIMAAAAA8JBgAA4CHBAAAAPCQYAACAhwQDAADwkGAAAAAeEgwAAMBDggEAAHhIMAAAAA8J
         BgAA4CHBAAAAPCQYAACAhwQDAADwwL/84/8BbcX/6Ugf3PoAAAAASUVORK5CYII=
 </value>
+  </data>
+  <data name="trash" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\trash.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
 </root>
