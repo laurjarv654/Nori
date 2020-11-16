@@ -62,6 +62,9 @@ namespace UndertaleBattleSystemPrototype
         #endregion xml readers, brushes, images, and other
 
         #region ints and strings
+        //string for after battle result
+        public static string enemySpared = "null";
+
         //int for after turn counting and enemy turn counting
         int afterTurnCounter = 0;
         int enemyTurnCounter = 500;
@@ -80,7 +83,6 @@ namespace UndertaleBattleSystemPrototype
         #region booleans
         //make a globally useable spare variable
         public static Boolean canSpare = false;
-        public static Boolean enemySpared = false;
 
         //player key press variables
         Boolean wDown, aDown, sDown, dDown, spaceDown, shiftDown;
@@ -350,9 +352,11 @@ namespace UndertaleBattleSystemPrototype
 
                             //go back to the town screen
                             LoseScreen ls = new LoseScreen();
+                            TownScreen ts = new TownScreen();
                             Form form = this.FindForm();
                             form.Controls.Add(ls);
                             form.Controls.Remove(this);
+                            form.Controls.Remove(ts);
                             ls.Focus();
                         }
                     }
@@ -568,8 +572,11 @@ namespace UndertaleBattleSystemPrototype
                             //set the action result to show that the player won
                             actText[0] = "* You Won!";
 
-                            //set the enemy spared boolean to true
-                            enemySpared = true;
+                            //set the enemy spared string to "spared"
+                            enemySpared = "spared";
+
+                            //call the player save update method
+                            playerSaveUpdate();
 
                             //call the menu disappear method
                             MenuDisappear(0);
@@ -577,11 +584,9 @@ namespace UndertaleBattleSystemPrototype
                             gameTimer.Enabled = false;
 
                             //go back to the town screen
-                            TownScreen ts = new TownScreen();
+                            gameTimer.Enabled = false;
                             Form form = this.FindForm();
-                            form.Controls.Add(ts);
                             form.Controls.Remove(this);
-                            ts.Focus();
                         }
                     }
                     if (aDown == true)
@@ -658,8 +663,11 @@ namespace UndertaleBattleSystemPrototype
                         //set the action result to show that the player won
                         actText[0] = "* You Won! \n\n* You got " + enemy.gold + " gold.";
 
-                        //set the enemy spared boolean to true
-                        enemySpared = false;
+                        //set the enemy spared string to "killed"
+                        enemySpared = "killed";
+
+                        //call the player save update method
+                        playerSaveUpdate();
 
                         //call the menu disappear method
                         MenuDisappear(0);
@@ -667,11 +675,9 @@ namespace UndertaleBattleSystemPrototype
                         gameTimer.Enabled = false;
 
                         //go back to the town screen
-                        TownScreen ts = new TownScreen();
+                        gameTimer.Enabled = false;
                         Form form = this.FindForm();
-                        form.Controls.Add(ts);
                         form.Controls.Remove(this);
-                        ts.Focus();
                     }
 
                     afterTurnCounter = 0;
@@ -1124,7 +1130,7 @@ namespace UndertaleBattleSystemPrototype
             textOutput.Visible = false;
 
             //wait for 3 seconds before the enemy turn (again, so the player can read lol)
-            if (enemySpared == false)
+            if (enemySpared == "killed")
             {
                 //display the enemy dialog box
                 showEnemyDialog = true;
@@ -1472,10 +1478,10 @@ namespace UndertaleBattleSystemPrototype
 
         #endregion enemy turn methods
 
-        #region player xml update method
+        #region player xml update method (items)
         private void PlayerXmlUpdate(int i)
         {
-            //open the player xml file adn place it in doc
+            //open the player xml file and place it in doc
             XmlDocument doc = new XmlDocument();
             doc.Load("Resources/Player.xml");
 
@@ -1524,6 +1530,30 @@ namespace UndertaleBattleSystemPrototype
             //save and close the player xml
             doc.Save("Resources/Player.xml");
         }
-        #endregion player xml update method
+        #endregion player xml update method (items
+
+        #region player xml save update method
+        private void playerSaveUpdate()
+        {
+            //open the player xml file and place it in doc
+            XmlDocument doc = new XmlDocument();
+            doc.Load("Resources/Player.xml");
+
+            //create a node for "Save"
+            XmlNode saveInfo = doc.GetElementById("Save");
+
+            //update the fight outcome depending on the enemy fought
+            for (int i = 0; i < 2; i++)
+            {
+                if (TownScreen.enemyName == saveInfo.Attributes[i].Name)
+                {
+                    saveInfo.Attributes[i].InnerText = enemySpared;
+                }
+            }
+
+            //save and close the player xml
+            doc.Save("Resources/Player.xml");
+        }
+        #endregion player xml save update method
     }
 }

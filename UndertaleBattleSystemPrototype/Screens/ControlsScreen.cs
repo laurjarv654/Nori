@@ -133,13 +133,13 @@ namespace UndertaleBattleSystemPrototype
                 tutorialTimer.Enabled = false;
 
                 //Goes to the menu screen
-                MenuScreen ts = new MenuScreen();
+                MenuScreen ms = new MenuScreen();
                 Form form = this.FindForm();
 
-                form.Controls.Add(ts);
+                form.Controls.Add(ms);
                 form.Controls.Remove(this);
 
-                ts.Location = new Point((form.Width - ts.Width) / 2, (form.Height - ts.Height) / 2);
+                ms.Location = new Point((form.Width - ms.Width) / 2, (form.Height - ms.Height) / 2);
             }
             //if the game over text hasn't been fully written out yet, continue to write it out
             if (controlsText != controlsTextWritten)

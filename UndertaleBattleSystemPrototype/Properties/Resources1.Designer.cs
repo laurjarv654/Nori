@@ -221,16 +221,6 @@ namespace UndertaleBattleSystemPrototype.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap bush {
-            get {
-                object obj = ResourceManager.GetObject("bush", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to &lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
         ///&lt;Enemy&gt;
         ///  &lt;Stats hp =&quot;80&quot;
@@ -353,8 +343,9 @@ namespace UndertaleBattleSystemPrototype.Properties {
         ///    &lt;/Attack&gt;
         ///  &lt;/Attacks&gt;
         ///  &lt;Dialog&gt;
-        ///    &lt;Text string =&quot;...I guess I&apos;ll go appologize. You won&apos;t back off if I say no anyways. You win Nori.&quot;&gt;&lt;/Text&gt;
-        ///    &lt;Text string =&quot;Because he&apos;s weak. People like him don&apos;t survive society. He&apos;s a loser.&quot;&gt; [rest of string was truncated]&quot;;.
+        ///    &lt;Text string =&quot;Ugh fine. I guess I can do that... not that he needs it.&quot;&gt;&lt;/Text&gt;
+        ///    &lt;Text string =&quot;Because he&apos;s weak. People like him don&apos;t survive society. He&apos;s a loser.&quot;&gt;&lt;/Text&gt;
+        ///    &lt;Text string =&quot; [rest of string was truncated]&quot;;.
         /// </summary>
         internal static string Franky {
             get {
@@ -616,8 +607,7 @@ namespace UndertaleBattleSystemPrototype.Properties {
         ///   Looks up a localized string similar to &lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
         ///&lt;Player&gt;
         ///  &lt;Stats&gt;
-        ///    &lt;General gold =&quot;0&quot;&gt;
-        ///    &lt;/General&gt;
+        ///    &lt;General gold =&quot;0&quot;&gt;&lt;/General&gt;
         ///    &lt;Battle currentHP =&quot;40&quot;
         ///            atk =&quot;5&quot;&gt;
         ///    &lt;/Battle&gt;
@@ -637,7 +627,8 @@ namespace UndertaleBattleSystemPrototype.Properties {
         ///            heal =&quot;0&quot;&gt;
         ///      &lt;/Item&gt;
         ///    &lt;/Inventory&gt;
-        ///  &lt;/I [rest of string was truncated]&quot;;.
+        ///  &lt;/Items&gt;
+        /// [rest of string was truncated]&quot;;.
         /// </summary>
         internal static string Player {
             get {
@@ -727,16 +718,6 @@ namespace UndertaleBattleSystemPrototype.Properties {
         internal static System.Drawing.Bitmap titleSprite {
             get {
                 object obj = ResourceManager.GetObject("titleSprite", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap trash {
-            get {
-                object obj = ResourceManager.GetObject("trash", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
