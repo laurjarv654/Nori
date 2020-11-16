@@ -450,6 +450,7 @@ namespace UndertaleBattleSystemPrototype
         {
             if (gameTimer.Enabled == true)
             {
+                wDown = aDown = sDown = dDown = escapeDown = false;
                 gameTimer.Enabled = false;
                 Pause pauseForm = new Pause();
 

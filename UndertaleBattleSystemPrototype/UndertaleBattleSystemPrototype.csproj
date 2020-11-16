@@ -230,9 +230,6 @@
     <None Include="Resources\noriB2.png" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\heart.png" />
-  </ItemGroup>
-  <ItemGroup>
     <None Include="Resources\Library.png" />
   </ItemGroup>
   <ItemGroup>
@@ -356,13 +353,16 @@
     <None Include="Resources\Calum_FS.png" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\PauseFormBackground.png" />
-  </ItemGroup>
-  <ItemGroup>
     <None Include="Resources\road2.png" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\roadTurn.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\PauseFormBackground.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\heart.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

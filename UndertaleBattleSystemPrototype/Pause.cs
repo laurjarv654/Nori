@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Threading;
 using System.Windows.Forms;
+using System.Xml;
 
 namespace UndertaleBattleSystemPrototype
 {
@@ -16,7 +17,6 @@ namespace UndertaleBattleSystemPrototype
         #region variables
 
         //pause screen exiting stuff...?
-        Boolean escapeDown = false;
         private static Pause pauseForm;
         private static DialogResult buttonResult = new DialogResult();
 
@@ -24,13 +24,20 @@ namespace UndertaleBattleSystemPrototype
         Boolean wDown, sDown, spaceDown;
 
         //rectangles for menu buttons and player
-        Rectangle resumeRec, saveRec, exitRec, playerRec;
+        Rectangle resumeRec, exitRec, playerRec;
+
+        //rectangle and string for drawing player stats
+        Rectangle statsRec;
+        string stats;
 
         //images for sprites
-        Image playerSprite;
+        Image playerSprite, noriSprite;
 
-        //brush for menu buttons
+        //brush for menu buttons and text
         SolidBrush whiteBrush = new SolidBrush(Color.White);
+
+        //xml reader for the player xml file
+        XmlReader reader = XmlReader.Create("Resources/Player.xml");
 
         #endregion variables
 
@@ -40,14 +47,26 @@ namespace UndertaleBattleSystemPrototype
 
             //setup sprites
             playerSprite = Properties.Resources.heart;
+            noriSprite = Properties.Resources.noriFR;
 
             //set menu button sizes and positions
-            resumeRec = new Rectangle(this.Width / 6, this.Height / 4, 100, 25);
-            saveRec = new Rectangle(this.Width / 6, resumeRec.Y + 50, 100, 25);
-            exitRec = new Rectangle(this.Width / 6, saveRec.Y + 50, 100, 25);
+            resumeRec = new Rectangle(this.Width / 12, this.Height / 3, 150, 25);
+            exitRec = new Rectangle(this.Width / 12, resumeRec.Y + 50, 150, 25);
 
             //set player location
             playerRec = new Rectangle(resumeRec.X + 5, resumeRec.Y + 5, 20, 20);
+
+            //setup the stats string
+            reader.ReadToFollowing("General");
+            string gold = reader.GetAttribute("gold");
+            reader.ReadToFollowing("Battle");
+            string hp = reader.GetAttribute("currentHP");
+            string atk = reader.GetAttribute("atk");
+
+            stats = "Gold: " + gold + "\n\nHP: " + hp + "\n\nAtk: " + atk;
+
+            //set the statsRec position
+            statsRec = new Rectangle(this.Width / 3, this.Height / 3, this.Width / 4, this.Height / 2);
         }
 
         public static DialogResult Show()
@@ -64,9 +83,6 @@ namespace UndertaleBattleSystemPrototype
         {
             switch (e.KeyCode)
             {
-                case Keys.Escape:
-                    escapeDown = true;
-                    break;
                 case Keys.Space:
                     spaceDown = true;
                     break;
@@ -82,9 +98,6 @@ namespace UndertaleBattleSystemPrototype
         {
             switch (e.KeyCode)
             {
-                case Keys.Escape:
-                    escapeDown = false;
-                    break;
                 case Keys.Space:
                     spaceDown = false;
                     break;
@@ -109,25 +122,25 @@ namespace UndertaleBattleSystemPrototype
         #region paint method
         private void Pause_Paint(object sender, PaintEventArgs e)
         {
+            //draw the stats string
+            e.Graphics.DrawString(stats, Form1.dialogFontLarge, whiteBrush, statsRec);
+
+            //draw an image of nori
+            e.Graphics.DrawImage(noriSprite, this.Width - this.Width / 3, this.Height / 3, 200, 200);
+
+            //draw the buttons according to which button the player is on
             if (playerRec.IntersectsWith(resumeRec))
             {
                 e.Graphics.DrawString("  Resume", Form1.dialogFont, whiteBrush, resumeRec);
-                e.Graphics.DrawString("* Save", Form1.dialogFont, whiteBrush, saveRec);
-                e.Graphics.DrawString("* Exit", Form1.dialogFont, whiteBrush, exitRec);
-            }
-            if (playerRec.IntersectsWith(saveRec))
-            {
-                e.Graphics.DrawString("* Resume", Form1.dialogFont, whiteBrush, resumeRec);
-                e.Graphics.DrawString("  Save", Form1.dialogFont, whiteBrush, saveRec);
                 e.Graphics.DrawString("* Exit", Form1.dialogFont, whiteBrush, exitRec);
             }
             if (playerRec.IntersectsWith(exitRec))
             {
                 e.Graphics.DrawString("* Resume", Form1.dialogFont, whiteBrush, resumeRec);
-                e.Graphics.DrawString("* Save", Form1.dialogFont, whiteBrush, saveRec);
                 e.Graphics.DrawString("  Exit", Form1.dialogFont, whiteBrush, exitRec);
             }
 
+            //draw the player heart sprite
             e.Graphics.DrawImage(playerSprite, playerRec);
         }
         #endregion paint method
@@ -135,37 +148,14 @@ namespace UndertaleBattleSystemPrototype
         #region button menu method
         private void ButtonMenu()
         {
-            #region play
+            #region resume
             if (playerRec.IntersectsWith(resumeRec))
             {
                 if (spaceDown == true)
                 {
-                    //TODO -- exit the pause form and resume the game
-                }
-                if (sDown == true)
-                {
-                    playerRec = new Rectangle(saveRec.X + 5, saveRec.Y + 5, 20, 20);
-                    sDown = false;
-
-                    Thread.Sleep(150);
-                }
-            }
-            #endregion play
-
-            #region controls
-            if (playerRec.IntersectsWith(saveRec))
-            {
-                //go into the settings menu
-                if (spaceDown == true)
-                {
-                   //TODO -- save player game info (is calum spared or not?)
-                }
-                if (wDown == true)
-                {
-                    playerRec = new Rectangle(resumeRec.X + 5, resumeRec.Y + 5, 20, 20);
-                    wDown = false;
-
-                    Thread.Sleep(150);
+                    //exit the pause form and resume the game
+                    buttonResult = DialogResult.Cancel;
+                    pauseForm.Close();
                 }
                 if (sDown == true)
                 {
@@ -175,7 +165,7 @@ namespace UndertaleBattleSystemPrototype
                     Thread.Sleep(150);
                 }
             }
-            #endregion controls
+            #endregion resume
 
             #region exit
             if (playerRec.IntersectsWith(exitRec))
@@ -187,7 +177,7 @@ namespace UndertaleBattleSystemPrototype
                 }
                 if (wDown == true)
                 {
-                    playerRec = new Rectangle(saveRec.X + 5, saveRec.Y + 5, 20, 20);
+                    playerRec = new Rectangle(resumeRec.X + 5, resumeRec.Y + 5, 20, 20);
                     wDown = false;
 
                     Thread.Sleep(150);

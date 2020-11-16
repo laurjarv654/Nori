@@ -1,8 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Player>
   <Stats>
-    <General gold ="0">
-    </General>
+    <General gold ="0"></General>
     <Battle currentHP ="40"
             atk ="5">
     </Battle>
@@ -24,8 +23,8 @@
     </Inventory>
   </Items>
   <Other>
-    <Save x ="600"
-          y ="400">
+    <Save calum ="null"
+          franky ="null">
     </Save>
   </Other>
 </Player>
