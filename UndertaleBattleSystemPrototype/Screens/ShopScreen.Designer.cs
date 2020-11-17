@@ -46,7 +46,7 @@
             this.DoubleBuffered = true;
             this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "ShopScreen";
-            this.Size = new System.Drawing.Size(1198, 899);
+            this.Size = new System.Drawing.Size(1180, 851);
             this.Paint += new System.Windows.Forms.PaintEventHandler(this.ShopScreen_Paint);
             this.KeyUp += new System.Windows.Forms.KeyEventHandler(this.ShopScreen_KeyUp);
             this.PreviewKeyDown += new System.Windows.Forms.PreviewKeyDownEventHandler(this.ShopScreen_PreviewKeyDown);

@@ -56,8 +56,6 @@ namespace UndertaleBattleSystemPrototype
 
             OnStart();
 
-           
-
             #region initializing nori animation
 
             noriSprite = Properties.Resources.noriBR;
@@ -190,7 +188,7 @@ namespace UndertaleBattleSystemPrototype
             #region updating nori movement
 
             //setting the rectangles to the updated x,y
-            noriRec = new Rectangle(nori.x + 40, nori.y + 120, 70, 30);
+            noriRec = new Rectangle(nori.x + (nori.size/4), nori.y + (nori.size/8)*7, (nori.size/2), nori.size/8);
 
             if (wDown == true && nori.y >= (boothWidth / 4) * 5 - nori.size)
             {
