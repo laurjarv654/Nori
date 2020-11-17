@@ -60,7 +60,7 @@
             this.DoubleBuffered = true;
             this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "ControlsScreen";
-            this.Size = new System.Drawing.Size(1180, 851);
+            this.Size = new System.Drawing.Size(944, 681);
             this.Paint += new System.Windows.Forms.PaintEventHandler(this.ControlsScreen_Paint);
             this.KeyUp += new System.Windows.Forms.KeyEventHandler(this.ControlsScreen_KeyUp);
             this.PreviewKeyDown += new System.Windows.Forms.PreviewKeyDownEventHandler(this.ControlsScreen_PreviewKeyDown);

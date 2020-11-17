@@ -40,7 +40,9 @@ namespace UndertaleBattleSystemPrototype
 
         #region Text box
         Boolean displayText = false, displayTextBox = false;
-        Rectangle textBox;
+        Rectangle textBoxSpriteRec, textBoxRec;
+        Image textBoxSprite = Properties.Resources.textBoxSprite;
+        SolidBrush textBrush = new SolidBrush(Color.White);
         List<string> textList = new List<string>();
         string text = "";
         int talkingD = 0;
@@ -138,6 +140,9 @@ namespace UndertaleBattleSystemPrototype
             border.Add(new Rectangle(0, this.Height - 150, this.Width, 150));
 
             #endregion
+
+            textBoxSpriteRec = new Rectangle(this.Width / 8, (this.Height / 3) * 2, (this.Width / 4) * 3, this.Height / 4);
+            textBoxRec = new Rectangle(textBoxSpriteRec.X + 40, textBoxSpriteRec.Y + 25, textBoxSpriteRec.Width - 40, textBoxSpriteRec.Height - 25);
 
         }
         public void OnStart()
@@ -411,7 +416,8 @@ namespace UndertaleBattleSystemPrototype
 
             if (displayTextBox == true)
             {
-                e.Graphics.DrawRectangle(test, textBox);
+                e.Graphics.DrawImage(textBoxSprite, textBoxSpriteRec);
+                e.Graphics.DrawString(text, Form1.dialogFont, textBrush, textBoxRec);
             }
 
         }
@@ -482,14 +488,10 @@ namespace UndertaleBattleSystemPrototype
             text = textList[textNum];
 
             displayTextBox = true;
-            textLabel.Visible = true;
-            textLabel.Text = text;
             if (spaceDown == true)
             {
                 displayTextBox = false;
                 displayText = false;
-                textLabel.Visible = false;
-                textLabel.Text = "";
                 Thread.Sleep(200);
             }
 

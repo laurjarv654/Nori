@@ -30,7 +30,6 @@
         {
             this.components = new System.ComponentModel.Container();
             this.gameTimer = new System.Windows.Forms.Timer(this.components);
-            this.textLabel = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // gameTimer
@@ -39,28 +38,15 @@
             this.gameTimer.Interval = 20;
             this.gameTimer.Tick += new System.EventHandler(this.gameTimer_Tick);
             // 
-            // textLabel
-            // 
-            this.textLabel.BackColor = System.Drawing.Color.Transparent;
-            this.textLabel.ForeColor = System.Drawing.SystemColors.ActiveBorder;
-            this.textLabel.Location = new System.Drawing.Point(148, 635);
-            this.textLabel.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.textLabel.Name = "textLabel";
-            this.textLabel.Size = new System.Drawing.Size(852, 168);
-            this.textLabel.TabIndex = 1;
-            this.textLabel.Text = "label1";
-            this.textLabel.Visible = false;
-            // 
             // LibraryScreen
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(120F, 120F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(96F, 96F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(64)))), ((int)(((byte)(0)))));
-            this.Controls.Add(this.textLabel);
             this.DoubleBuffered = true;
             this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "LibraryScreen";
-            this.Size = new System.Drawing.Size(1180, 851);
+            this.Size = new System.Drawing.Size(958, 718);
             this.Paint += new System.Windows.Forms.PaintEventHandler(this.LibraryScreen_Paint);
             this.KeyUp += new System.Windows.Forms.KeyEventHandler(this.LibraryScreen_KeyUp);
             this.PreviewKeyDown += new System.Windows.Forms.PreviewKeyDownEventHandler(this.LibraryScreen_PreviewKeyDown);
@@ -71,6 +57,5 @@
         #endregion
 
         private System.Windows.Forms.Timer gameTimer;
-        private System.Windows.Forms.Label textLabel;
     }
 }
