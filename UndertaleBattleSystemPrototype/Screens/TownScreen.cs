@@ -119,7 +119,7 @@ namespace UndertaleBattleSystemPrototype
 
             #endregion
 
-            textBoxSpriteRec = new Rectangle(100, this.Height / 2 + 100, this.Width - 200, this.Height / 2 - 150);
+            textBoxSpriteRec = new Rectangle(this.Width / 8, (this.Height / 3) * 2, (this.Width / 4) * 3, this.Height / 4);
             textBoxRec = new Rectangle(textBoxSpriteRec.X + 40, textBoxSpriteRec.Y + 25, textBoxSpriteRec.Width - 40, textBoxSpriteRec.Height - 25);
 
         }
@@ -355,7 +355,7 @@ namespace UndertaleBattleSystemPrototype
                 {
                     ObjectMovement(-HEROSPEED);
                 }
-                else if (nori.x >= this.Width / 2 - 100 && LeftSide == false)
+                else if (nori.x <= this.Width - nori.size && LeftSide == false)
                 {
                     nori.MoveLeftRight(HEROSPEED);
                 }
@@ -606,7 +606,7 @@ namespace UndertaleBattleSystemPrototype
             if (displayTextBox == true)
             {
                 e.Graphics.DrawImage(textBoxSprite, textBoxSpriteRec);
-                e.Graphics.DrawString(text, Form1.dialogFontLarge, textBrush, textBoxRec);
+                e.Graphics.DrawString(text, Form1.dialogFont, textBrush, textBoxRec);
             }
         }
         private void DisplayTextCollisions()
