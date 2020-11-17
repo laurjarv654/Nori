@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Player>
   <Stats>
-    <General gold ="0"></General>
+    <General gold ="50"></General>
     <Battle currentHP ="40"
             atk ="5">
     </Battle>

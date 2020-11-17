@@ -17,7 +17,7 @@ namespace UndertaleBattleSystemPrototype
         #region variables
 
         //pause screen exiting stuff
-        private static Pause pauseForm;
+        private static ShopMenu shopForm;
         private static DialogResult buttonResult = new DialogResult();
 
         //booleans for key presses
@@ -26,8 +26,11 @@ namespace UndertaleBattleSystemPrototype
         //string for description drawing
         string description;
 
+        //int for player gold
+        int gold;
+
         //rectangles for description text, player, and shop buttons
-        Rectangle descriptionRec, playerRec, buy1Rec, buy2Rec, buy3Rec;
+        Rectangle descriptionRec, playerRec, buy1Rec, buy2Rec, buy3Rec, confirmRec;
 
         //image for player sprite
         Image playerSprite;
@@ -44,7 +47,31 @@ namespace UndertaleBattleSystemPrototype
         {
             InitializeComponent();
 
+            //setup sprites
+            playerSprite = Properties.Resources.heart;
 
+            //initialize the description rec
+            descriptionRec = new Rectangle(this.Width / 12, this.Height / 3, this.Width / 2, this.Height);
+
+            //initialize the player rec and button recs
+            buy1Rec = new Rectangle((this.Width / 2) + (this.Width / 5), this.Height / 3, 200, 20);
+            buy2Rec = new Rectangle((this.Width / 2) + (this.Width / 5), buy1Rec.Y + 60, 200, 20);
+            buy3Rec = new Rectangle((this.Width / 2) + (this.Width / 5), buy2Rec.Y + 60, 200, 20);
+            confirmRec = new Rectangle((this.Width / 2) + (this.Width / 4), buy3Rec.Y + 60, 200, 40);
+            playerRec = new Rectangle(buy1Rec.X + 5, buy1Rec.Y + 5, 20, 20);
+
+            //get the player's gold amount
+            reader.ReadToFollowing("General");
+            gold = Convert.ToInt16(reader.GetAttribute("gold"));
+        }
+
+        public static DialogResult Show()
+        {
+            shopForm = new ShopMenu();
+            shopForm.StartPosition = FormStartPosition.CenterParent;
+
+            shopForm.ShowDialog();
+            return buttonResult;
         }
 
         #region key down and up
@@ -91,11 +118,16 @@ namespace UndertaleBattleSystemPrototype
         #region shop timer
         private void shopTimer_Tick(object sender, EventArgs e)
         {
-            if (shiftDown == true)
+            if (playerRec.IntersectsWith(confirmRec) == false)
             {
-                //exit the shop form and resume the game
-                buttonResult = DialogResult.Cancel;
-                pauseForm.Close();
+                if (shiftDown == true)
+                {
+                    //exit the shop form and resume the game
+                    buttonResult = DialogResult.Cancel;
+                    shopForm.Close();
+                }
+
+                description = "Arlo's shop. There are a few things that pique your interest. \n\nUse SPACE to select and SHIFT to exit.";
             }
 
             ButtonMenu();
@@ -125,8 +157,14 @@ namespace UndertaleBattleSystemPrototype
             if (playerRec.IntersectsWith(buy3Rec))
             {
                 e.Graphics.DrawString("* Caesar Salad", Form1.dialogFont, whiteBrush, buy1Rec);
-                e.Graphics.DrawString("*  Protein Bar", Form1.dialogFont, whiteBrush, buy2Rec);
-                e.Graphics.DrawString(" Hot Chocolate", Form1.dialogFont, whiteBrush, buy3Rec);
+                e.Graphics.DrawString("* Protein Bar", Form1.dialogFont, whiteBrush, buy2Rec);
+                e.Graphics.DrawString("  Hot Chocolate", Form1.dialogFont, whiteBrush, buy3Rec);
+            }
+
+            //draw the confirm buy button if it is timer
+            if (playerRec.IntersectsWith(confirmRec))
+            {
+                e.Graphics.DrawString("  Buy?", Form1.dialogFont, whiteBrush, confirmRec);
             }
 
             //draw the player heart sprite
@@ -137,12 +175,29 @@ namespace UndertaleBattleSystemPrototype
         #region button menu method
         private void ButtonMenu()
         {
+            #region confirm button
+            if (playerRec.IntersectsWith(confirmRec))
+            {
+                if (spaceDown == true)
+                {
+                    //TODO -- add the item to the player's inventory if they have the gold, then subtract the correct amount of gold
+                }
+                if (shiftDown == true)
+                {
+                    playerRec = new Rectangle(buy1Rec.X + 5, buy1Rec.Y + 5, 20, 20);
+                    Thread.Sleep(150);
+                }
+            }
+            #endregion confirm button
+
             #region buy1 button
             if (playerRec.IntersectsWith(buy1Rec))
             {
                 if (spaceDown == true)
                 {
-                    //TODO -- show description and y/n to buying
+                    playerRec = new Rectangle(confirmRec.X + 5, confirmRec.Y + 5, 20, 20);
+                    description = "A delicious salad and a personal favorite of some guy named Christopher. A classic. \n\nThis item costs 40G and will heal you 25HP.";
+                    Thread.Sleep(150);
                 }
                 if (sDown == true)
                 {
@@ -157,10 +212,11 @@ namespace UndertaleBattleSystemPrototype
             #region buy2 button
             if (playerRec.IntersectsWith(buy2Rec))
             {
-                //exit the game
                 if (spaceDown == true)
                 {
-                    //TODO -- show description and y/n to buying
+                    playerRec = new Rectangle(confirmRec.X + 5, confirmRec.Y + 5, 20, 20);
+                    description = "A protein bar. Not what you'd expect at a restaurant, but hey- who cares? \n\nThis item costs 20G and will heal you 10HP.";
+                    Thread.Sleep(150);
                 }
                 if (wDown == true)
                 {
@@ -182,10 +238,11 @@ namespace UndertaleBattleSystemPrototype
             #region buy3 button
             if (playerRec.IntersectsWith(buy3Rec))
             {
-                //exit the game
                 if (spaceDown == true)
                 {
-                    //TODO -- show description and y/n to buying
+                    playerRec = new Rectangle(confirmRec.X + 5, confirmRec.Y + 5, 20, 20);
+                    description = "Hot chocolate. It's the best drink to warm up your life! ...or so Arlo's slogan says. \n\nThis item costs 30G and will heal you 15HP.";
+                    Thread.Sleep(150);
                 }
                 if (wDown == true)
                 {

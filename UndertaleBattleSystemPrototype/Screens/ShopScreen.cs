@@ -114,6 +114,9 @@ namespace UndertaleBattleSystemPrototype
             #endregion
 
             //arlo rectangle
+            objectRecs.Add(new Rectangle(objects[9].x, objects[9].y, objects[9].width, objects[9].height));
+
+            //mysterious figure
             //objectRecs.Add(new Rectangle());
 
         }
@@ -225,7 +228,32 @@ namespace UndertaleBattleSystemPrototype
 
             #region collisions
 
-            //if (noriRec.IntersectsWith())
+            if (noriRec.IntersectsWith(objectRecs[0]) && spaceDown == true)
+            {
+                if (gameTimer.Enabled == true)
+                {
+                    wDown = aDown = sDown = dDown = spaceDown = false;
+                    gameTimer.Enabled = false;
+                    ShopMenu shopForm = new ShopMenu();
+
+                    DialogResult dr = ShopMenu.Show();
+
+                    if (dr == DialogResult.Cancel)
+                    {
+                        gameTimer.Enabled = true;
+                    }
+                    else if (dr == DialogResult.Abort)
+                    {
+                        Form form = this.FindForm();
+                        MenuScreen ms = new MenuScreen();
+
+                        ms.Location = new Point((form.Width - ms.Width) / 2, (form.Height - ms.Height) / 2);
+
+                        form.Controls.Add(ms);
+                        form.Controls.Remove(this);
+                    }
+                }
+            }
 
             #endregion
 
