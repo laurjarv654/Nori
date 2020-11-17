@@ -33,7 +33,7 @@ namespace UndertaleBattleSystemPrototype
         List<Object> objects = new List<Object>();
         List<Rectangle> objectRecs = new List<Rectangle>();
         List<Rectangle> border = new List<Rectangle>();
-        const int BORDERWIDTH = 300;
+        int BORDERWIDTH;
         int boothWidth, boothHeight;
         #endregion
 
@@ -50,10 +50,13 @@ namespace UndertaleBattleSystemPrototype
         public ShopScreen()
         {
             InitializeComponent();
-            OnStart();
-
+            BORDERWIDTH = this.Width / 4;
             boothWidth = (this.Width - (BORDERWIDTH * 2)) / 3;
             boothHeight = (boothWidth / 5) * 4;
+
+            OnStart();
+
+           
 
             #region initializing nori animation
 
@@ -100,16 +103,16 @@ namespace UndertaleBattleSystemPrototype
             objects.Add(new Object(this.Width - BORDERWIDTH - boothWidth, 70, boothHeight, boothWidth, Properties.Resources.mysteriousFigure));
 
             //side booths (4-7)
-            objects.Add(new Object(BORDERWIDTH, 110, (boothWidth / 10) * 7, (boothHeight / 5) * 4, Properties.Resources.benchF2));
-            objects.Add(new Object(BORDERWIDTH, 100 + (boothWidth / 10) * 7, (boothWidth / 10) * 7, (boothHeight / 5) * 4, Properties.Resources.benchF2));
-            objects.Add(new Object(BORDERWIDTH, 90 + ((boothWidth / 10) * 7) * 2, (boothWidth / 10) * 7, (boothHeight / 5) * 4, Properties.Resources.benchF2));
-            objects.Add(new Object(BORDERWIDTH, 80 + ((boothWidth / 10) * 7) * 3, ((boothWidth / 10) * 7) * 2, (boothHeight / 5) * 4, Properties.Resources.benchF1));
+            objects.Add(new Object(BORDERWIDTH, BORDERWIDTH/3, (boothWidth / 10) * 7, (boothHeight / 5) * 4, Properties.Resources.benchF2));
+            objects.Add(new Object(BORDERWIDTH, BORDERWIDTH / 3 + (boothWidth / 20) * 13, (boothWidth / 10) * 7, (boothHeight / 5) * 4, Properties.Resources.benchF2));
+            objects.Add(new Object(BORDERWIDTH, BORDERWIDTH / 3 + ((boothWidth / 20) * 12) * 2, (boothWidth / 10) * 7, (boothHeight / 5) * 4, Properties.Resources.benchF2));
+            objects.Add(new Object(BORDERWIDTH, BORDERWIDTH / 3 + ((boothWidth / 20) * 11) * 3, ((boothWidth / 10) * 7) * 2, (boothHeight / 5) * 4, Properties.Resources.benchF1));
 
             //carpet (8)
             objects.Add(new Object(this.Width - BORDERWIDTH - boothWidth*2, (boothWidth/2) * 3, (boothHeight/2)*3,  (boothWidth/4)*7, Properties.Resources.carpet));
 
             //arlo(9)
-            objects.Add(new Object(this.Width - BORDERWIDTH - (boothWidth / 10) * 9, this.Height - 150 - (boothWidth / 10) * 9, (boothWidth / 10) * 9, (boothWidth / 10) * 9, Properties.Resources.Arlo));
+            objects.Add(new Object(this.Width - BORDERWIDTH - boothWidth, this.Height - 150 - boothWidth, boothWidth, boothWidth, Properties.Resources.Arlo));
 
             #endregion
 
@@ -122,7 +125,7 @@ namespace UndertaleBattleSystemPrototype
 
         public void OnStart()
         {
-            nori = new Player(this.Width / 2 - 75, this.Height - 300, 150, 0, 0);
+            nori = new Player(this.Width / 2 - 100, this.Height / 2 - 100, boothHeight, 0, 0);
 
             //filling the text list with all of the dialogue that happens on this screen
             reader = XmlReader.Create("Resources/text.xml");
