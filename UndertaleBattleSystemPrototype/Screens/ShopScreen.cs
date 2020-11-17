@@ -227,14 +227,13 @@ namespace UndertaleBattleSystemPrototype
 
             #region collisions
 
-            if (noriRec.IntersectsWith(objectRecs[0])&&spaceDown == true)
+            if (noriRec.IntersectsWith(objectRecs[0]) && spaceDown == true)
             {
                 if (gameTimer.Enabled == true)
                 {
                     wDown = aDown = sDown = dDown = spaceDown = false;
                     gameTimer.Enabled = false;
-                    ShopMenu  shopForm = new ShopMenu();
-
+                    ShopMenu shopForm = new ShopMenu();
                     DialogResult dr = ShopMenu.Show();
 
                     if (dr == DialogResult.Cancel)
