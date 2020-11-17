@@ -44,22 +44,23 @@
             // 
             this.titleSprite.BackgroundImage = global::UndertaleBattleSystemPrototype.Properties.Resources.controlsSprite;
             this.titleSprite.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.titleSprite.Location = new System.Drawing.Point(242, 80);
+            this.titleSprite.Location = new System.Drawing.Point(302, 100);
+            this.titleSprite.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.titleSprite.Name = "titleSprite";
-            this.titleSprite.Size = new System.Drawing.Size(460, 85);
+            this.titleSprite.Size = new System.Drawing.Size(575, 106);
             this.titleSprite.TabIndex = 1;
             this.titleSprite.TabStop = false;
             // 
             // ControlsScreen
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(96F, 96F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(120F, 120F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
             this.BackColor = System.Drawing.Color.Black;
             this.Controls.Add(this.titleSprite);
             this.DoubleBuffered = true;
             this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "ControlsScreen";
-            this.Size = new System.Drawing.Size(944, 861);
+            this.Size = new System.Drawing.Size(1180, 851);
             this.Paint += new System.Windows.Forms.PaintEventHandler(this.ControlsScreen_Paint);
             this.KeyUp += new System.Windows.Forms.KeyEventHandler(this.ControlsScreen_KeyUp);
             this.PreviewKeyDown += new System.Windows.Forms.PreviewKeyDownEventHandler(this.ControlsScreen_PreviewKeyDown);
