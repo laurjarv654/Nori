@@ -63,7 +63,7 @@ namespace UndertaleBattleSystemPrototype
 
         #region ints and strings
         //string for after battle result
-        public static string enemySpared = "null";
+        public static string enemySpared = "blank";
 
         //int for after turn counting and enemy turn counting
         int afterTurnCounter = 0;
@@ -671,8 +671,6 @@ namespace UndertaleBattleSystemPrototype
                         //call the menu disappear method
                         MenuDisappear(0);
 
-                        gameTimer.Enabled = false;
-
                         //go back to the town screen
                         gameTimer.Enabled = false;
                         Form form = this.FindForm();
@@ -1129,7 +1127,7 @@ namespace UndertaleBattleSystemPrototype
             textOutput.Visible = false;
 
             //wait for 3 seconds before the enemy turn (again, so the player can read lol)
-            if (enemySpared == "killed")
+            if (enemySpared == "blank" || enemySpared == "spared")
             {
                 //display the enemy dialog box
                 showEnemyDialog = true;
@@ -1538,15 +1536,15 @@ namespace UndertaleBattleSystemPrototype
             XmlDocument doc = new XmlDocument();
             doc.Load("Resources/Player.xml");
 
-            //create a node for "Save"
-            XmlNode saveInfo = doc.GetElementById("Save");
+            //create a nodelist for "Save" nodes
+            XmlNodeList saveInfo = doc.GetElementsByTagName("Save");
 
             //update the fight outcome depending on the enemy fought
             for (int i = 0; i < 2; i++)
             {
-                if (TownScreen.enemyName == saveInfo.Attributes[i].Name)
+                if (TownScreen.enemyName == saveInfo[0].Attributes[i].Name)
                 {
-                    saveInfo.Attributes[i].InnerText = enemySpared;
+                    saveInfo[0].Attributes[i].InnerText = enemySpared;
                 }
             }
 

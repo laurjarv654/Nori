@@ -312,8 +312,8 @@ namespace UndertaleBattleSystemPrototype
                     XmlDocument doc = new XmlDocument();
                     doc.Load("Resources/Player.xml");
 
-                    XmlNode gold = doc.GetElementById("Gold");
-                    gold.Attributes[0].InnerText = Convert.ToInt16(gold.Attributes[0].InnerText) + goldGained + "";
+                    XmlNodeList gold = doc.GetElementsByTagName("General");
+                    gold[0].Attributes[0].InnerText = Convert.ToInt16(gold[0].Attributes[0].InnerText) + goldGained + "";
                     doc.Save("Resources/Player.xml");
                 }
 
