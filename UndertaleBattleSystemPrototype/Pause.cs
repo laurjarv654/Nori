@@ -16,7 +16,7 @@ namespace UndertaleBattleSystemPrototype
     {
         #region variables
 
-        //pause screen exiting stuff...?
+        //pause screen exiting stuff
         private static Pause pauseForm;
         private static DialogResult buttonResult = new DialogResult();
 

@@ -707,7 +707,8 @@ namespace UndertaleBattleSystemPrototype.Properties {
         ///            heal =&quot;0&quot;&gt;
         ///      &lt;/Item&gt;
         ///    &lt;/Inventory&gt;
-        ///  &lt;/Items&gt;        /// [rest of string was truncated]&quot;;.
+        ///  &lt;/Items&gt;
+        /// [rest of string was truncated]&quot;;.
         /// </summary>
         internal static string Player {
             get {
@@ -741,6 +742,16 @@ namespace UndertaleBattleSystemPrototype.Properties {
         internal static System.Drawing.Bitmap Sharol_WS {
             get {
                 object obj = ResourceManager.GetObject("Sharol_WS", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap ShopFormBackground {
+            get {
+                object obj = ResourceManager.GetObject("ShopFormBackground", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

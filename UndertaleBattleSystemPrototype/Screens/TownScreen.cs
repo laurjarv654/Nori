@@ -150,54 +150,54 @@ namespace UndertaleBattleSystemPrototype
 
             #region coming from battlescreen
 
-            #region Franky dialogue
-            //if you spare Franky
-            if (noriRec.IntersectsWith(objectRecs[8]) && fOutcome == "spared")
-            {
-                switch (talkingF)
-                {
-                    case 3:
-                        textNum = 15;
-                        displayText = true;
-                        spaceDown = false;
-                        talkingF++;
-                        break;
-                    case 4:
-                        textNum = 16;
-                        displayText = true;
-                        spaceDown = false;
-                        talkingF++;
-                        break;
+            //#region Franky dialogue
+            ////if you spare Franky
+            //if (noriRec.IntersectsWith(objectRecs[8]) && fOutcome == "spared")
+            //{
+            //    switch (talkingF)
+            //    {
+            //        case 3:
+            //            textNum = 15;
+            //            displayText = true;
+            //            spaceDown = false;
+            //            talkingF++;
+            //            break;
+            //        case 4:
+            //            textNum = 16;
+            //            displayText = true;
+            //            spaceDown = false;
+            //            talkingF++;
+            //            break;
 
-                }
-            }
-            //if you kill Franky
-            if (noriRec.IntersectsWith(objectRecs[8]) && fOutcome == "killed")
-            {
-                textNum = 17;
-                displayText = true;
-                spaceDown = false;
-            }
-            #endregion
+            //    }
+            //}
+            ////if you kill Franky
+            //if (noriRec.IntersectsWith(objectRecs[8]) && fOutcome == "killed")
+            //{
+            //    textNum = 17;
+            //    displayText = true;
+            //    spaceDown = false;
+            //}
+            //#endregion
 
-            #region Callum
-            //coming out of battlescreen and if you spared callum
-            if (noriRec.IntersectsWith(objectRecs[7]) && cOutcome == "spared")
-            {
-                textNum = 7;
-                displayText = true;
-                spaceDown = false;
+            //#region Callum
+            ////coming out of battlescreen and if you spared callum
+            //if (noriRec.IntersectsWith(objectRecs[7]) && cOutcome == "spared")
+            //{
+            //    textNum = 7;
+            //    displayText = true;
+            //    spaceDown = false;
 
-            }
+            //}
 
-            //coming out of battlescreen and if you killed callum
-            if (noriRec.IntersectsWith(objectRecs[7]) && cOutcome == "killed")
-            {
-                textNum = 8;
-                displayText = true;
-                spaceDown = false;
-            }
-            #endregion
+            ////coming out of battlescreen and if you killed callum
+            //if (noriRec.IntersectsWith(objectRecs[7]) && cOutcome == "killed")
+            //{
+            //    textNum = 8;
+            //    displayText = true;
+            //    spaceDown = false;
+            //}
+            //#endregion
             #endregion
         }
 

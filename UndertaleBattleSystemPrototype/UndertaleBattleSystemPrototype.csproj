@@ -120,6 +120,12 @@
     <Compile Include="Screens\TownScreen.Designer.cs">
       <DependentUpon>TownScreen.cs</DependentUpon>
     </Compile>
+    <Compile Include="ShopMenu.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ShopMenu.Designer.cs">
+      <DependentUpon>ShopMenu.cs</DependentUpon>
+    </Compile>
     <EmbeddedResource Include="Pause.resx">
       <DependentUpon>Pause.cs</DependentUpon>
     </EmbeddedResource>
@@ -154,6 +160,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Screens\WinScreen.resx">
       <DependentUpon>WinScreen.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ShopMenu.resx">
+      <DependentUpon>ShopMenu.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="app.manifest" />
     <None Include="Properties\Settings.settings">
@@ -389,6 +398,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\carpet.png" />
+    <None Include="Resources\ShopFormBackground.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
