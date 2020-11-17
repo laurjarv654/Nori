@@ -103,6 +103,16 @@ namespace UndertaleBattleSystemPrototype.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap Arlo {
+            get {
+                object obj = ResourceManager.GetObject("Arlo", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap arlos {
             get {
                 object obj = ResourceManager.GetObject("arlos", resourceCulture);
@@ -183,6 +193,46 @@ namespace UndertaleBattleSystemPrototype.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap bench1 {
+            get {
+                object obj = ResourceManager.GetObject("bench1", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap bench2 {
+            get {
+                object obj = ResourceManager.GetObject("bench2", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap benchF1 {
+            get {
+                object obj = ResourceManager.GetObject("benchF1", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap benchF2 {
+            get {
+                object obj = ResourceManager.GetObject("benchF2", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap bookshelfB {
             get {
                 object obj = ResourceManager.GetObject("bookshelfB", resourceCulture);
@@ -216,6 +266,16 @@ namespace UndertaleBattleSystemPrototype.Properties {
         internal static System.Drawing.Bitmap bookshelfY {
             get {
                 object obj = ResourceManager.GetObject("bookshelfY", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap bush {
+            get {
+                object obj = ResourceManager.GetObject("bush", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -263,6 +323,16 @@ namespace UndertaleBattleSystemPrototype.Properties {
         internal static System.Drawing.Bitmap Calum_WS {
             get {
                 object obj = ResourceManager.GetObject("Calum_WS", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap carpet {
+            get {
+                object obj = ResourceManager.GetObject("carpet", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -476,6 +546,16 @@ namespace UndertaleBattleSystemPrototype.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap mysteriousFigure {
+            get {
+                object obj = ResourceManager.GetObject("mysteriousFigure", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap noriB1 {
             get {
                 object obj = ResourceManager.GetObject("noriB1", resourceCulture);
@@ -627,8 +707,7 @@ namespace UndertaleBattleSystemPrototype.Properties {
         ///            heal =&quot;0&quot;&gt;
         ///      &lt;/Item&gt;
         ///    &lt;/Inventory&gt;
-        ///  &lt;/Items&gt;
-        /// [rest of string was truncated]&quot;;.
+        ///  &lt;/Items&gt;        /// [rest of string was truncated]&quot;;.
         /// </summary>
         internal static string Player {
             get {
@@ -718,6 +797,16 @@ namespace UndertaleBattleSystemPrototype.Properties {
         internal static System.Drawing.Bitmap titleSprite {
             get {
                 object obj = ResourceManager.GetObject("titleSprite", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap wall {
+            get {
+                object obj = ResourceManager.GetObject("wall", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

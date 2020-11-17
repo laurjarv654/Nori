@@ -55,7 +55,7 @@ namespace UndertaleBattleSystemPrototype
 
 
         #region fighting variables
-        String cOutcome, fOutcome;
+        String cOutcome = "null", fOutcome="null";
         public static string enemyName;
         #endregion
 
@@ -69,9 +69,11 @@ namespace UndertaleBattleSystemPrototype
         public TownScreen()
         {
             InitializeComponent();
+            buildingHeight = (this.Height / 16) * 7;
+
             OnStart();
 
-            buildingHeight = (this.Height / 16) * 7;
+           
 
             //play the music on loop
             //music.PlayLooping();
@@ -125,6 +127,27 @@ namespace UndertaleBattleSystemPrototype
         {
             gameTimer.Enabled = true;
             Thread.Sleep(400);
+
+            #region initializing object recs
+            objectRecs.Clear();
+            //library
+            objectRecs.Add(new Rectangle(objects[0].x + (this.Width / 32) * 9, objects[0].y + buildingHeight, 140, 20));
+            //arlos
+            objectRecs.Add(new Rectangle(objects[1].x + 85, objects[1].y + 290, 110, 20));
+
+            //appartments(3-6)
+            objectRecs.Add(new Rectangle(objects[2].x + (this.Width / 32) * 2, objects[2].y + buildingHeight, 100, 20));
+            objectRecs.Add(new Rectangle(objects[2].x + (this.Width / 8) * 5, objects[2].y + buildingHeight, 100, 20));
+            objectRecs.Add(new Rectangle(objects[2].x + (this.Width / 16) * 13, objects[2].y + buildingHeight, 100, 20));
+            objectRecs.Add(new Rectangle(objects[2].x + (this.Width / 16) * 22, objects[2].y + buildingHeight, 100, 20));
+
+            //characters (7-9)
+            objectRecs.Add(new Rectangle(objects[3].x, objects[3].y, objects[3].width, objects[3].height));
+            objectRecs.Add(new Rectangle(objects[4].x, objects[4].y, objects[4].width, objects[4].height));
+            objectRecs.Add(new Rectangle(objects[5].x, objects[5].y, objects[5].width, objects[5].height));
+
+            #endregion
+
             #region coming from battlescreen
 
             #region Franky dialogue
@@ -180,7 +203,7 @@ namespace UndertaleBattleSystemPrototype
 
         public void OnStart()
         {
-            nori = new Player(this.Width / 2 - 100, this.Height / 2 - 100, buildingHeight - 150, 0, 0);
+            nori = new Player(this.Width / 2 - 100, this.Height / 2 - 100, (buildingHeight/8)*3, 0, 0);
 
             //filling the text list with all of the dialogue that happens on this screen
             reader = XmlReader.Create("Resources/text.xml");
@@ -287,7 +310,7 @@ namespace UndertaleBattleSystemPrototype
             //setting the rectangles to the updated x,y
             noriRec = new Rectangle(nori.x + 40, nori.y + 130, 70, 20);
 
-            if (wDown == true && sDown == false && nori.y >= buildingHeight - (this.Height / 32) * 5)
+            if (wDown == true && sDown == false && nori.y >= buildingHeight - (this.Height / 64) * 9)
             {
                 nori.MoveUpDown(-HEROSPEED);
                 animationCounterH++;
