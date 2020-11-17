@@ -291,14 +291,31 @@ namespace UndertaleBattleSystemPrototype
             if (displayText == false)
             {
                 //bookshelves
-                for (int i = 0; i <= 7; i++)
+                for (int i = 0; i <= 6; i++)
                 {
                     if (noriRec.IntersectsWith(objectRecs[i]) && spaceDown == true)
                     {
-                        textNum = i + 15;
+                        textNum = i + 18;
                         displayText = true;
                         Thread.Sleep(200);
                     }
+                }
+
+                //hidden gold bookshelf
+                if (noriRec.IntersectsWith(objectRecs[7])&&spaceDown == true)
+                {
+                    
+                    textNum = 25;
+                    displayText = true;
+                    Thread.Sleep(200);
+
+                    int goldGained = 10;
+                    XmlDocument doc = new XmlDocument();
+                    doc.Load("Resources/Player.xml");
+
+                    XmlNode gold = doc.GetElementById("Gold");
+                    gold.Attributes[0].InnerText = Convert.ToInt16(gold.Attributes[0].InnerText) + goldGained + "";
+                    doc.Save("Resources/Player.xml");
                 }
 
                 //donna

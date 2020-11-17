@@ -23,8 +23,8 @@
     </Inventory>
   </Items>
   <Other>
-    <Save calum ="null"
-          franky ="null">
+    <Save calum ="blank"
+          franky ="blank">
     </Save>
   </Other>
 </Player>

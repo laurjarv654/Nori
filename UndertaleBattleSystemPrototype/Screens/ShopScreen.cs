@@ -114,11 +114,10 @@ namespace UndertaleBattleSystemPrototype
             #endregion
 
             //arlo rectangle
-            objectRecs.Add(new Rectangle(objects[9].x, objects[9].y, objects[9].width, objects[9].height));
+            objectRecs.Add(new Rectangle(objects[9].x+60, objects[9].y+100, objects[9].width-60, objects[9].height-100));
 
             //mysterious figure
             //objectRecs.Add(new Rectangle());
-
         }
 
         public void OnStart()
@@ -235,7 +234,6 @@ namespace UndertaleBattleSystemPrototype
                     wDown = aDown = sDown = dDown = spaceDown = false;
                     gameTimer.Enabled = false;
                     ShopMenu shopForm = new ShopMenu();
-
                     DialogResult dr = ShopMenu.Show();
 
                     if (dr == DialogResult.Cancel)
@@ -273,6 +271,11 @@ namespace UndertaleBattleSystemPrototype
 
             //drawing Arlo
             e.Graphics.DrawImage(objects[9].sprite, objects[9].x, objects[9].y, objects[9].width, objects[9].height);
+
+            //rectangles
+            Pen test = new Pen(Color.Red);
+            foreach (Rectangle r in objectRecs) { e.Graphics.DrawRectangle(test, r); }
+            e.Graphics.DrawRectangle(test, noriRec);
 
         }
 

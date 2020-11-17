@@ -79,7 +79,14 @@ namespace UndertaleBattleSystemPrototype
             shopForm.ShowDialog();
             return buttonResult;
         }
+        public static DialogResult Show()
+        {
+            shopForm = new ShopMenu();
+            shopForm.StartPosition = FormStartPosition.CenterParent;
 
+            shopForm.ShowDialog();
+            return buttonResult;
+        }
         #region key down and up
         private void ShopMenu_PreviewKeyDown(object sender, PreviewKeyDownEventArgs e)
         {
