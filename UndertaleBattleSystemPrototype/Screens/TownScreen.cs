@@ -55,7 +55,7 @@ namespace UndertaleBattleSystemPrototype
 
 
         #region fighting variables
-        String cOutcome = "null", fOutcome="null";
+        string cOutcome = "null", fOutcome = "null";
         public static string enemyName;
         #endregion
 
@@ -72,8 +72,6 @@ namespace UndertaleBattleSystemPrototype
             buildingHeight = (this.Height / 16) * 7;
 
             OnStart();
-
-           
 
             //play the music on loop
             //music.PlayLooping();
@@ -98,6 +96,7 @@ namespace UndertaleBattleSystemPrototype
             #endregion
 
             #region initializing objects+object recs
+
             //library(0)
             objects.Add(new Object((this.Width / 4) * 7, 0, buildingHeight, (this.Width / 8) * 7, Properties.Resources.library));
             //arlos(1)
@@ -107,7 +106,7 @@ namespace UndertaleBattleSystemPrototype
             objects.Add(new Object(0, 0, buildingHeight, (this.Width / 4) * 3, Properties.Resources.appartement1));
             objects.Add(new Object((this.Width / 4) * 3, 0, buildingHeight, (this.Width / 4) * 3, Properties.Resources.appartement2));
 
-            //characters
+            //characters (4-6)
             objects.Add(new Object((this.Width / 8) * 15, buildingHeight - this.Height / 10 + 10, this.Height / 10, this.Width / 17, Properties.Resources.Sharol_WS));
             objects.Add(new Object((this.Width / 8) * 21, buildingHeight - this.Height / 6 + 10, this.Height / 6, this.Width / 16, Properties.Resources.Calum_WS));
             objects.Add(new Object((this.Width / 8) * 28, buildingHeight - this.Height / 6 + 10, this.Height / 6, this.Width / 12, Properties.Resources.Franky_WS));
@@ -130,80 +129,93 @@ namespace UndertaleBattleSystemPrototype
 
             #region initializing object recs
             objectRecs.Clear();
-            //library
+            //library (0)
             objectRecs.Add(new Rectangle(objects[0].x + (this.Width / 32) * 9, objects[0].y + buildingHeight, 140, 20));
-            //arlos
+
+            //arlos(1)
             objectRecs.Add(new Rectangle(objects[1].x + 85, objects[1].y + 290, 110, 20));
 
-            //appartments(3-6)
+            //appartments(2-5)
             objectRecs.Add(new Rectangle(objects[2].x + (this.Width / 32) * 2, objects[2].y + buildingHeight, 100, 20));
             objectRecs.Add(new Rectangle(objects[2].x + (this.Width / 8) * 5, objects[2].y + buildingHeight, 100, 20));
             objectRecs.Add(new Rectangle(objects[2].x + (this.Width / 16) * 13, objects[2].y + buildingHeight, 100, 20));
             objectRecs.Add(new Rectangle(objects[2].x + (this.Width / 16) * 22, objects[2].y + buildingHeight, 100, 20));
 
-            //characters (7-9)
-            objectRecs.Add(new Rectangle(objects[3].x, objects[3].y, objects[3].width, objects[3].height));
+            //characters (6-8)
             objectRecs.Add(new Rectangle(objects[4].x, objects[4].y, objects[4].width, objects[4].height));
             objectRecs.Add(new Rectangle(objects[5].x, objects[5].y, objects[5].width, objects[5].height));
+            objectRecs.Add(new Rectangle(objects[6].x, objects[6].y, objects[6].width, objects[6].height));
 
             #endregion
 
             #region coming from battlescreen
 
-            //#region Franky dialogue
-            ////if you spare Franky
-            //if (noriRec.IntersectsWith(objectRecs[8]) && fOutcome == "spared")
-            //{
-            //    switch (talkingF)
-            //    {
-            //        case 3:
-            //            textNum = 15;
-            //            displayText = true;
-            //            spaceDown = false;
-            //            talkingF++;
-            //            break;
-            //        case 4:
-            //            textNum = 16;
-            //            displayText = true;
-            //            spaceDown = false;
-            //            talkingF++;
-            //            break;
+            #region Franky dialogue
 
-            //    }
-            //}
-            ////if you kill Franky
-            //if (noriRec.IntersectsWith(objectRecs[8]) && fOutcome == "killed")
-            //{
-            //    textNum = 17;
-            //    displayText = true;
-            //    spaceDown = false;
-            //}
-            //#endregion
+            //if you spare Franky
+            if (noriRec.IntersectsWith(objectRecs[8]) && fOutcome == "spared")
+            {
+                switch (talkingF)
+                {
+                    case 3:
+                        textNum = 15;
+                        displayText = true;
+                        spaceDown = false;
+                        talkingF++;
+                        break;
+                    case 4:
+                        textNum = 16;
+                        displayText = true;
+                        spaceDown = false;
+                        talkingF++;
+                        break;
 
-            //#region Callum
-            ////coming out of battlescreen and if you spared callum
-            //if (noriRec.IntersectsWith(objectRecs[7]) && cOutcome == "spared")
-            //{
-            //    textNum = 7;
-            //    displayText = true;
-            //    spaceDown = false;
+                }
 
-            //}
+                Thread.Sleep(200);
+                objects[6] = new Object(objects[5].x, objects[5].y - 10, this.Height / 6, this.Width / 12, Properties.Resources.Franky_WS);
+            }
 
-            ////coming out of battlescreen and if you killed callum
-            //if (noriRec.IntersectsWith(objectRecs[7]) && cOutcome == "killed")
-            //{
-            //    textNum = 8;
-            //    displayText = true;
-            //    spaceDown = false;
-            //}
-            //#endregion
+            //if you kill Franky
+            if (noriRec.IntersectsWith(objectRecs[8]) && fOutcome == "killed")
+            {
+                textNum = 17;
+                displayText = true;
+                spaceDown = false;
+
+                Thread.Sleep(200);
+                objects[6] = new Object(0, 0, 0, 0, Properties.Resources.Franky_WS);
+
+            }
+            #endregion
+
+            #region Callum
+            //coming out of battlescreen and if you spared callum
+            if (noriRec.IntersectsWith(objectRecs[7]) && cOutcome == "spared")
+            {
+                textNum = 7;
+                displayText = true;
+                spaceDown = false;
+
+            }
+
+            //coming out of battlescreen and if you killed callum
+            if (noriRec.IntersectsWith(objectRecs[7]) && cOutcome == "killed")
+            {
+                textNum = 8;
+                displayText = true;
+                spaceDown = false;
+
+                Thread.Sleep(200);
+                objects[5] = new Object(0, 0, 0, 0, Properties.Resources.Calum_WS);
+            }
+            #endregion
             #endregion
         }
 
         public void OnStart()
         {
-            nori = new Player(this.Width / 2 - 100, this.Height / 2 - 100, (buildingHeight/8)*3, 0, 0);
+            nori = new Player(this.Width / 2 - 100, this.Height / 2 - 100, (buildingHeight / 8) * 3, 0, 0);
 
             //filling the text list with all of the dialogue that happens on this screen
             reader = XmlReader.Create("Resources/text.xml");
@@ -276,13 +288,13 @@ namespace UndertaleBattleSystemPrototype
         {
             #region set up xml reader
             reader = XmlReader.Create("Resources/Player.xml");
-            while (reader.Read())
-            {
-                reader.ReadToFollowing("save");
 
-                cOutcome = reader.GetAttribute("calum");
-                fOutcome = reader.GetAttribute("franky");
-            }
+            reader.ReadToFollowing("Save");
+
+            cOutcome = reader.GetAttribute("calum");
+            fOutcome = reader.GetAttribute("franky");
+
+            reader.Close();
             #endregion
 
             #region updating object recs
@@ -299,9 +311,9 @@ namespace UndertaleBattleSystemPrototype
             objectRecs.Add(new Rectangle(objects[2].x + (this.Width / 16) * 22, objects[2].y + buildingHeight, 100, 20));
 
             //characters (7-9)
-            objectRecs.Add(new Rectangle(objects[3].x, objects[3].y, objects[3].width, objects[3].height));
             objectRecs.Add(new Rectangle(objects[4].x, objects[4].y, objects[4].width, objects[4].height));
             objectRecs.Add(new Rectangle(objects[5].x, objects[5].y, objects[5].width, objects[5].height));
+            objectRecs.Add(new Rectangle(objects[6].x, objects[6].y, objects[6].width, objects[6].height));
 
             #endregion
 
@@ -461,7 +473,7 @@ namespace UndertaleBattleSystemPrototype
                 #endregion
 
                 #region Sharol
-                if (noriRec.IntersectsWith(objectRecs[7]) && spaceDown == true)
+                if (noriRec.IntersectsWith(objectRecs[6]) && spaceDown == true)
                 {
                     switch (talkingS)
                     {
@@ -486,54 +498,59 @@ namespace UndertaleBattleSystemPrototype
                 }
                 #endregion
 
-                #region Frankie
-                //if you haven't fought with callum yet
-                if (noriRec.IntersectsWith(objectRecs[8]) && spaceDown == true && cOutcome == "null")
-                {
-                    switch (talkingF)
-                    {
-                        case 0:
-                            textNum = 10;
-                            displayText = true;
-                            spaceDown = false;
-                            talkingF++;
-                            break;
-
-                        case 1:
-                            textNum = 11;
-                            displayText = true;
-                            spaceDown = false;
-                            break;
-                    }
-                }
-
-                //if you killed callum
-                if (noriRec.IntersectsWith(objectRecs[8]) && spaceDown == true && cOutcome == "killed")
-                {
-                    switch (talkingF)
-                    {
-                        case 1:
-                            textNum = 12;
-                            displayText = true;
-                            spaceDown = false;
-                            talkingF++;
-                            break;
-                        case 2:
-                            textNum = 13;
-                            displayText = true;
-                            spaceDown = false;
-                            talkingF++;
-                            break;
-                        case 3:
-                            textNum = 14;
-                            displayText = true;
-                            spaceDown = false;
-                            break;
-
-                    }
-
-                }
+                #region Franky
                
+                if (noriRec.IntersectsWith(objectRecs[8]) && spaceDown == true)
+                {
+                    //if you haven't fought with callum yet
+                    if (cOutcome == "blank")
+                    {
+                        switch (talkingF)
+                        {
+                            case 0:
+                                textNum = 10;
+                                displayText = true;
+                                spaceDown = false;
+                                talkingF++;
+                                break;
+
+                            case 1:
+                                textNum = 11;
+                                displayText = true;
+                                spaceDown = false;
+                                break;
+                        }
+                    }
+
+                    //if you killed callum
+                    if (cOutcome == "killed")
+                    {
+                        switch (talkingF)
+                        {
+                            case 1:
+                                textNum = 12;
+                                displayText = true;
+                                spaceDown = false;
+                                talkingF++;
+                                break;
+                            case 2:
+                                textNum = 13;
+                                displayText = true;
+                                spaceDown = false;
+                                talkingF++;
+                                break;
+                            case 3:
+                                textNum = 14;
+                                displayText = true;
+                                spaceDown = false;
+                                break;
+
+                        }
+
+                    }
+
+                }
+
                 #endregion
             }
             else
@@ -547,6 +564,7 @@ namespace UndertaleBattleSystemPrototype
 
             #endregion
 
+
             if (escapeDown == true)
             {
                 Pausing();
@@ -557,12 +575,13 @@ namespace UndertaleBattleSystemPrototype
 
         private void TownScreen_Paint(object sender, PaintEventArgs e)
         {
+            //drawing road images
             foreach (Object o in roadList)
             {
                 e.Graphics.DrawImage(o.sprite, o.x, o.y, o.width, o.height);
             }
 
-            //drawing all images on the screen
+            //drawing all objects on the screen
             foreach (Object o in objects)
             {
                 e.Graphics.DrawImage(o.sprite, o.x, o.y, o.width, o.height);
@@ -577,6 +596,8 @@ namespace UndertaleBattleSystemPrototype
 
             //drawing nori
             e.Graphics.DrawImage(noriSprite, nori.x, nori.y, nori.size, nori.size);
+
+            e.Graphics.DrawRectangle(test, noriRec);
 
             if (displayTextBox == true)
             {

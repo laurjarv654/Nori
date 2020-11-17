@@ -150,7 +150,6 @@ namespace UndertaleBattleSystemPrototype
         public BattleScreen()
         {
             InitializeComponent();
-            TownScreen.enemyName = "Franky";
 
             //screen setup
             OnStart();

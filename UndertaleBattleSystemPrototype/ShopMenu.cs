@@ -17,7 +17,7 @@ namespace UndertaleBattleSystemPrototype
         #region variables
 
         //pause screen exiting stuff
-        private static Pause pauseForm;
+        private static ShopMenu shopForm;
         private static DialogResult buttonResult = new DialogResult();
 
         //booleans for key presses
@@ -46,7 +46,14 @@ namespace UndertaleBattleSystemPrototype
 
 
         }
+        public static DialogResult Show()
+        {
+            shopForm = new ShopMenu();
+            shopForm.StartPosition = FormStartPosition.CenterParent;
 
+            shopForm.ShowDialog();
+            return buttonResult;
+        }
         #region key down and up
         private void ShopMenu_PreviewKeyDown(object sender, PreviewKeyDownEventArgs e)
         {
@@ -95,7 +102,7 @@ namespace UndertaleBattleSystemPrototype
             {
                 //exit the shop form and resume the game
                 buttonResult = DialogResult.Cancel;
-                pauseForm.Close();
+                shopForm.Close();
             }
 
             ButtonMenu();
