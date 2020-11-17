@@ -272,8 +272,9 @@ namespace UndertaleBattleSystemPrototype
             XmlDocument doc = new XmlDocument();
             doc.Load("Resources/Player.xml");
 
-            //create a list of all nodes called "Item"
+            //create a list of all nodes called "Item" and one for "General"
             XmlNodeList itemList = doc.GetElementsByTagName("Item");
+            XmlNodeList playerGold = doc.GetElementsByTagName("General");
 
             //search each Item node in the list until there is an empty node
             //then change it to the correct item if the player has enough gold
@@ -286,11 +287,12 @@ namespace UndertaleBattleSystemPrototype
                         n.Attributes[0].InnerText = itemNames[itemSelected];
                         n.Attributes[1].InnerText = Convert.ToString(itemHealAmounts[itemSelected]);
                         gold -= itemGoldAmounts[itemSelected];
-
+                        playerGold[0].Attributes[0].InnerText = Convert.ToInt16(playerGold[0].Attributes[0].InnerText) - itemGoldAmounts[itemSelected] + "";
+                        
                         description = "Item Bought.";
                         Refresh();
                         Thread.Sleep(1000);
-                        //playerRec = new Rectangle(buy1Rec.X + 5, buy1Rec.Y + 5, 20, 20);
+                        playerRec = new Rectangle(buy1Rec.X + 5, buy1Rec.Y + 5, 20, 20);
                         break;
                     }
                     //if the player doesn't have enough gold, tell them and go back to the first buying option

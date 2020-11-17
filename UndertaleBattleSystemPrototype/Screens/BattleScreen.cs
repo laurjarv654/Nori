@@ -1527,7 +1527,7 @@ namespace UndertaleBattleSystemPrototype
             //save and close the player xml
             doc.Save("Resources/Player.xml");
         }
-        #endregion player xml update method (items
+        #endregion player xml update method (items)
 
         #region player xml save update method
         private void playerSaveUpdate()
@@ -1536,8 +1536,9 @@ namespace UndertaleBattleSystemPrototype
             XmlDocument doc = new XmlDocument();
             doc.Load("Resources/Player.xml");
 
-            //create a nodelist for "Save" nodes
+            //create a nodelist for "Save" nodes and "General" nodes
             XmlNodeList saveInfo = doc.GetElementsByTagName("Save");
+            XmlNodeList gold = doc.GetElementsByTagName("General");
 
             //update the fight outcome depending on the enemy fought
             for (int i = 0; i < 2; i++)
@@ -1546,6 +1547,12 @@ namespace UndertaleBattleSystemPrototype
                 {
                     saveInfo[0].Attributes[i].InnerText = enemySpared;
                 }
+            }
+
+            if (enemySpared == "killed")
+            {
+                //update the player gold amount
+                gold[0].Attributes[0].InnerText = Convert.ToInt16(gold[0].Attributes[0].InnerText) + enemy.gold + "";
             }
 
             //save and close the player xml

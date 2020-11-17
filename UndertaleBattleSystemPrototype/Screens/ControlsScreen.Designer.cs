@@ -44,16 +44,15 @@
             // 
             this.titleSprite.BackgroundImage = global::UndertaleBattleSystemPrototype.Properties.Resources.controlsSprite;
             this.titleSprite.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.titleSprite.Location = new System.Drawing.Point(302, 100);
-            this.titleSprite.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.titleSprite.Location = new System.Drawing.Point(242, 20);
             this.titleSprite.Name = "titleSprite";
-            this.titleSprite.Size = new System.Drawing.Size(575, 106);
+            this.titleSprite.Size = new System.Drawing.Size(460, 85);
             this.titleSprite.TabIndex = 1;
             this.titleSprite.TabStop = false;
             // 
             // ControlsScreen
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(120F, 120F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(96F, 96F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
             this.BackColor = System.Drawing.Color.Black;
             this.Controls.Add(this.titleSprite);

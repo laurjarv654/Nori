@@ -21,7 +21,7 @@ namespace UndertaleBattleSystemPrototype
             "\nUse SPACE to interact with various things in-game. " +
             "\nUse SHIFT to exit menus. " +
             "\n\nYour name is Nori. You're just looking to pass through town, but on the horizon a gang is blocking your way. Talk to the townsfolk and try to resolve the conflict in the town. Have fun!" +
-            "\n\n\nYou are now in the demo area. Feel free to get a feel for the battle system movement. When you are done, press SHIFT to go back to the main menu.";
+            "\n\nYou are now in the demo area. Feel free to get a feel for the battle system movement. When you are done, press SHIFT to go back to the main menu.";
         string controlsTextWritten = "";
 
         //booleans for key presses
@@ -60,8 +60,8 @@ namespace UndertaleBattleSystemPrototype
             textRec = new Rectangle(this.Width / 8, titleSprite.Location.Y + 100, (this.Width / 2) + (this.Width / 6), this.Height / 2);
 
             //initialize the battle area walls
-            leftWall = new Rectangle(this.Width / 2 - 125, textRec.Y + textRec.Height - 100, 5, 200);
-            rightWall = new Rectangle(this.Width / 2 + 125, textRec.Y + textRec.Height - 100, 5, 200);
+            leftWall = new Rectangle(this.Width / 2 - 125, textRec.Y + textRec.Height - 50, 5, 200);
+            rightWall = new Rectangle(this.Width / 2 + 125, textRec.Y + textRec.Height - 50, 5, 200);
             topWall = new Rectangle(leftWall.X, leftWall.Y, rightWall.X - leftWall.X + 5, 5);
             bottomWall = new Rectangle(leftWall.X, leftWall.Y + leftWall.Height, rightWall.X - leftWall.X + 5, 5);
 
