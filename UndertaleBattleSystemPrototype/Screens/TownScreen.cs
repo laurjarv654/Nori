@@ -43,7 +43,9 @@ namespace UndertaleBattleSystemPrototype
 
         #region Text box
         Boolean displayText = false, displayTextBox = false;
-        Rectangle textBox;
+        Rectangle textBoxSpriteRec, textBoxRec;
+        Image textBoxSprite = Properties.Resources.textBoxSprite;
+        SolidBrush textBrush = new SolidBrush(Color.White);
         List<string> textList = new List<string>();
         string text = "";
         int textNum = 0;
@@ -117,7 +119,8 @@ namespace UndertaleBattleSystemPrototype
 
             #endregion
 
-            textBox = new Rectangle(100, this.Height / 2 + 100, this.Width - 200, this.Height / 2 - 150);
+            textBoxSpriteRec = new Rectangle(100, this.Height / 2 + 100, this.Width - 200, this.Height / 2 - 150);
+            textBoxRec = new Rectangle(textBoxSpriteRec.X + 40, textBoxSpriteRec.Y + 25, textBoxSpriteRec.Width - 40, textBoxSpriteRec.Height - 25);
 
         }
 
@@ -320,7 +323,7 @@ namespace UndertaleBattleSystemPrototype
             #region update nori/object movement
 
             //setting the rectangles to the updated x,y
-            noriRec = new Rectangle(nori.x + 40, nori.y + 130, 70, 20);
+            noriRec = new Rectangle(nori.x + 40, nori.y + 100, 50, 20);
 
             if (wDown == true && sDown == false && nori.y >= buildingHeight - (this.Height / 64) * 9)
             {
@@ -421,6 +424,7 @@ namespace UndertaleBattleSystemPrototype
             //arlo's door
             if (noriRec.IntersectsWith(objectRecs[1]) && spaceDown == true)
             {
+                gameTimer.Enabled = false;
                 ShopScreen ss = new ShopScreen();
                 this.Controls.Add(ss);
                 ss.Focus();
@@ -601,7 +605,8 @@ namespace UndertaleBattleSystemPrototype
 
             if (displayTextBox == true)
             {
-                e.Graphics.DrawRectangle(test, textBox);
+                e.Graphics.DrawImage(textBoxSprite, textBoxSpriteRec);
+                e.Graphics.DrawString(text, Form1.dialogFontLarge, textBrush, textBoxRec);
             }
         }
         private void DisplayTextCollisions()
@@ -610,14 +615,10 @@ namespace UndertaleBattleSystemPrototype
             text = textList[textNum];
 
             displayTextBox = true;
-            textLabel.Visible = true;
-            textLabel.Text = text;
             if (spaceDown == true)
             {
                 displayTextBox = false;
                 displayText = false;
-                textLabel.Visible = false;
-                textLabel.Text = "";
                 Thread.Sleep(200);
             }
 

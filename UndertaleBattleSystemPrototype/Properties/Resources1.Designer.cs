@@ -687,27 +687,29 @@ namespace UndertaleBattleSystemPrototype.Properties {
         ///   Looks up a localized string similar to &lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
         ///&lt;Player&gt;
         ///  &lt;Stats&gt;
-        ///    &lt;General gold =&quot;0&quot;&gt;&lt;/General&gt;
+        ///    &lt;General gold =&quot;50&quot;&gt;&lt;/General&gt;
         ///    &lt;Battle currentHP =&quot;40&quot;
         ///            atk =&quot;5&quot;&gt;
         ///    &lt;/Battle&gt;
         ///  &lt;/Stats&gt;
         ///  &lt;Items&gt;
         ///    &lt;Inventory&gt;
-        ///      &lt;Item name =&quot;Test Item 1&quot;
-        ///            heal =&quot;10&quot;&gt;
+        ///      &lt;Item name =&quot; &quot;
+        ///            heal =&quot;0&quot;&gt;
         ///      &lt;/Item&gt;
-        ///      &lt;Item name =&quot;Test Item 2&quot;
-        ///            heal =&quot;5&quot;&gt;
+        ///      &lt;Item name =&quot; &quot;
+        ///            heal =&quot;0&quot;&gt;
         ///      &lt;/Item&gt;
-        ///      &lt;Item name =&quot;Test Item 3&quot;
-        ///            heal =&quot;20&quot;&gt;
+        ///      &lt;Item name =&quot; &quot;
+        ///            heal =&quot;0&quot;&gt;
         ///      &lt;/Item&gt;
         ///      &lt;Item name =&quot; &quot;
         ///            heal =&quot;0&quot;&gt;
         ///      &lt;/Item&gt;
         ///    &lt;/Inventory&gt;
-        ///  &lt;/Items&gt;        /// [rest of string was truncated]&quot;;.
+        ///  &lt;/Items&gt;
+        ///  &lt;Other&gt;
+        ///    &lt;Save calum =&quot;b [rest of string was truncated]&quot;;.
         /// </summary>
         internal static string Player {
             get {
@@ -798,6 +800,16 @@ namespace UndertaleBattleSystemPrototype.Properties {
         internal static string text {
             get {
                 return ResourceManager.GetString("text", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap textBoxSprite {
+            get {
+                object obj = ResourceManager.GetObject("textBoxSprite", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
             }
         }
         

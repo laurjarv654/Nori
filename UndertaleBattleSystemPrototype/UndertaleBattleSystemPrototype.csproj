@@ -400,5 +400,8 @@
     <None Include="Resources\carpet.png" />
     <None Include="Resources\ShopFormBackground.png" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\textBoxSprite.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
