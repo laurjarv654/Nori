@@ -225,7 +225,7 @@ namespace UndertaleBattleSystemPrototype
 
             #region collisions
 
-            if (noriRec.IntersectsWith())
+            //if (noriRec.IntersectsWith())
 
             #endregion
 
