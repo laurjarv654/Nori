@@ -34,7 +34,7 @@ namespace UndertaleBattleSystemPrototype
         List<Object> objects = new List<Object>();
         List<Rectangle> objectRecs = new List<Rectangle>();
         List<Rectangle> border = new List<Rectangle>();
-        const int BORDERWIDTH = 250;
+        int BORDERWIDTH;
         int bookshelfSize;
         #endregion
 
@@ -52,6 +52,7 @@ namespace UndertaleBattleSystemPrototype
         public LibraryScreen()
         {
             InitializeComponent();
+            BORDERWIDTH = this.Width/5;
             OnStart();
 
             bookshelfSize = (this.Width - (BORDERWIDTH * 2)) / 4;
@@ -100,19 +101,19 @@ namespace UndertaleBattleSystemPrototype
             #endregion
 
             #region object rectangles
-            //backrow 
+            //backrow (0,1)
             objectRecs.Add(new Rectangle(BORDERWIDTH, bookshelfSize + 20, bookshelfSize, bookshelfSize - 20));
             objectRecs.Add(new Rectangle(this.Width - BORDERWIDTH - bookshelfSize, bookshelfSize + 20, bookshelfSize, bookshelfSize - 20));
 
-            //row 2
+            //row 2(2,3)
             objectRecs.Add(new Rectangle(BORDERWIDTH, (bookshelfSize * 2), bookshelfSize, bookshelfSize - 20));
             objectRecs.Add(new Rectangle(this.Width - BORDERWIDTH - bookshelfSize, (bookshelfSize * 2), bookshelfSize, bookshelfSize - 20));
 
-            //row 1
+            //row 1(4,5)
             objectRecs.Add(new Rectangle(BORDERWIDTH, (bookshelfSize * 3) - 20, bookshelfSize, 30));
             objectRecs.Add(new Rectangle(this.Width - BORDERWIDTH - bookshelfSize, (bookshelfSize * 3) - 20, bookshelfSize, 30));
 
-            //mid back row
+            //mid back row(6,7)
             objectRecs.Add(new Rectangle(BORDERWIDTH + bookshelfSize, bookshelfSize + 20, bookshelfSize, 30));
             objectRecs.Add(new Rectangle(this.Width - BORDERWIDTH - (bookshelfSize * 2), bookshelfSize + 20, bookshelfSize, 30));
 
@@ -205,8 +206,6 @@ namespace UndertaleBattleSystemPrototype
         private void gameTimer_Tick(object sender, EventArgs e)
         {
 
-
-
             #region update nori/object movement
             for (int i = 0; i <= 3; i++)
             {
@@ -249,7 +248,7 @@ namespace UndertaleBattleSystemPrototype
             //setting the rectangles to the updated x,y
             noriRec = new Rectangle(nori.x + 40, nori.y + 120, 70, 30);
 
-            if (wDown == true && nori.y >= bookshelfSize - 90)
+            if (wDown == true && nori.y >= bookshelfSize-nori.size)
             {
                 nori.MoveUpDown(-HEROSPEED);
                 direction = "up";
@@ -324,19 +323,19 @@ namespace UndertaleBattleSystemPrototype
                     switch (talkingD)
                     {
                         case 0:
-                            textNum = 25;
-                            displayText = true;
-                            spaceDown = false;
-                            talkingD++;
-                            break;
-                        case 1:
                             textNum = 26;
                             displayText = true;
                             spaceDown = false;
                             talkingD++;
                             break;
-                        case 2:
+                        case 1:
                             textNum = 27;
+                            displayText = true;
+                            spaceDown = false;
+                            talkingD++;
+                            break;
+                        case 2:
+                            textNum = 28;
                             displayText = true;
                             spaceDown = false;
                             break;

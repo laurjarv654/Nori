@@ -323,7 +323,7 @@ namespace UndertaleBattleSystemPrototype
             #region update nori/object movement
 
             //setting the rectangles to the updated x,y
-            noriRec = new Rectangle(nori.x + 40, nori.y + 100, 50, 20);
+            noriRec = new Rectangle(nori.x + nori.x/10, nori.y + (nori.y/2)*5, nori.x - nori.x / 10, nori.y - (nori.y / 2) * 5);
 
             if (wDown == true && sDown == false && nori.y >= buildingHeight - (this.Height / 64) * 9)
             {
