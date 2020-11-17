@@ -373,6 +373,31 @@
     <None Include="Resources\heart.png" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Resources\bench.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Arlo.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\bench1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\bench2.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\mysteriousFigure.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\benchF1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\benchF2.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\wall.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\carpet.png" />
     <None Include="Resources\ShopFormBackground.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

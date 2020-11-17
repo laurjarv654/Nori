@@ -15,7 +15,6 @@ namespace UndertaleBattleSystemPrototype
     {
         Boolean wDown, aDown, sDown, dDown, spaceDown, escapeDown;
 
-
         #region nori
         Player nori;
         Rectangle noriRec;
@@ -34,8 +33,8 @@ namespace UndertaleBattleSystemPrototype
         List<Object> objects = new List<Object>();
         List<Rectangle> objectRecs = new List<Rectangle>();
         List<Rectangle> border = new List<Rectangle>();
-        const int BORDERWIDTH = 250;
-        int bookshelfSize;
+        const int BORDERWIDTH = 300;
+        int boothWidth, boothHeight;
         #endregion
 
         #region Text box
@@ -53,7 +52,8 @@ namespace UndertaleBattleSystemPrototype
             InitializeComponent();
             OnStart();
 
-            bookshelfSize = (this.Width - (BORDERWIDTH * 2)) / 4;
+            boothWidth = (this.Width - (BORDERWIDTH * 2)) / 3;
+            boothHeight = (boothWidth / 5) * 4;
 
             #region initializing nori animation
 
@@ -77,7 +77,7 @@ namespace UndertaleBattleSystemPrototype
 
             #region initializing borders
             //top
-            border.Add(new Rectangle(0, 0, this.Width, bookshelfSize + 20));
+            border.Add(new Rectangle(0, 0, this.Width, ((boothWidth / 5) * 4) + 70));
 
             //left
             border.Add(new Rectangle(0, 0, BORDERWIDTH, this.Height));
@@ -89,6 +89,33 @@ namespace UndertaleBattleSystemPrototype
             border.Add(new Rectangle(0, this.Height - 150, this.Width, 150));
 
             #endregion
+
+            #region initializing objects
+            //door (0)
+            objects.Add(new Object((this.Width / 2) - (boothWidth / 2), this.Height - 170, 50, boothWidth, Properties.Resources.libraryDoor));
+
+            //back wall(1-3)
+            objects.Add(new Object(BORDERWIDTH, 70, boothHeight, boothWidth + 10, Properties.Resources.wall));
+            objects.Add(new Object(this.Width - BORDERWIDTH - boothWidth * 2, 70, boothHeight, boothWidth, Properties.Resources.bench1));
+            objects.Add(new Object(this.Width - BORDERWIDTH - boothWidth, 70, boothHeight, boothWidth, Properties.Resources.mysteriousFigure));
+
+            //side booths (4-7)
+            objects.Add(new Object(BORDERWIDTH, 110, (boothWidth / 10) * 7, (boothHeight / 5) * 4, Properties.Resources.benchF2));
+            objects.Add(new Object(BORDERWIDTH, 100 + (boothWidth / 10) * 7, (boothWidth / 10) * 7, (boothHeight / 5) * 4, Properties.Resources.benchF2));
+            objects.Add(new Object(BORDERWIDTH, 90 + ((boothWidth / 10) * 7) * 2, (boothWidth / 10) * 7, (boothHeight / 5) * 4, Properties.Resources.benchF2));
+            objects.Add(new Object(BORDERWIDTH, 80 + ((boothWidth / 10) * 7) * 3, ((boothWidth / 10) * 7) * 2, (boothHeight / 5) * 4, Properties.Resources.benchF1));
+
+            //carpet (8)
+            objects.Add(new Object(this.Width - BORDERWIDTH - boothWidth*2, (boothWidth/2) * 3, (boothHeight/2)*3,  (boothWidth/4)*7, Properties.Resources.carpet));
+
+            //arlo(9)
+            objects.Add(new Object(this.Width - BORDERWIDTH - (boothWidth / 10) * 9, this.Height - 150 - (boothWidth / 10) * 9, (boothWidth / 10) * 9, (boothWidth / 10) * 9, Properties.Resources.Arlo));
+
+            #endregion
+
+            //arlo rectangle
+            //objectRecs.Add(new Rectangle());
+
         }
 
         public void OnStart()
@@ -160,7 +187,7 @@ namespace UndertaleBattleSystemPrototype
             //setting the rectangles to the updated x,y
             noriRec = new Rectangle(nori.x + 40, nori.y + 120, 70, 30);
 
-            if (wDown == true && nori.y >= bookshelfSize - 90)
+            if (wDown == true && nori.y >= (boothWidth / 4) * 5 - nori.size)
             {
                 nori.MoveUpDown(-HEROSPEED);
                 direction = "up";
@@ -185,7 +212,7 @@ namespace UndertaleBattleSystemPrototype
                 NoriAnimation();
 
             }
-            if (aDown == true && dDown == false && nori.x >= BORDERWIDTH - 40)
+            if (aDown == true && dDown == false && nori.x >= BORDERWIDTH + (boothHeight / 5) * 4 - 20)
             {
                 nori.MoveLeftRight(-HEROSPEED);
                 direction = "left";
@@ -194,6 +221,12 @@ namespace UndertaleBattleSystemPrototype
                 NoriAnimation();
 
             }
+            #endregion
+
+            #region collisions
+
+            //if (noriRec.IntersectsWith())
+
             #endregion
 
             Refresh();
@@ -205,8 +238,13 @@ namespace UndertaleBattleSystemPrototype
             //drawing borders
             foreach (Rectangle r in border) { e.Graphics.FillRectangle(borderbrush, r); }
 
+            for (int i = 0; i<=8; i++) { e.Graphics.DrawImage(objects[i].sprite, objects[i].x, objects[i].y, objects[i].width, objects[i].height); }
+
             //drawing nori
             e.Graphics.DrawImage(noriSprite, nori.x, nori.y, nori.size, nori.size);
+
+            //drawing Arlo
+            e.Graphics.DrawImage(objects[9].sprite, objects[9].x, objects[9].y, objects[9].width, objects[9].height);
 
         }
 

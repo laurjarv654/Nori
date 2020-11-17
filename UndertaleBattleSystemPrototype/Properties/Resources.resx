@@ -6198,6 +6198,29 @@
         AICHBAMAAPDAv/zj/wFtxf/pSB/c+gAAAABJRU5ErkJggg==
 </value>
   </data>
+  <data name="Arlo" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Arlo.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="bench1" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\bench1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="bench2" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\bench2.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="mysteriousFigure" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\mysteriousFigure.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="benchF1" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\benchF1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="benchF2" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\benchF2.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="carpet" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\carpet.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="wall" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\wall.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   <data name="heart" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
