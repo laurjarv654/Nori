@@ -33,6 +33,10 @@ namespace UndertaleBattleSystemPrototype
         //sound player for the background music
         SoundPlayer music = new SoundPlayer("Resources/Nori - Nori.wav");
 
+        //SFX
+        SoundPlayer menuMoveSound = new SoundPlayer("Resources/Nori - MenuMove.wav");
+        SoundPlayer menuSelectSound = new SoundPlayer("Resources/Nori - MenuSelect.wav");
+
         #endregion variable declaractions
 
         public MenuScreen()
@@ -147,6 +151,9 @@ namespace UndertaleBattleSystemPrototype
             {
                 if (spaceDown == true)
                 {
+                    //play menu select sound
+                    menuSelectSound.Play();
+
                     //stop menu timer
                     menuTimer.Enabled = false;
 
@@ -165,6 +172,9 @@ namespace UndertaleBattleSystemPrototype
                 }
                 if (dDown == true)
                 {
+                    //play menu move sound
+                    menuMoveSound.Play();
+
                     playerRec = new Rectangle(resumeRec.X + 5, resumeRec.Y + 5, 20, 20);
                     dDown = false;
 
@@ -178,6 +188,9 @@ namespace UndertaleBattleSystemPrototype
             {
                 if (spaceDown == true)
                 {
+                    //play menu select sound
+                    menuSelectSound.Play();
+
                     //stop menu timer
                     menuTimer.Enabled = false;
 
@@ -193,13 +206,19 @@ namespace UndertaleBattleSystemPrototype
                 }
                 if (aDown == true)
                 {
+                    //play menu move sound
+                    menuMoveSound.Play();
+
                     playerRec = new Rectangle(newGameRec.X + 5, newGameRec.Y + 5, 20, 20);
-                    dDown = false;
+                    aDown = false;
 
                     Thread.Sleep(150);
                 }
                 if (dDown == true)
                 {
+                    //play menu move sound
+                    menuMoveSound.Play();
+
                     playerRec = new Rectangle(controlsRec.X + 5, controlsRec.Y + 5, 20, 20);
                     dDown = false;
 
@@ -214,6 +233,9 @@ namespace UndertaleBattleSystemPrototype
                 //go into the settings menu
                 if (spaceDown == true)
                 {
+                    //play menu select sound
+                    menuSelectSound.Play();
+
                     //stop menu timer
                     menuTimer.Enabled = false;
 
@@ -228,6 +250,9 @@ namespace UndertaleBattleSystemPrototype
                 }
                 if (aDown == true)
                 {
+                    //play menu move sound
+                    menuMoveSound.Play();
+
                     playerRec = new Rectangle(resumeRec.X + 5, resumeRec.Y + 5, 20, 20);
                     aDown = false;
 
@@ -235,6 +260,9 @@ namespace UndertaleBattleSystemPrototype
                 }
                 if (dDown == true)
                 {
+                    //play menu move sound
+                    menuMoveSound.Play();
+
                     playerRec = new Rectangle(exitRec.X + 5, exitRec.Y + 5, 20, 20);
                     dDown = false;
 
@@ -249,10 +277,16 @@ namespace UndertaleBattleSystemPrototype
                 //exit the game
                 if (spaceDown == true)
                 {
+                    //play menu select sound
+                    menuSelectSound.Play();
+
                     Application.Exit();
                 }
                 if (aDown == true)
                 {
+                    //play menu move sound
+                    menuMoveSound.Play();
+
                     playerRec = new Rectangle(controlsRec.X + 5, controlsRec.Y + 5, 20, 20);
                     aDown = false;
 

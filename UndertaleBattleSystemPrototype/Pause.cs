@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Threading;
 using System.Windows.Forms;
 using System.Xml;
+using System.Media;
 
 namespace UndertaleBattleSystemPrototype
 {
@@ -38,6 +39,10 @@ namespace UndertaleBattleSystemPrototype
 
         //xml reader for the player xml file
         XmlReader reader = XmlReader.Create("Resources/Player.xml");
+
+        //SFX
+        SoundPlayer menuMoveSound = new SoundPlayer("Resources/Nori - MenuMove.wav");
+        SoundPlayer menuSelectSound = new SoundPlayer("Resources/Nori - MenuSelect.wav");
 
         #endregion variables
 
@@ -153,12 +158,18 @@ namespace UndertaleBattleSystemPrototype
             {
                 if (spaceDown == true)
                 {
+                    //play menu select sound
+                    menuSelectSound.Play();
+
                     //exit the pause form and resume the game
                     buttonResult = DialogResult.Cancel;
                     pauseForm.Close();
                 }
                 if (sDown == true)
                 {
+                    //play menu move sound
+                    menuMoveSound.Play();
+
                     playerRec = new Rectangle(exitRec.X + 5, exitRec.Y + 5, 20, 20);
                     sDown = false;
 
@@ -173,10 +184,16 @@ namespace UndertaleBattleSystemPrototype
                 //exit the game
                 if (spaceDown == true)
                 {
+                    //play menu select sound
+                    menuSelectSound.Play();
+
                     Application.Exit();
                 }
                 if (wDown == true)
                 {
+                    //play menu move sound
+                    menuMoveSound.Play();
+
                     playerRec = new Rectangle(resumeRec.X + 5, resumeRec.Y + 5, 20, 20);
                     wDown = false;
 

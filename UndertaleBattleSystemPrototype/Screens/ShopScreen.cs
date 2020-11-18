@@ -9,12 +9,16 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Xml;
 using System.Threading;
+using System.Media;
 
 namespace UndertaleBattleSystemPrototype
 {
     public partial class ShopScreen : UserControl
     {
         Boolean wDown, aDown, sDown, dDown, spaceDown=false, escapeDown;
+
+        //SFX
+        SoundPlayer interactionSound = new SoundPlayer("Resources/Nori - InteractionSound.wav");
 
         #region nori
         Player nori;
@@ -235,6 +239,9 @@ namespace UndertaleBattleSystemPrototype
             //interacting with arlo and bringing up shop menu
             if (noriRec.IntersectsWith(objectRecs[0]) && spaceDown == true)
             {
+                //play interaction sound
+                interactionSound.Play();
+
                 if (gameTimer.Enabled == true)
                 {
                     wDown = aDown = sDown = dDown = spaceDown = false;
@@ -262,6 +269,9 @@ namespace UndertaleBattleSystemPrototype
 
             if (noriRec.IntersectsWith(objectRecs[1])&&spaceDown==true)
             {
+                //play interaction sound
+                interactionSound.Play();
+
                 gameTimer.Enabled = false;
                 Form form = this.FindForm();
                 form.Controls.Remove(this);
@@ -285,12 +295,6 @@ namespace UndertaleBattleSystemPrototype
 
             //drawing Arlo
             e.Graphics.DrawImage(objects[9].sprite, objects[9].x, objects[9].y, objects[9].width, objects[9].height);
-
-            //rectangles
-            Pen test = new Pen(Color.Red);
-            foreach (Rectangle r in objectRecs) { e.Graphics.DrawRectangle(test, r); }
-            e.Graphics.DrawRectangle(test, noriRec);
-
         }
 
         private void NoriAnimation()

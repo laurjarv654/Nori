@@ -22,6 +22,10 @@ namespace UndertaleBattleSystemPrototype
         //music player
         SoundPlayer music = new SoundPlayer("Resources/Nori - The Winter City.wav");
 
+        //SFX
+        SoundPlayer dogBark = new SoundPlayer("Resources/Nori - DogBark.wav");
+        SoundPlayer interactionSound = new SoundPlayer("Resources/Nori - InteractionSound.wav");
+
         #region nori
         Player nori;
         Rectangle noriRec;
@@ -135,6 +139,17 @@ namespace UndertaleBattleSystemPrototype
             gameTimer.Enabled = true;
             Thread.Sleep(400);
 
+            #region set up xml reader
+            reader = XmlReader.Create("Resources/Player.xml");
+
+            reader.ReadToFollowing("Save");
+
+            cOutcome = reader.GetAttribute("calum");
+            fOutcome = reader.GetAttribute("franky");
+
+            reader.Close();
+            #endregion
+
             #region initializing object recs
             objectRecs.Clear();
             //library (0)
@@ -170,9 +185,6 @@ namespace UndertaleBattleSystemPrototype
 
                 form.Controls.Add(ws);
                 form.Controls.Remove(this);
-
-                ws.Focus();
-                ws.Location = new Point((form.Width - ws.Width) / 2, (form.Height - ws.Height) / 2);
             }
 
             #endregion
@@ -274,17 +286,6 @@ namespace UndertaleBattleSystemPrototype
         }
         private void gameTimer_Tick(object sender, EventArgs e)
         {
-            #region set up xml reader
-            reader = XmlReader.Create("Resources/Player.xml");
-
-            reader.ReadToFollowing("Save");
-
-            cOutcome = reader.GetAttribute("calum");
-            fOutcome = reader.GetAttribute("franky");
-
-            reader.Close();
-            #endregion
-
             #region updating object recs
             objectRecs.Clear();
             //library
@@ -395,6 +396,9 @@ namespace UndertaleBattleSystemPrototype
             //library door
             if (noriRec.IntersectsWith(objectRecs[0]) && spaceDown == true)
             {
+                //play interaction sound
+                interactionSound.Play();
+
                 spaceDown = false;
                 gameTimer.Enabled = false;
                 LibraryScreen ls = new LibraryScreen();
@@ -410,6 +414,9 @@ namespace UndertaleBattleSystemPrototype
             //arlo's door
             if (noriRec.IntersectsWith(objectRecs[1]) && spaceDown == true)
             {
+                //play interaction sound
+                interactionSound.Play();
+
                 spaceDown = false;
                 gameTimer.Enabled = false;
                 ShopScreen ss = new ShopScreen();
@@ -425,6 +432,9 @@ namespace UndertaleBattleSystemPrototype
             //Calum
             if (noriRec.IntersectsWith(objectRecs[7]) && spaceDown == true && cOutcome == "blank")
             {
+                //play interaction sound
+                interactionSound.Play();
+
                 enemyName = "Calum";
                 gameTimer.Enabled = false;
                 BattleScreen bs = new BattleScreen();
@@ -440,6 +450,9 @@ namespace UndertaleBattleSystemPrototype
             //Franky
             if (noriRec.IntersectsWith(objectRecs[8]) && spaceDown == true && cOutcome == "spared")
             {
+                //play interaction sound
+                interactionSound.Play();
+
                 enemyName = "Franky";
                 gameTimer.Enabled = false;
                 BattleScreen bs = new BattleScreen();
@@ -461,6 +474,8 @@ namespace UndertaleBattleSystemPrototype
                 {
                     if (noriRec.IntersectsWith(objectRecs[i]) && spaceDown == true)
                     {
+                        if (i == 3) { dogBark.Play(); }
+                        else { interactionSound.Play(); }
                         textNum = i - 2;
                         displayText = true;
                         Thread.Sleep(200);
@@ -471,6 +486,9 @@ namespace UndertaleBattleSystemPrototype
                 #region Sharol
                 if (noriRec.IntersectsWith(objectRecs[6]) && spaceDown == true)
                 {
+                    //play interaction sound
+                    interactionSound.Play();
+
                     switch (talkingS)
                     {
                         case 0:
@@ -498,7 +516,9 @@ namespace UndertaleBattleSystemPrototype
 
                 if (noriRec.IntersectsWith(objectRecs[8]) && spaceDown == true)
                 {
-                    //if you haven't fought with callum yet
+                    //play interaction sound
+                    interactionSound.Play();
+
                     if (cOutcome == "blank")
                     {
                         switch (talkingF)
@@ -579,17 +599,8 @@ namespace UndertaleBattleSystemPrototype
                 e.Graphics.DrawImage(o.sprite, o.x, o.y, o.width, o.height);
             }
 
-            // for testing rectangle collisions
-            Pen test = new Pen(Color.Red);
-            foreach (Rectangle r in objectRecs)
-            {
-                e.Graphics.DrawRectangle(test, r);
-            }
-
             //drawing nori
             e.Graphics.DrawImage(noriSprite, nori.x, nori.y, nori.size, nori.size);
-
-            e.Graphics.DrawRectangle(test, noriRec);
 
             if (displayTextBox == true)
             {

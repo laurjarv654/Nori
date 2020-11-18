@@ -141,6 +141,14 @@ namespace UndertaleBattleSystemPrototype
         //random number generator
         Random randNum = new Random();
 
+        //music player
+        SoundPlayer music = new SoundPlayer("Resources/Nori - " + TownScreen.enemyName + "'s Theme.wav");
+
+        //SFX
+        SoundPlayer menuMoveSound = new SoundPlayer("Resources/Nori - MenuMove.wav");
+        SoundPlayer menuSelectSound = new SoundPlayer("Resources/Nori - MenuSelect.wav");
+        SoundPlayer hurtSound = new SoundPlayer("Resources/Nori - HurtSound.wav");
+
         #endregion variables and lists
 
         #region battle system brought up
@@ -166,9 +174,6 @@ namespace UndertaleBattleSystemPrototype
             fightUISprite = Resources.fightUISprite;
             if (TownScreen.enemyName == "Calum") { enemySprite = Resources.Calum_FS; }
             if (TownScreen.enemyName == "Franky") { enemySprite = Resources.Franky_FS; }
-
-            //music player
-            SoundPlayer music = new SoundPlayer("Resources/Nori - " + TownScreen.enemyName + "'s Theme.wav");
 
             //play the music on loop
             //music.PlayLooping();
@@ -346,6 +351,9 @@ namespace UndertaleBattleSystemPrototype
                     //if it does, do damage accordingly
                     if (playerRec.IntersectsWith(r))
                     {
+                        //play hurt sound
+                        hurtSound.Play();
+
                         player.AttackCollision(enemy.atk, playerInvincible);
 
                         if (player.hp <= 0)
@@ -446,6 +454,9 @@ namespace UndertaleBattleSystemPrototype
                     //go into the fight menu
                     if (spaceDown == true)
                     {
+                        //play menu select sound
+                        menuSelectSound.Play();
+
                         //hide the text output box
                         textOutput.Visible = false;
 
@@ -463,6 +474,9 @@ namespace UndertaleBattleSystemPrototype
                     }
                     if (dDown == true)
                     {
+                        //play menu move sound
+                        menuMoveSound.Play();
+
                         fightSprite = Resources.fightButton;
                         player.x = actRec.X + 15;
                         player.y = actRec.Y + 15;
@@ -481,6 +495,9 @@ namespace UndertaleBattleSystemPrototype
                     //go into the act menu
                     if (spaceDown == true)
                     {
+                        //play menu select sound
+                        menuSelectSound.Play();
+
                         //set actions to be visible and put player in the action menu
                         MenuDisplay();
 
@@ -494,6 +511,9 @@ namespace UndertaleBattleSystemPrototype
                     }
                     if (aDown == true)
                     {
+                        //play menu move sound
+                        menuMoveSound.Play();
+
                         actSprite = Resources.actButton;
                         player.x = fightRec.X + 15;
                         player.y = fightRec.Y + 15;
@@ -502,6 +522,9 @@ namespace UndertaleBattleSystemPrototype
                     }
                     if (dDown == true)
                     {
+                        //play menu move sound
+                        menuMoveSound.Play();
+
                         actSprite = Resources.actButton;
                         player.x = itemRec.X + 15;
                         player.y = itemRec.Y + 15;
@@ -521,6 +544,9 @@ namespace UndertaleBattleSystemPrototype
                     //go into the item menu
                     if (spaceDown == true)
                     {
+                        //play menu select sound
+                        menuSelectSound.Play();
+
                         //setup the item menu for the current enemy
                         ItemMenuText();
 
@@ -548,6 +574,9 @@ namespace UndertaleBattleSystemPrototype
                     }
                     if (aDown == true)
                     {
+                        //play menu move sound
+                        menuMoveSound.Play();
+
                         itemSprite = Resources.itemButton;
                         player.x = actRec.X + 15;
                         player.y = actRec.Y + 15;
@@ -556,6 +585,9 @@ namespace UndertaleBattleSystemPrototype
                     }
                     if (dDown == true)
                     {
+                        //play menu move sound
+                        menuMoveSound.Play();
+
                         itemSprite = Resources.itemButton;
                         player.x = mercyRec.X + 15;
                         player.y = mercyRec.Y + 15;
@@ -575,6 +607,9 @@ namespace UndertaleBattleSystemPrototype
                     //go into the mercy menu
                     if (spaceDown == true)
                     {
+                        //play menu select sound
+                        menuSelectSound.Play();
+
                         //check if the enemy is spare-able or not
                         if (canSpare == false)
                         {
@@ -608,6 +643,9 @@ namespace UndertaleBattleSystemPrototype
                     }
                     if (aDown == true)
                     {
+                        //play menu move sound
+                        menuMoveSound.Play();
+
                         if (canSpare == true) { mercySprite = Resources.mercyButtonSpare; }
                         else { mercySprite = Resources.mercyButton; }
 
@@ -960,11 +998,16 @@ namespace UndertaleBattleSystemPrototype
                 //call the menu disappear method and go back to the fight button
                 if (spaceDown == true)
                 {
+                    //play menu select sound
+                    menuSelectSound.Play();
                     MenuDisappear(0);
                 }
                 //move to option 3
                 if (sDown == true && actLabel3.Visible == true)
                 {
+                    //play menu move sound
+                    menuMoveSound.Play();
+
                     actLabel1.Text = "* " + actNames[0];
                     player.x = actLabel3.Location.X;
                     player.y = actLabel3.Location.Y + 5;
@@ -974,6 +1017,9 @@ namespace UndertaleBattleSystemPrototype
                 //move to option 2
                 if (dDown == true && actLabel2.Visible == true)
                 {
+                    //play menu move sound
+                    menuMoveSound.Play();
+
                     actLabel1.Text = "* " + actNames[0];
                     player.x = actLabel2.Location.X;
                     player.y = actLabel2.Location.Y + 5;
@@ -988,11 +1034,16 @@ namespace UndertaleBattleSystemPrototype
                 //call the menu disappear method and go back to the fight button
                 if (spaceDown == true)
                 {
+                    //play menu select sound
+                    menuSelectSound.Play();
                     MenuDisappear(1);
                 }
                 //move to option 1
                 if (aDown == true && actLabel1.Visible == true)
                 {
+                    //play menu move sound
+                    menuMoveSound.Play();
+
                     actLabel2.Text = "* " + actNames[1];
                     player.x = actLabel1.Location.X;
                     player.y = actLabel1.Location.Y + 5;
@@ -1002,6 +1053,9 @@ namespace UndertaleBattleSystemPrototype
                 //move to option 4
                 if (sDown == true && actLabel4.Visible == true)
                 {
+                    //play menu move sound
+                    menuMoveSound.Play();
+
                     actLabel2.Text = "* " + actNames[1];
                     player.x = actLabel4.Location.X;
                     player.y = actLabel4.Location.Y + 5;
@@ -1016,11 +1070,17 @@ namespace UndertaleBattleSystemPrototype
                 //call the menu disappear method and go back to the fight button
                 if (spaceDown == true)
                 {
+                    //play menu select sound
+                    menuSelectSound.Play();
                     MenuDisappear(2);
+
                 }
                 //move to option 1
                 if (wDown == true && actLabel1.Visible == true)
                 {
+                    //play menu move sound
+                    menuMoveSound.Play();
+
                     actLabel3.Text = "* " + actNames[2];
                     player.x = actLabel1.Location.X;
                     player.y = actLabel1.Location.Y + 5;
@@ -1030,6 +1090,9 @@ namespace UndertaleBattleSystemPrototype
                 //move to option 4
                 if (dDown == true && actLabel4.Visible == true)
                 {
+                    //play menu move sound
+                    menuMoveSound.Play();
+
                     actLabel3.Text = "* " + actNames[2];
                     player.x = actLabel4.Location.X;
                     player.y = actLabel4.Location.Y + 5;
@@ -1044,11 +1107,16 @@ namespace UndertaleBattleSystemPrototype
                 //call the menu disappear method and go back to the fight button
                 if (spaceDown == true)
                 {
+                    //play menu select sound
+                    menuSelectSound.Play();
                     MenuDisappear(3);
                 }
                 //move to option 2
                 if (wDown == true && actLabel2.Visible == true)
                 {
+                    //play menu move sound
+                    menuMoveSound.Play();
+
                     actLabel4.Text = "* " + actNames[3];
                     player.x = actLabel2.Location.X;
                     player.y = actLabel2.Location.Y + 5;
@@ -1058,6 +1126,9 @@ namespace UndertaleBattleSystemPrototype
                 //move to option 3
                 if (aDown == true && actLabel3.Visible == true)
                 {
+                    //play menu move sound
+                    menuMoveSound.Play();
+
                     actLabel4.Text = "* " + actNames[3];
                     player.x = actLabel3.Location.X;
                     player.y = actLabel3.Location.Y + 5;
