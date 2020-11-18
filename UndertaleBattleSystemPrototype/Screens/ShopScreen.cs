@@ -78,7 +78,7 @@ namespace UndertaleBattleSystemPrototype
             border.Add(new Rectangle(this.Width - BORDERWIDTH, 0, BORDERWIDTH, this.Height));
 
             //bottom
-            border.Add(new Rectangle(0, this.Height - 150, this.Width, 150));
+            border.Add(new Rectangle(0, this.Height - (this.Height/57)*10, this.Width, (this.Height / 57) * 10));
 
             #endregion
 
@@ -181,7 +181,7 @@ namespace UndertaleBattleSystemPrototype
                 spriteNumber = 0;
                 NoriAnimation();
             }
-            if (sDown == true && wDown == false && nori.y <= this.Height - 310)
+            if (sDown == true && wDown == false && nori.y <= this.Height - (this.Height / 57) * 10-nori.size)
             {
                 nori.MoveUpDown(HEROSPEED);
                 direction = "down";
