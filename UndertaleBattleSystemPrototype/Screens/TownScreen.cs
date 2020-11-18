@@ -543,22 +543,7 @@ namespace UndertaleBattleSystemPrototype
 
                 #endregion
 
-                #region bushes?
-                if (noriRec.IntersectsWith(objectRecs[9]) && spaceDown == true)
-                {
-                    textNum = 31;
-                    displayText = true;
-                    Thread.Sleep(200);
-                }
-
-                if (noriRec.IntersectsWith(objectRecs[10]) && spaceDown == true)
-                {
-                    textNum = 32;
-                    displayText = true;
-                    Thread.Sleep(200);
-                }
-
-                #endregion
+                
             }
             else
             {

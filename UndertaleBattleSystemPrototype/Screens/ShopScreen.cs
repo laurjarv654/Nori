@@ -211,6 +211,27 @@ namespace UndertaleBattleSystemPrototype
 
             #region collisions
 
+            if (noriRec.IntersectsWith(objectRecs[0]))
+            {
+                if (direction == "down")
+                {
+                    sDown = false;
+                }
+                if (direction == "up")
+                {
+                    sDown = false;
+                }
+
+                if (direction == "left")
+                {
+                    dDown = false;
+                }
+                if (direction == "right")
+                {
+                    dDown = false;
+                }
+            }
+
             //interacting with arlo and bringing up shop menu
             if (noriRec.IntersectsWith(objectRecs[0]) && spaceDown == true)
             {
