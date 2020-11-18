@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Threading;
 using System.Media;
+using System.Xml;
 using UndertaleBattleSystemPrototype.Properties;
 
 namespace UndertaleBattleSystemPrototype
@@ -21,7 +22,7 @@ namespace UndertaleBattleSystemPrototype
         Boolean aDown, dDown, spaceDown;
 
         //rectangles for menu buttons and player
-        Rectangle playRec, controlsRec, exitRec, playerRec;
+        Rectangle newGameRec, resumeRec, controlsRec, exitRec, playerRec;
 
         //images for sprites
         Image playerSprite;
@@ -49,12 +50,13 @@ namespace UndertaleBattleSystemPrototype
         public void OnStart()
         {
             //set menu button sizes and positions
-            playRec = new Rectangle(this.Width / 4 - 40, (this.Height / 2) + (this.Height / 4), 150, 40);
-            controlsRec = new Rectangle(this.Width / 2 - 75, (this.Height / 2) + (this.Height / 4), 150, 40);
-            exitRec = new Rectangle(this.Width - (this.Width / 4) - 40, (this.Height / 2) + (this.Height / 4), 150, 40);
+            newGameRec = new Rectangle(this.Width / 8 - 75, titleSprite.Location.Y + titleSprite.Height + 100, 150, 25);
+            resumeRec = new Rectangle(this.Width / 8 * 3 - 75, newGameRec.Y, 150, 25);
+            controlsRec = new Rectangle(this.Width / 8 * 5 - 75, newGameRec.Y, 150, 25);
+            exitRec = new Rectangle(this.Width / 8 * 7 - 75, newGameRec.Y, 150, 25);
 
             //set player location
-            playerRec = new Rectangle(playRec.X + 5, playRec.Y + 5, 20, 20);
+            playerRec = new Rectangle(newGameRec.X + 5, newGameRec.Y + 5, 20, 20);
         }
 
         #region key down and up
@@ -104,21 +106,31 @@ namespace UndertaleBattleSystemPrototype
         #region paint method
         private void MenuScreen_Paint(object sender, PaintEventArgs e)
         {
-            if (playerRec.IntersectsWith(playRec))
+            if (playerRec.IntersectsWith(newGameRec))
             {
-                e.Graphics.DrawString("  Play", Form1.dialogFont, whiteBrush, playRec);
+                e.Graphics.DrawString("  New Game", Form1.dialogFont, whiteBrush, newGameRec);
+                e.Graphics.DrawString("* Resume", Form1.dialogFont, whiteBrush, resumeRec);
+                e.Graphics.DrawString("* Controls", Form1.dialogFont, whiteBrush, controlsRec);
+                e.Graphics.DrawString("* Exit", Form1.dialogFont, whiteBrush, exitRec);
+            }
+            if (playerRec.IntersectsWith(resumeRec))
+            {
+                e.Graphics.DrawString("* New Game", Form1.dialogFont, whiteBrush, newGameRec);
+                e.Graphics.DrawString("  Resume", Form1.dialogFont, whiteBrush, resumeRec);
                 e.Graphics.DrawString("* Controls", Form1.dialogFont, whiteBrush, controlsRec);
                 e.Graphics.DrawString("* Exit", Form1.dialogFont, whiteBrush, exitRec);
             }
             if (playerRec.IntersectsWith(controlsRec))
             {
-                e.Graphics.DrawString("* Play", Form1.dialogFont, whiteBrush, playRec);
+                e.Graphics.DrawString("* New Game", Form1.dialogFont, whiteBrush, newGameRec);
+                e.Graphics.DrawString("* Resume", Form1.dialogFont, whiteBrush, resumeRec);
                 e.Graphics.DrawString("  Controls", Form1.dialogFont, whiteBrush, controlsRec);
                 e.Graphics.DrawString("* Exit", Form1.dialogFont, whiteBrush, exitRec);
             }
             if (playerRec.IntersectsWith(exitRec))
             {
-                e.Graphics.DrawString("* Play", Form1.dialogFont, whiteBrush, playRec);
+                e.Graphics.DrawString("* New Game", Form1.dialogFont, whiteBrush, newGameRec);
+                e.Graphics.DrawString("* Resume", Form1.dialogFont, whiteBrush, resumeRec);
                 e.Graphics.DrawString("* Controls", Form1.dialogFont, whiteBrush, controlsRec);
                 e.Graphics.DrawString("  Exit", Form1.dialogFont, whiteBrush, exitRec);
             }
@@ -130,8 +142,39 @@ namespace UndertaleBattleSystemPrototype
         #region button menu method
         private void ButtonMenu()
         {
-            #region play
-            if (playerRec.IntersectsWith(playRec))
+            #region new game
+            if (playerRec.IntersectsWith(newGameRec))
+            {
+                if (spaceDown == true)
+                {
+                    //stop menu timer
+                    menuTimer.Enabled = false;
+
+                    //stop the music
+                    music.Stop();
+
+                    //reset the player xml
+                    playerXmlReset();
+
+                    // Goes to the town screen
+                    TownScreen ts = new TownScreen();
+                    Form form = this.FindForm();
+
+                    form.Controls.Add(ts);
+                    form.Controls.Remove(this);
+                }
+                if (dDown == true)
+                {
+                    playerRec = new Rectangle(resumeRec.X + 5, resumeRec.Y + 5, 20, 20);
+                    dDown = false;
+
+                    Thread.Sleep(150);
+                }
+            }
+            #endregion new game
+
+            #region resume
+            if (playerRec.IntersectsWith(resumeRec))
             {
                 if (spaceDown == true)
                 {
@@ -147,8 +190,13 @@ namespace UndertaleBattleSystemPrototype
 
                     form.Controls.Add(ts);
                     form.Controls.Remove(this);
+                }
+                if (aDown == true)
+                {
+                    playerRec = new Rectangle(newGameRec.X + 5, newGameRec.Y + 5, 20, 20);
+                    dDown = false;
 
-                    ts.Location = new Point((form.Width - ts.Width) / 2, (form.Height - ts.Height) / 2);
+                    Thread.Sleep(150);
                 }
                 if (dDown == true)
                 {
@@ -158,7 +206,7 @@ namespace UndertaleBattleSystemPrototype
                     Thread.Sleep(150);
                 }
             }
-            #endregion play
+            #endregion resume
 
             #region controls
             if (playerRec.IntersectsWith(controlsRec))
@@ -180,7 +228,7 @@ namespace UndertaleBattleSystemPrototype
                 }
                 if (aDown == true)
                 {
-                    playerRec = new Rectangle(playRec.X + 5, playRec.Y + 5, 20, 20);
+                    playerRec = new Rectangle(resumeRec.X + 5, resumeRec.Y + 5, 20, 20);
                     aDown = false;
 
                     Thread.Sleep(150);
@@ -214,5 +262,40 @@ namespace UndertaleBattleSystemPrototype
             #endregion exit
         }
         #endregion button menu method
+
+        #region player xml reset method
+        public void playerXmlReset()
+        {
+            //open the player xml file and place it in doc
+            XmlDocument doc = new XmlDocument();
+            doc.Load("Resources/Player.xml");
+
+            //create lists for all nodes in the player xml
+            XmlNodeList gold = doc.GetElementsByTagName("General");
+            XmlNodeList stats = doc.GetElementsByTagName("Battle");
+            XmlNodeList itemList = doc.GetElementsByTagName("Item");
+            XmlNodeList saveInfo = doc.GetElementsByTagName("Save");
+
+            //reset gold
+            gold[0].Attributes[0].InnerText = "50";
+
+            //reset hp and atk
+            stats[0].Attributes[0].InnerText = "40";
+            stats[0].Attributes[1].InnerText = "5";
+
+            //reset items
+            foreach (XmlNode n in itemList)
+            {
+                n.Attributes[0].InnerText = " ";
+                n.Attributes[1].InnerText = "0";
+            }
+
+            //reset save info
+            saveInfo[0].Attributes[0].InnerText = "blank";
+            saveInfo[0].Attributes[1].InnerText = "blank";
+
+            doc.Save("Resources/Player.xml");
+        }
+        #endregion player xml reset method
     }
 }

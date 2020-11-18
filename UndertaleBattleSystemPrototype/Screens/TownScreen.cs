@@ -429,7 +429,7 @@ namespace UndertaleBattleSystemPrototype
             }
 
             //Calum
-            if (noriRec.IntersectsWith(objectRecs[7]) && spaceDown == true)
+            if (noriRec.IntersectsWith(objectRecs[7]) && spaceDown == true && cOutcome == "blank")
             {
                 enemyName = "Calum";
                 gameTimer.Enabled = false;
