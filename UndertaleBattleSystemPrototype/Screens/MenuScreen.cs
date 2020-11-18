@@ -291,10 +291,8 @@ namespace UndertaleBattleSystemPrototype
             }
 
             //reset save info
-            foreach (XmlNode n in saveInfo)
-            {
-                n.Attributes[0].InnerText = "blank";
-            }
+            saveInfo[0].Attributes[0].InnerText = "blank";
+            saveInfo[0].Attributes[1].InnerText = "blank";
 
             doc.Save("Resources/Player.xml");
         }

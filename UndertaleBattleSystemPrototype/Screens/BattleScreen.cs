@@ -141,9 +141,6 @@ namespace UndertaleBattleSystemPrototype
         //random number generator
         Random randNum = new Random();
 
-        //music player
-        SoundPlayer music = new SoundPlayer("Resources/Nori - " + TownScreen.enemyName + "'s Theme.wav");
-
         #endregion variables and lists
 
         #region battle system brought up
@@ -170,6 +167,9 @@ namespace UndertaleBattleSystemPrototype
             if (TownScreen.enemyName == "Calum") { enemySprite = Resources.Calum_FS; }
             if (TownScreen.enemyName == "Franky") { enemySprite = Resources.Franky_FS; }
 
+            //music player
+            SoundPlayer music = new SoundPlayer("Resources/Nori - " + TownScreen.enemyName + "'s Theme.wav");
+
             //play the music on loop
             //music.PlayLooping();
         }
@@ -178,6 +178,10 @@ namespace UndertaleBattleSystemPrototype
         #region setup
         public void OnStart()
         {
+            //ensure these variables are reset correctly (VERY IMPORTANT)
+            enemySpared = "blank";
+            canSpare = false;
+
             //health bar rectangles
             maxHPRec = new Rectangle(this.Width / 2 - 40, this.Height - 130, 80, 20);
             remainingHPRec = new Rectangle(this.Width / 2 - 40, this.Height - 130, 80, 20);
@@ -517,16 +521,30 @@ namespace UndertaleBattleSystemPrototype
                     //go into the item menu
                     if (spaceDown == true)
                     {
-                        //set actions to be visible and put player in the action menu
-                        MenuDisplay();
-
                         //setup the item menu for the current enemy
                         ItemMenuText();
 
-                        //set boolean for item menu check to true
-                        itemMenuSelected = true;
+                        if (actLabel1.Text == "*  " || actNames[0] == null)
+                        {
+                            actLabel1.Visible = false;
+                            textOutput.Text = "You can't do that!";
 
-                        Thread.Sleep(150);
+                            Refresh();
+                            Thread.Sleep(150);
+
+                            player.x = itemRec.X + 15;
+                            player.y = itemRec.Y + 15;
+                        }
+                        else
+                        {
+                            //set actions to be visible and put player in the action menu
+                            MenuDisplay();
+
+                            //set boolean for item menu check to true
+                            itemMenuSelected = true;
+
+                            Thread.Sleep(150);
+                        }
                     }
                     if (aDown == true)
                     {
@@ -1127,7 +1145,7 @@ namespace UndertaleBattleSystemPrototype
             textOutput.Visible = false;
 
             //wait for 3 seconds before the enemy turn (again, so the player can read lol)
-            if (enemySpared == "blank" || enemySpared == "spared")
+            if (enemySpared == "blank")
             {
                 //display the enemy dialog box
                 showEnemyDialog = true;
