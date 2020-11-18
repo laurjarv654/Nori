@@ -14,7 +14,7 @@ namespace UndertaleBattleSystemPrototype
 {
     public partial class LibraryScreen : UserControl
     {
-        Boolean aDown, dDown, wDown, sDown, spaceDown, escapeDown;
+        Boolean aDown, dDown, wDown, sDown, spaceDown, escapeDown, gotGold = false;
 
         #region nori
         Player nori;
@@ -306,9 +306,9 @@ namespace UndertaleBattleSystemPrototype
                 }
 
                 //hidden gold bookshelf
-                if (noriRec.IntersectsWith(objectRecs[7])&&spaceDown == true)
+                if (noriRec.IntersectsWith(objectRecs[7])&&spaceDown == true&&gotGold == false)
                 {
-                    
+                    gotGold = true;
                     textNum = 25;
                     displayText = true;
                     Thread.Sleep(200);
@@ -359,7 +359,6 @@ namespace UndertaleBattleSystemPrototype
             //door
             if (noriRec.IntersectsWith(objectRecs[9]) && spaceDown == true)
             {
-                TownScreen.timer = true;
                 gameTimer.Enabled = false;
                 Form form = this.FindForm();
                 form.Controls.Remove(this);

@@ -113,6 +113,11 @@ namespace UndertaleBattleSystemPrototype
             objects.Add(new Object((this.Width / 8) * 21, buildingHeight - this.Height / 6 + 10, this.Height / 6, this.Width / 16, Properties.Resources.Calum_WS));
             objects.Add(new Object((this.Width / 8) * 28, buildingHeight - this.Height / 6 + 10, this.Height / 6, this.Width / 12, Properties.Resources.Franky_WS));
 
+            //bushes + trashcan
+            objects.Add(new Object((this.Width / 8) * 12, buildingHeight - nori.size, nori.size, nori.size, Properties.Resources.bushGold));
+            objects.Add(new Object((this.Width / 16) * 27, buildingHeight - (nori.size / 3) * 2, (nori.size / 3) * 2, this.Width / 20, Properties.Resources.trash));
+            objects.Add(new Object((this.Width / 16) * 53, buildingHeight - nori.size, nori.size, nori.size, Properties.Resources.bushBook));
+            objects.Add(new Object((this.Width / 8) * 30, buildingHeight - nori.size, nori.size, nori.size, Properties.Resources.bush));
 
             //just putting osmething in here so that the list isn't empty
             objectRecs.Add(new Rectangle(0, 0, 0, 0));
@@ -136,7 +141,7 @@ namespace UndertaleBattleSystemPrototype
             objectRecs.Add(new Rectangle(objects[0].x + (this.Width / 32) * 9, objects[0].y + buildingHeight, 140, 20));
 
             //arlos(1)
-            objectRecs.Add(new Rectangle(objects[1].x + 85, objects[1].y + 290, 110, 20));
+            objectRecs.Add(new Rectangle(objects[1].x + (this.Width / 32) * 9, objects[1].y, 110, 20));
 
             //appartments(2-5)
             objectRecs.Add(new Rectangle(objects[2].x + (this.Width / 32) * 2, objects[2].y + buildingHeight, 100, 20));
@@ -149,6 +154,9 @@ namespace UndertaleBattleSystemPrototype
             objectRecs.Add(new Rectangle(objects[5].x, objects[5].y, objects[5].width, objects[5].height));
             objectRecs.Add(new Rectangle(objects[6].x, objects[6].y, objects[6].width, objects[6].height));
 
+            //special bushes(9,10)
+            objectRecs.Add(new Rectangle((this.Width / 8) * 12, buildingHeight - nori.size, nori.size, nori.size));
+            objectRecs.Add(new Rectangle((this.Width / 16) * 53, buildingHeight - nori.size, nori.size, nori.size));
             #endregion
 
             #region coming from battlescreen
@@ -305,19 +313,22 @@ namespace UndertaleBattleSystemPrototype
             //library
             objectRecs.Add(new Rectangle(objects[0].x + (this.Width / 32) * 9, objects[0].y + buildingHeight, 140, 20));
             //arlos
-            objectRecs.Add(new Rectangle(objects[1].x + 85, objects[1].y + 290, 110, 20));
+            objectRecs.Add(new Rectangle(objects[1].x + 85, objects[1].y + buildingHeight, 110, 20));
 
-            //appartments(3-6)
+            //appartments(2-5)
             objectRecs.Add(new Rectangle(objects[2].x + (this.Width / 32) * 2, objects[2].y + buildingHeight, 100, 20));
             objectRecs.Add(new Rectangle(objects[2].x + (this.Width / 8) * 5, objects[2].y + buildingHeight, 100, 20));
             objectRecs.Add(new Rectangle(objects[2].x + (this.Width / 16) * 13, objects[2].y + buildingHeight, 100, 20));
             objectRecs.Add(new Rectangle(objects[2].x + (this.Width / 16) * 22, objects[2].y + buildingHeight, 100, 20));
 
-            //characters (7-9)
+            //characters (6-8)
             objectRecs.Add(new Rectangle(objects[4].x, objects[4].y, objects[4].width, objects[4].height));
             objectRecs.Add(new Rectangle(objects[5].x, objects[5].y, objects[5].width, objects[5].height));
             objectRecs.Add(new Rectangle(objects[6].x, objects[6].y, objects[6].width, objects[6].height));
 
+            //special bushes(9,10)
+            objectRecs.Add(new Rectangle((this.Width / 8) * 12, buildingHeight - nori.size, nori.size, nori.size));
+            objectRecs.Add(new Rectangle((this.Width / 16) * 53, buildingHeight - nori.size, nori.size, nori.size));
             #endregion
 
             #region update nori/object movement
@@ -410,6 +421,7 @@ namespace UndertaleBattleSystemPrototype
             //library door
             if (noriRec.IntersectsWith(objectRecs[0]) && spaceDown == true)
             {
+                spaceDown = false;
                 gameTimer.Enabled = false;
                 LibraryScreen ls = new LibraryScreen();
                 Form form = this.FindForm();
@@ -424,10 +436,16 @@ namespace UndertaleBattleSystemPrototype
             //arlo's door
             if (noriRec.IntersectsWith(objectRecs[1]) && spaceDown == true)
             {
+                spaceDown = false;
                 gameTimer.Enabled = false;
                 ShopScreen ss = new ShopScreen();
-                this.Controls.Add(ss);
+                Form form = this.FindForm();
+                form.Controls.Add(ss);
+
+                ss.Location = new Point((this.Width - ss.Width) / 2, (this.Height - ss.Height) / 2);
+
                 ss.Focus();
+                ss.BringToFront();
             }
 
             //Calum
@@ -503,7 +521,7 @@ namespace UndertaleBattleSystemPrototype
                 #endregion
 
                 #region Franky
-               
+
                 if (noriRec.IntersectsWith(objectRecs[8]) && spaceDown == true)
                 {
                     //if you haven't fought with callum yet
@@ -553,6 +571,23 @@ namespace UndertaleBattleSystemPrototype
 
                     }
 
+                }
+
+                #endregion
+
+                #region bushes
+                if (noriRec.IntersectsWith(objectRecs[9])&&spaceDown == true)
+                {
+                    textNum = 31;
+                    displayText = true;
+                    Thread.Sleep(200);
+                }
+
+                if (noriRec.IntersectsWith(objectRecs[10]) && spaceDown == true)
+                {
+                    textNum = 32;
+                    displayText = true;
+                    Thread.Sleep(200);
                 }
 
                 #endregion
