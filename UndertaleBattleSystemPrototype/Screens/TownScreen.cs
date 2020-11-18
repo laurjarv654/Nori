@@ -541,25 +541,12 @@ namespace UndertaleBattleSystemPrototype
                     //if you killed callum
                     if (cOutcome == "killed")
                     {
-
                         textNum = 12;
                         displayText = true;
                         spaceDown = false;
                         talkingF++;
 
-                        Refresh();
-                        Thread.Sleep(3000);
-
-                        gameTimer.Enabled = false;
-
-                        WinScreen ws = new WinScreen();
-                        Form form = this.FindForm();
-
-                        form.Controls.Add(ws);
-                        form.Controls.Remove(this);
-
-                        ws.Focus();
-                        ws.Location = new Point((form.Width - ws.Width) / 2, (form.Height - ws.Height) / 2);
+                        return;
                     }
 
                 }
@@ -622,7 +609,23 @@ namespace UndertaleBattleSystemPrototype
                 displayTextBox = false;
                 displayText = false;
                 Thread.Sleep(200);
+
+                //if you killed calum, refresh and then bring up win screen after 3 seconds
+                if (textNum == 12)
+                {
+                    gameTimer.Enabled = false;
+
+                    WinScreen ws = new WinScreen();
+                    Form form = this.FindForm();
+
+                    form.Controls.Add(ws);
+                    form.Controls.Remove(this);
+
+                    ws.Focus();
+                }
             }
+
+            
 
         }
 
