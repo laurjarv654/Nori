@@ -54,7 +54,7 @@ namespace UndertaleBattleSystemPrototype
         public LibraryScreen()
         {
             InitializeComponent();
-            BORDERWIDTH = this.Width/5;
+            BORDERWIDTH = this.Width / 5;
             OnStart();
 
             bookshelfSize = (this.Width - (BORDERWIDTH * 2)) / 4;
@@ -147,7 +147,7 @@ namespace UndertaleBattleSystemPrototype
         }
         public void OnStart()
         {
-            nori = new Player(this.Width / 2 - 75, this.Height - 300, 150, 0, 0);
+            nori = new Player(this.Width / 2 - 100, this.Height / 2 - 100, (this.Width - (BORDERWIDTH * 2)) / 5, 0, 0);
 
             //filling the text list with all of the dialogue that happens on this screen
             reader = XmlReader.Create("Resources/text.xml");
@@ -253,7 +253,7 @@ namespace UndertaleBattleSystemPrototype
             //setting the rectangles to the updated x,y
             noriRec = new Rectangle(nori.x + 40, nori.y + 120, 70, 30);
 
-            if (wDown == true && nori.y >= bookshelfSize-nori.size)
+            if (wDown == true && nori.y >= bookshelfSize - nori.size)
             {
                 nori.MoveUpDown(-HEROSPEED);
                 direction = "up";
@@ -306,7 +306,7 @@ namespace UndertaleBattleSystemPrototype
                 }
 
                 //hidden gold bookshelf
-                if (noriRec.IntersectsWith(objectRecs[7])&&spaceDown == true&&gotGold == false)
+                if (noriRec.IntersectsWith(objectRecs[7]) && spaceDown == true && gotGold == false)
                 {
                     gotGold = true;
                     textNum = 25;
@@ -365,7 +365,7 @@ namespace UndertaleBattleSystemPrototype
 
             }
 
-            
+
 
             #endregion
 
