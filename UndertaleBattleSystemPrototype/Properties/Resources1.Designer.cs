@@ -446,6 +446,16 @@ namespace UndertaleBattleSystemPrototype.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap Franky_Crew {
+            get {
+                object obj = ResourceManager.GetObject("Franky_Crew", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap Franky_FS {
             get {
                 object obj = ResourceManager.GetObject("Franky_FS", resourceCulture);

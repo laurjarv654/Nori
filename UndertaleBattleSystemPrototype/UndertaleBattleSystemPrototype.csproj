@@ -412,6 +412,7 @@
     <None Include="Resources\bushGold.png" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Resources\Franky_Crew.png" />
     <None Include="Resources\Nori - BuySound.wav">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>

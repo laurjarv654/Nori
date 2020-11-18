@@ -115,12 +115,12 @@ namespace UndertaleBattleSystemPrototype
             //characters (4-6)
             objects.Add(new Object((this.Width / 8) * 15, buildingHeight - this.Height / 10 + 10, this.Height / 10, this.Width / 17, Properties.Resources.Sharol_WS));
             objects.Add(new Object((this.Width / 8) * 21, buildingHeight - this.Height / 6 + 10, this.Height / 6, this.Width / 16, Properties.Resources.Calum_WS));
-            objects.Add(new Object((this.Width / 8) * 28, buildingHeight - this.Height / 6 + 10, this.Height / 6, this.Width / 12, Properties.Resources.Franky_WS));
+            objects.Add(new Object((this.Width / 16) * 56, buildingHeight - this.Height / 5 + 10, this.Height / 5, this.Width / 4, Properties.Resources.Franky_Crew));
 
             //bushes + trashcan
-            objects.Add(new Object((this.Width / 8) * 12, buildingHeight - nori.size, nori.size, nori.size, Properties.Resources.bushGold));
+            objects.Add(new Object((this.Width / 8) * 12, buildingHeight - nori.size, nori.size, nori.size, Properties.Resources.bush));
             objects.Add(new Object((this.Width / 16) * 27, buildingHeight - (nori.size / 3) * 2, (nori.size / 3) * 2, this.Width / 20, Properties.Resources.trash));
-            objects.Add(new Object((this.Width / 16) * 53, buildingHeight - nori.size, nori.size, nori.size, Properties.Resources.bushBook));
+            objects.Add(new Object((this.Width / 16) * 53, buildingHeight - nori.size, nori.size, nori.size, Properties.Resources.bush));
             objects.Add(new Object((this.Width / 8) * 30, buildingHeight - nori.size, nori.size, nori.size, Properties.Resources.bush));
 
             //just putting osmething in here so that the list isn't empty
@@ -169,17 +169,14 @@ namespace UndertaleBattleSystemPrototype
             objectRecs.Add(new Rectangle(objects[5].x, objects[5].y, objects[5].width, objects[5].height));
             objectRecs.Add(new Rectangle(objects[6].x, objects[6].y, objects[6].width, objects[6].height));
 
-            //special bushes(9,10)
-            objectRecs.Add(new Rectangle((this.Width / 8) * 12, buildingHeight - nori.size, nori.size, nori.size));
-            objectRecs.Add(new Rectangle((this.Width / 16) * 53, buildingHeight - nori.size, nori.size, nori.size));
             #endregion
 
             #region coming from battlescreen
 
-            #region Franky dialogue
+            #region Franky
 
             //if you defeat Franky
-            if (fOutcome == "spared"||fOutcome == "killed")
+            if (fOutcome == "spared" || fOutcome == "killed")
             {
                 gameTimer.Enabled = false;
 
@@ -307,9 +304,6 @@ namespace UndertaleBattleSystemPrototype
             objectRecs.Add(new Rectangle(objects[5].x, objects[5].y, objects[5].width, objects[5].height));
             objectRecs.Add(new Rectangle(objects[6].x, objects[6].y, objects[6].width, objects[6].height));
 
-            //special bushes(9,10)
-            objectRecs.Add(new Rectangle((this.Width / 8) * 12, buildingHeight - nori.size, nori.size, nori.size));
-            objectRecs.Add(new Rectangle((this.Width / 16) * 53, buildingHeight - nori.size, nori.size, nori.size));
             #endregion
 
             #region update nori/object movement
@@ -547,51 +541,29 @@ namespace UndertaleBattleSystemPrototype
                     //if you killed callum
                     if (cOutcome == "killed")
                     {
-                        switch (talkingF)
-                        {
-                            case 1:
-                                textNum = 12;
-                                displayText = true;
-                                spaceDown = false;
-                                talkingF++;
-                                break;
-                            case 2:
-                                textNum = 13;
-                                displayText = true;
-                                spaceDown = false;
-                                talkingF++;
-                                break;
-                            case 3:
-                                textNum = 14;
-                                displayText = true;
-                                spaceDown = false;
-                                talkingF++;
-                                break;
 
-                        }
+                        textNum = 12;
+                        displayText = true;
+                        spaceDown = false;
+                        talkingF++;
 
+                        gameTimer.Enabled = false;
+
+                        WinScreen ws = new WinScreen();
+                        Form form = this.FindForm();
+
+                        form.Controls.Add(ws);
+                        form.Controls.Remove(this);
+
+                        ws.Focus();
+                        ws.Location = new Point((form.Width - ws.Width) / 2, (form.Height - ws.Height) / 2);
                     }
 
                 }
 
                 #endregion
 
-                #region bushes?
-                if (noriRec.IntersectsWith(objectRecs[9])&&spaceDown == true)
-                {
-                    textNum = 31;
-                    displayText = true;
-                    Thread.Sleep(200);
-                }
-
-                if (noriRec.IntersectsWith(objectRecs[10]) && spaceDown == true)
-                {
-                    textNum = 32;
-                    displayText = true;
-                    Thread.Sleep(200);
-                }
-
-                #endregion
+                
             }
             else
             {
