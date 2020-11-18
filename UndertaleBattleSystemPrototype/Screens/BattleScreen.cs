@@ -1541,13 +1541,15 @@ namespace UndertaleBattleSystemPrototype
             XmlNodeList gold = doc.GetElementsByTagName("General");
 
             //update the fight outcome depending on the enemy fought
-            for (int i = 0; i < 2; i++)
+            if (TownScreen.enemyName == "Calum")
             {
-                if (TownScreen.enemyName == saveInfo[0].Attributes[i].Name)
-                {
-                    saveInfo[0].Attributes[i].InnerText = enemySpared;
-                }
+                saveInfo[0].Attributes[0].InnerText = enemySpared;
             }
+            if (TownScreen.enemyName == "Franky")
+            {
+                saveInfo[0].Attributes[1].InnerText = enemySpared;
+            }
+
 
             if (enemySpared == "killed")
             {
