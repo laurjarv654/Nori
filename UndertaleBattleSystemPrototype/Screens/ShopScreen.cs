@@ -84,7 +84,7 @@ namespace UndertaleBattleSystemPrototype
 
             #region initializing objects
             //door (0)
-            objects.Add(new Object((this.Width / 2) - (boothWidth / 2), this.Height - 170, 50, boothWidth, Properties.Resources.libraryDoor));
+            objects.Add(new Object((this.Width / 2) - (boothWidth / 2), this.Height - this.Height/5, 50, boothWidth, Properties.Resources.libraryDoor));
 
             //back wall(1-3)
             objects.Add(new Object(BORDERWIDTH, 70, boothHeight, boothWidth + 10, Properties.Resources.wall));

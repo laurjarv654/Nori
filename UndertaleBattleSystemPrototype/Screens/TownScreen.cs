@@ -163,41 +163,21 @@ namespace UndertaleBattleSystemPrototype
 
             #region Franky dialogue
 
-            //if you spare Franky
-            if (noriRec.IntersectsWith(objectRecs[8]) && fOutcome == "spared")
+            //if you defeat Franky
+            if (fOutcome == "spared"||fOutcome == "killed")
             {
-                switch (talkingF)
-                {
-                    case 3:
-                        textNum = 15;
-                        displayText = true;
-                        spaceDown = false;
-                        talkingF++;
-                        break;
-                    case 4:
-                        textNum = 16;
-                        displayText = true;
-                        spaceDown = false;
-                        talkingF++;
-                        break;
+                gameTimer.Enabled = false;
 
-                }
+                WinScreen ws = new WinScreen();
+                Form form = this.FindForm();
 
-                Thread.Sleep(200);
-                objects[6] = new Object(objects[5].x, objects[5].y - 10, this.Height / 6, this.Width / 12, Properties.Resources.Franky_WS);
+                form.Controls.Add(ws);
+                form.Controls.Remove(this);
+
+                ws.Focus();
+                ws.Location = new Point((form.Width - ws.Width) / 2, (form.Height - ws.Height) / 2);
             }
 
-            //if you kill Franky
-            if (noriRec.IntersectsWith(objectRecs[8]) && fOutcome == "killed")
-            {
-                textNum = 17;
-                displayText = true;
-                spaceDown = false;
-
-                Thread.Sleep(200);
-                objects[6] = new Object(0, 0, 0, 0, Properties.Resources.Franky_WS);
-
-            }
             #endregion
 
             #region Callum
@@ -565,6 +545,7 @@ namespace UndertaleBattleSystemPrototype
                                 textNum = 14;
                                 displayText = true;
                                 spaceDown = false;
+                                talkingF++;
                                 break;
 
                         }
@@ -575,7 +556,7 @@ namespace UndertaleBattleSystemPrototype
 
                 #endregion
 
-                #region bushes
+                #region bushes?
                 if (noriRec.IntersectsWith(objectRecs[9])&&spaceDown == true)
                 {
                     textNum = 31;
