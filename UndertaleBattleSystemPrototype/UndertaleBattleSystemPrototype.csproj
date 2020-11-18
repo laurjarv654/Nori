@@ -366,7 +366,6 @@
     <None Include="Resources\bush.png" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\trash.png" />
     <None Include="Resources\PauseFormBackground.png" />
   </ItemGroup>
   <ItemGroup>
@@ -402,6 +401,15 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\textBoxSprite.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\trash.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\bushBook.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\bushGold.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

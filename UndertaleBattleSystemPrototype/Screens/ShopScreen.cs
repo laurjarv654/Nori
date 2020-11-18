@@ -8,12 +8,13 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Xml;
+using System.Threading;
 
 namespace UndertaleBattleSystemPrototype
 {
     public partial class ShopScreen : UserControl
     {
-        Boolean wDown, aDown, sDown, dDown, spaceDown, escapeDown;
+        Boolean wDown, aDown, sDown, dDown, spaceDown=false, escapeDown;
 
         #region nori
         Player nori;
@@ -37,16 +38,6 @@ namespace UndertaleBattleSystemPrototype
         int boothWidth, boothHeight;
         #endregion
 
-        #region Text box
-        Boolean displayText = false, displayTextBox = false;
-        Rectangle textBox;
-        List<string> textList = new List<string>();
-        string text = "";
-        int talkingD = 0;
-
-        int textNum = 0;
-        XmlReader reader;
-        #endregion
         public ShopScreen()
         {
             InitializeComponent();
@@ -101,13 +92,13 @@ namespace UndertaleBattleSystemPrototype
             objects.Add(new Object(this.Width - BORDERWIDTH - boothWidth, 70, boothHeight, boothWidth, Properties.Resources.mysteriousFigure));
 
             //side booths (4-7)
-            objects.Add(new Object(BORDERWIDTH, BORDERWIDTH/3, (boothWidth / 10) * 7, (boothHeight / 5) * 4, Properties.Resources.benchF2));
+            objects.Add(new Object(BORDERWIDTH, BORDERWIDTH / 3, (boothWidth / 10) * 7, (boothHeight / 5) * 4, Properties.Resources.benchF2));
             objects.Add(new Object(BORDERWIDTH, BORDERWIDTH / 3 + (boothWidth / 20) * 13, (boothWidth / 10) * 7, (boothHeight / 5) * 4, Properties.Resources.benchF2));
             objects.Add(new Object(BORDERWIDTH, BORDERWIDTH / 3 + ((boothWidth / 20) * 12) * 2, (boothWidth / 10) * 7, (boothHeight / 5) * 4, Properties.Resources.benchF2));
             objects.Add(new Object(BORDERWIDTH, BORDERWIDTH / 3 + ((boothWidth / 20) * 11) * 3, ((boothWidth / 10) * 7) * 2, (boothHeight / 5) * 4, Properties.Resources.benchF1));
 
             //carpet (8)
-            objects.Add(new Object(this.Width - BORDERWIDTH - boothWidth*2, (boothWidth/2) * 3, (boothHeight/2)*3,  (boothWidth/4)*7, Properties.Resources.carpet));
+            objects.Add(new Object(this.Width - BORDERWIDTH - boothWidth * 2, (boothWidth / 2) * 3, (boothHeight / 2) * 3, (boothWidth / 4) * 7, Properties.Resources.carpet));
 
             //arlo(9)
             objects.Add(new Object(this.Width - BORDERWIDTH - boothWidth, this.Height - 150 - boothWidth, boothWidth, boothWidth, Properties.Resources.Arlo));
@@ -115,24 +106,16 @@ namespace UndertaleBattleSystemPrototype
             #endregion
 
             //arlo rectangle
-            objectRecs.Add(new Rectangle(objects[9].x+60, objects[9].y+100, objects[9].width-60, objects[9].height-100));
+            objectRecs.Add(new Rectangle(objects[9].x + 60, objects[9].y + 100, objects[9].width - 60, objects[9].height - 100));
 
-            //mysterious figure
-            //objectRecs.Add(new Rectangle());
+            //door
+            objectRecs.Add(new Rectangle(objects[0].x, objects[0].y, objects[0].width, objects[0].height));
         }
 
         public void OnStart()
         {
             nori = new Player(this.Width / 2 - 100, this.Height / 2 - 100, boothHeight, 0, 0);
 
-            //filling the text list with all of the dialogue that happens on this screen
-            reader = XmlReader.Create("Resources/text.xml");
-            while (reader.Read())
-            {
-                reader.ReadToFollowing("text");
-
-                textList.Add(reader.GetAttribute("value"));
-            }
         }
         private void ShopScreen_PreviewKeyDown(object sender, PreviewKeyDownEventArgs e)
         {
@@ -188,7 +171,7 @@ namespace UndertaleBattleSystemPrototype
             #region updating nori movement
 
             //setting the rectangles to the updated x,y
-            noriRec = new Rectangle(nori.x + (nori.size/4), nori.y + (nori.size/8)*7, (nori.size/2), nori.size/8);
+            noriRec = new Rectangle(nori.x + (nori.size / 4), nori.y + (nori.size / 8) * 7, (nori.size / 2), nori.size / 8);
 
             if (wDown == true && nori.y >= (boothWidth / 4) * 5 - nori.size)
             {
@@ -228,6 +211,7 @@ namespace UndertaleBattleSystemPrototype
 
             #region collisions
 
+            //interacting with arlo and bringing up shop menu
             if (noriRec.IntersectsWith(objectRecs[0]) && spaceDown == true)
             {
                 if (gameTimer.Enabled == true)
@@ -254,6 +238,14 @@ namespace UndertaleBattleSystemPrototype
                 }
             }
 
+
+            if (noriRec.IntersectsWith(objectRecs[1])&&spaceDown==true)
+            {
+                gameTimer.Enabled = false;
+                Form form = this.FindForm();
+                form.Controls.Remove(this);
+            }
+
             #endregion
 
             Refresh();
@@ -265,7 +257,7 @@ namespace UndertaleBattleSystemPrototype
             //drawing borders
             foreach (Rectangle r in border) { e.Graphics.FillRectangle(borderbrush, r); }
 
-            for (int i = 0; i<=8; i++) { e.Graphics.DrawImage(objects[i].sprite, objects[i].x, objects[i].y, objects[i].width, objects[i].height); }
+            for (int i = 0; i <= 8; i++) { e.Graphics.DrawImage(objects[i].sprite, objects[i].x, objects[i].y, objects[i].width, objects[i].height); }
 
             //drawing nori
             e.Graphics.DrawImage(noriSprite, nori.x, nori.y, nori.size, nori.size);
@@ -312,5 +304,7 @@ namespace UndertaleBattleSystemPrototype
 
             }
         }
+
+       
     }
 }

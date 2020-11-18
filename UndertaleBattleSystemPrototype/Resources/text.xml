@@ -29,4 +29,8 @@
   <text value ="Hey there! Passing through town? Well take a look around our library. There's plenty of interesting selections available."> </text>
   <text value ="If you're looking for a bite to eat, check out Arlo's! She's got the best food in town... Although Franky's gang is always sitting just out front."> </text>
   <text value ="Yeah, Franky likes to hang out there. Poor Arlo doesn't get a break. You should visit her if you get the chance."> </text>
+  <text value ="..."> </text>
+  <test value ="...they don't seem much for conversation..." ></test>
+  <test value ="Wow! 10G "></test>
+  <test value ="Huh weird... It's a sketchbook with the name 'Max' on it. Why would they leave it here, in a bush of all things? "></test>
 </Dialogue>
