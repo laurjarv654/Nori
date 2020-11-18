@@ -193,7 +193,7 @@ namespace UndertaleBattleSystemPrototype
             //coming out of battlescreen and if you spared callum
             if (noriRec.IntersectsWith(objectRecs[7]) && cOutcome == "spared")
             {
-                textNum = 7;
+                textNum = 8;
                 displayText = true;
                 spaceDown = false;
 
@@ -202,7 +202,7 @@ namespace UndertaleBattleSystemPrototype
             //coming out of battlescreen and if you killed callum
             if (noriRec.IntersectsWith(objectRecs[7]) && cOutcome == "killed")
             {
-                textNum = 8;
+                textNum = 9;
                 displayText = true;
                 spaceDown = false;
 
@@ -546,6 +546,9 @@ namespace UndertaleBattleSystemPrototype
                         displayText = true;
                         spaceDown = false;
                         talkingF++;
+
+                        Refresh();
+                        Thread.Sleep(3000);
 
                         gameTimer.Enabled = false;
 
