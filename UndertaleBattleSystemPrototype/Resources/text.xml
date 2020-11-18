@@ -12,12 +12,12 @@
   <text value ="(...Callum is gone.)"></text>
   <text value ="Psh who are you? Get out of here punk!"></text>
   <text value ="Why do you keep bugging us? Haven't you taken the hint? Get lost you loser!"></text>
-  <text value ="Wait... You killed that elk nerd?"></text>
-  <text value ="What's with that creepy look? G-get away from me!! You... You freak!"></text>
-  <text value ="(Franky ran away)"></text>
-  <text value ="...I guess I'll go appologize. You won't back off if I say no anyways. You win Nori."></text>
-  <text value ="(Franky went to apologize)"></text>
-  <text value ="(...Frankie is gone.)"></text>
+  <text value ="Wait... You killed that elk nerd? G-get away from me!! You... You freak!"></text>
+  <text value ="(UNUSED BECAUSE OF TIME) What's with that creepy look? G-get away from me!! You... You freak!"></text>
+  <text value ="(UNUSED BECAUSE OF TIME) (Franky ran away)"></text>
+  <text value ="(UNUSED BECAUSE OF TIME)...I guess I'll go appologize. You won't back off if I say no anyways. You win Nori."></text>
+  <text value ="(UNUSED BECAUSE OF TIME)(Franky went to apologize)"></text>
+  <text value ="(UNUSED BECAUSE OF TIME)(...Frankie is gone.)"></text>
   <text value ="'The Life of Mr. Theodoropoulos' - A book about the life of some tech teacher. Wonder who he is? ...I wonder if you can answer that."></text>
   <text value ="'Big Brain Academy' - It seems like a university textbook... Not that interesting."></text>
   <text value ="'Super Mayo Bros.' - It's a manual for a game... What's that doing here?"></text>
@@ -29,8 +29,8 @@
   <text value ="Hey there! Passing through town? Well take a look around our library. There's plenty of interesting selections available."> </text>
   <text value ="If you're looking for a bite to eat, check out Arlo's! She's got the best food in town... Although Franky's gang is always sitting just out front."> </text>
   <text value ="Yeah, Franky likes to hang out there. Poor Arlo doesn't get a break. You should visit her if you get the chance."> </text>
-  <text value ="..."> </text>
-  <test value ="...they don't seem much for conversation..." ></test>
+  <text value ="(UNUSED BECAUSE OF TIME)..."> </text>
+  <test value =" (UNUSED BECAUSE OF TIME)they don't seem much for conversation..." ></test>
   <test value ="Wow! 10G "></test>
   <test value ="Huh weird... It's a sketchbook with the name 'Max' on it. Why would they leave it here, in a bush of all things? "></test>
 </Dialogue>
