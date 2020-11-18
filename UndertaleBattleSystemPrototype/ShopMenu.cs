@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Threading;
 using System.Xml;
 using System.Windows.Forms;
+using System.Media;
 
 namespace UndertaleBattleSystemPrototype
 {
@@ -45,6 +46,11 @@ namespace UndertaleBattleSystemPrototype
         List<string> itemNames = new List<string>() { "Caesar Salad", "Protein Bar", "Hot Chocolate" };
         List<int> itemGoldAmounts = new List<int>() { 40, 20, 30 };
         List<int> itemHealAmounts = new List<int>() { 25, 10, 15 };
+
+        //SFX
+        SoundPlayer menuMoveSound = new SoundPlayer("Resources/Nori - MenuMove.wav");
+        SoundPlayer menuSelectSound = new SoundPlayer("Resources/Nori - MenuSelect.wav");
+        SoundPlayer buySound = new SoundPlayer("Resources/Nori - BuySound.wav");
 
         #endregion variables
 
@@ -186,6 +192,9 @@ namespace UndertaleBattleSystemPrototype
             {
                 if (spaceDown == true)
                 {
+                    //play buy sound
+                    buySound.Play();
+
                     PlayerItemUpdate();
                 }
                 if (shiftDown == true)
@@ -201,6 +210,9 @@ namespace UndertaleBattleSystemPrototype
             {
                 if (spaceDown == true)
                 {
+                    //play menu select sound
+                    menuSelectSound.Play();
+
                     playerRec = new Rectangle(confirmRec.X + 5, confirmRec.Y + 5, 20, 20);
                     description = "A delicious salad and a personal favorite of some guy named Christopher. A classic. \n\nThis item costs 40G and will heal you 25HP.";
                     itemSelected = 0;
@@ -208,6 +220,9 @@ namespace UndertaleBattleSystemPrototype
                 }
                 if (sDown == true)
                 {
+                    //play menu move sound
+                    menuMoveSound.Play();
+
                     playerRec = new Rectangle(buy2Rec.X + 5, buy2Rec.Y + 5, 20, 20);
                     sDown = false;
 
@@ -221,6 +236,9 @@ namespace UndertaleBattleSystemPrototype
             {
                 if (spaceDown == true)
                 {
+                    //play menu select sound
+                    menuSelectSound.Play();
+
                     playerRec = new Rectangle(confirmRec.X + 5, confirmRec.Y + 5, 20, 20);
                     description = "A protein bar. Not what you'd expect at a restaurant, but hey- who cares? \n\nThis item costs 20G and will heal you 10HP.";
                     itemSelected = 1;
@@ -228,6 +246,9 @@ namespace UndertaleBattleSystemPrototype
                 }
                 if (wDown == true)
                 {
+                    //play menu move sound
+                    menuMoveSound.Play();
+
                     playerRec = new Rectangle(buy1Rec.X + 5, buy1Rec.Y + 5, 20, 20);
                     wDown = false;
 
@@ -235,6 +256,9 @@ namespace UndertaleBattleSystemPrototype
                 }
                 if (sDown == true)
                 {
+                    //play menu move sound
+                    menuMoveSound.Play();
+
                     playerRec = new Rectangle(buy3Rec.X + 5, buy3Rec.Y + 5, 20, 20);
                     sDown = false;
 
@@ -248,6 +272,9 @@ namespace UndertaleBattleSystemPrototype
             {
                 if (spaceDown == true)
                 {
+                    //play menu select sound
+                    menuSelectSound.Play();
+
                     playerRec = new Rectangle(confirmRec.X + 5, confirmRec.Y + 5, 20, 20);
                     description = "Hot chocolate. It's the best drink to warm up your life! ...or so Arlo's slogan says. \n\nThis item costs 30G and will heal you 15HP.";
                     itemSelected = 2;
@@ -255,6 +282,9 @@ namespace UndertaleBattleSystemPrototype
                 }
                 if (wDown == true)
                 {
+                    //play menu move sound
+                    menuMoveSound.Play();
+
                     playerRec = new Rectangle(buy2Rec.X + 5, buy2Rec.Y + 5, 20, 20);
                     wDown = false;
 

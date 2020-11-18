@@ -9,12 +9,17 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Threading;
 using System.Xml;
+using System.Media;
 
 namespace UndertaleBattleSystemPrototype
 {
     public partial class LibraryScreen : UserControl
     {
         Boolean aDown, dDown, wDown, sDown, spaceDown, escapeDown, gotGold = false;
+
+        //SFX
+        SoundPlayer interactionSound = new SoundPlayer("Resources/Nori - InteractionSound.wav");
+
 
         #region nori
         Player nori;
@@ -299,6 +304,9 @@ namespace UndertaleBattleSystemPrototype
                 {
                     if (noriRec.IntersectsWith(objectRecs[i]) && spaceDown == true)
                     {
+                        //play interaction sound
+                        interactionSound.Play();
+
                         textNum = i + 18;
                         displayText = true;
                         Thread.Sleep(200);
@@ -308,6 +316,9 @@ namespace UndertaleBattleSystemPrototype
                 //hidden gold bookshelf
                 if (noriRec.IntersectsWith(objectRecs[7]) && spaceDown == true && gotGold == false)
                 {
+                    //play interaction sound
+                    interactionSound.Play();
+
                     gotGold = true;
                     textNum = 25;
                     displayText = true;
@@ -325,6 +336,9 @@ namespace UndertaleBattleSystemPrototype
                 //donna
                 if (noriRec.IntersectsWith(objectRecs[8]) && spaceDown == true)
                 {
+                    //play interaction sound
+                    interactionSound.Play();
+
                     switch (talkingD)
                     {
                         case 0:
@@ -407,11 +421,6 @@ namespace UndertaleBattleSystemPrototype
 
             //drawing donna
             e.Graphics.DrawImage(objects[5].sprite, objects[5].x, objects[5].y, objects[5].width, objects[5].height);
-
-            // for testing rectangle collisions
-            Pen test = new Pen(Color.Red);
-            foreach (Rectangle r in objectRecs) { e.Graphics.DrawRectangle(test, r); }
-            e.Graphics.DrawRectangle(test, noriRec);
 
             if (displayTextBox == true)
             {
